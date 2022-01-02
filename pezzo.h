@@ -3,6 +3,6 @@ class Pezzo{
     bool colore;    //true=bianco,false=nero
     bool stato;     //true=vivo, false=morto
     public:
-    Pezzo(bool colorePezzo);
+    Pezzo(bool colore);
     void mossa();
 };

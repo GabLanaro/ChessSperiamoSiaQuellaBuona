@@ -1,6 +1,6 @@
 #include "pezzo.h"
-Pezzo::Pezzo(bool colorePezzo){
-    colore=colorePezzo;
+Pezzo::Pezzo(bool colore){
+    this->colore=colore;
     stato=true; //pezzo inizializzato come vivo
 }
 void mossa(){
