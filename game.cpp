@@ -31,6 +31,7 @@ void Game::start(){
         currentPlayer.mossa();
     }while(!gameIsOver);
 }  
+//Ciao sono GAbriel
 
 bool Game::randomColor(){
     //true=white, false=black
