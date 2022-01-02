@@ -19,7 +19,7 @@ void Game::start(){
     Player player2(!playerColor,false);     //player2 è un computer ed è creato in entrambe le modalità.
     Player& currentPlayer=(player1.getColor()==true)? currentPlayer=player1 : currentPlayer=player2;
 }  
-
+//ciao sono Gabriel
 
 bool Game::sottoscacco(){
     return false;
