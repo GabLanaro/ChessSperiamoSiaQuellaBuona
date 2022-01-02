@@ -3,7 +3,6 @@
 #include <cctype>
 #include <ctime>
 #include "game.h"
-//#include "player.h"
 #include "board.h"
 
 Game::Game(string mod)
