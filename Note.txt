@@ -1,0 +1,17 @@
+classe Game:
+start()
+sottoscacco()
+scaccomatto()
+
+classe Board:
+board()
+printscacchiera()
+muovi()
+
+classe Pezzo+sottoclassi:
+pezzo()
+checkvalidità()
+
+classe Player:
+player()
+mossa()
