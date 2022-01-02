@@ -8,5 +8,6 @@ private:
 public:
     Board();
     void printScacchiera();
-    void muovi();
+    void spostaPezzo();
+    bool isMoveValid(int rigaI,int colonnaI,int rigaF,int colonnaF);
 };

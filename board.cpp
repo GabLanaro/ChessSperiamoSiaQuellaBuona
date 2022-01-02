@@ -35,7 +35,12 @@ void Board::printScacchiera()
     }
 }
 
-void Board::muovi()
+void Board::spostaPezzo()
 {
     //swap dei pezzi + eliminazione eventuale pezzo
+}
+
+bool Board::isMoveValid(int rigaI,int colonnaI,int rigaF,int colonnaF)
+{
+    return true;
 }

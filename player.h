@@ -1,3 +1,4 @@
+#include <tuple>
 class Player{
     private:
     bool colore;    //true=white,false=black
@@ -6,5 +7,5 @@ class Player{
     Player(bool colore,bool tipo);
     bool getColor() const;
     void setTipo(bool tipo);
-    void mossa();
+    std::tuple<int,int,int,int> mossa();
 };
