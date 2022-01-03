@@ -31,8 +31,26 @@ tuple<int,int,int,int> Player::mossa()
         cout << "inserisci mossa (Ex. C2 C3): ";
         string input;
         cin >> input;
-        //  CONTROLLI INPUT
-        // Le lettere vanno convertite in Maiuscolo per favorire la conversione
+
+        //CONTROLLI INPUT LESSICO E RANGE
+        bool inputValido = false;
+        while (!inputValido)
+        {
+            cin >> input;
+
+            if (input[0] >= 'A' && input[0] <= 'H' &&
+                input[3] >= 'A' && input[3] <= 'H' &&
+                input[1] >= '1' && input[1] <= '8' &&
+                input[4] >= '1' && input[4] <= '8' &&
+                input[2] == ' ' && input[0] + input[1] != input[3] + input[4]) // check validità lettere/numeri
+            {
+                inputValido = true;
+            }
+            else
+            {
+                cout << "L'input che hai inserito non è valido, riprova";
+            }
+        }
 
         int colIniz = (int)input[0] - 65; // Il codice ASCII di 'A' è 65
         int rigIniz = input[1] - 1;
