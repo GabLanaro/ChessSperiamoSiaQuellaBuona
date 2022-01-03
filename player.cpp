@@ -17,6 +17,12 @@ bool Player::getColor() const
 }
 
 
+bool Player::getTipo() const
+{
+    return tipo;
+}
+
+
 void Player::setTipo(bool tipo)
 {
     this->tipo = tipo;
@@ -30,14 +36,12 @@ tuple<int,int,int,int> Player::mossa()
         // true=umano
         cout << "inserisci mossa (Ex. C2 C3): ";
         string input;
-        cin >> input;
 
         //CONTROLLI INPUT LESSICO E RANGE
         bool inputValido = false;
         while (!inputValido)
         {
             cin >> input;
-
             if (input[0] >= 'A' && input[0] <= 'H' &&
                 input[3] >= 'A' && input[3] <= 'H' &&
                 input[1] >= '1' && input[1] <= '8' &&
