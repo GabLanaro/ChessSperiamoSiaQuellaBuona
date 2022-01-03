@@ -11,7 +11,7 @@ Game::Game(string mod)
     modalita = mod;
 }
 
-//game
+
 void Game::start()
 {
     std::cout<<"\n*******************************************\n";
