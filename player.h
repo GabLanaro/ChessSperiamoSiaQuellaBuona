@@ -8,5 +8,5 @@ class Player{
     bool getColor() const;
     bool getTipo() const;
     void setTipo(bool tipo);
-    std::tuple<int,int,int,int> mossa();
+    std::tuple<int,int,int,int> mossa(Board &board);
 };
