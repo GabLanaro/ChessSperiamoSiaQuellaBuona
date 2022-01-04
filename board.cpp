@@ -28,7 +28,7 @@ void Board::printScacchiera()
             }
             else
             {
-                cout << board[i][j]->getNome();
+                //cout << board[i][j]->getNome();
             }
         }
         cout << endl;
@@ -43,4 +43,8 @@ void Board::spostaPezzo()
 bool Board::isMoveValid(int rigaI,int colonnaI,int rigaF,int colonnaF)
 {
     return true;
+    //check generali: 
+    //è un pezzo tuo? a[rigaI][colonnaI].getColor()==currentPlayer.getColor()
+    //la casella d'arrivo è occupata da un tuo pezzo? 
+    //la mossa mette il tuo re sottoscacco?
 }

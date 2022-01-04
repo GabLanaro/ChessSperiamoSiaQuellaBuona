@@ -35,7 +35,7 @@ void Game::start()
             std::cout<<"giocatore umano, ti è stato assegnato il colore bianco,\nmuoverai la prima mossa.\n";
         }
     }
-    Player *currentPlayer = (player1.getColor() == true) ? &player1 : &player2; // currentPlayer è una reference al player bianco
+    Player *currentPlayer = (player1.getColor() == true) ? &player1 : &player2; // currentPlayer è un puntatore al player bianco
     // CICLO CHE VERIFICA SCACCO E SCACCOMATTO, CHIEDE MOSSA, LA EFFETTUA E CAMBIA TURNO.
     do
     {
