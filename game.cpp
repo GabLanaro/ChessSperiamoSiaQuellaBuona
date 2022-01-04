@@ -83,6 +83,11 @@ bool Game::randomColor()
 
 bool Game::sottoScacco(Player &p)
 {
+    //cerco il re del currentPlayer
+        //for annidato per leggere la board
+        //if ==nullPtr    if getPezzo della posizione corrente == Re
+        //getPezzo returna la posizione del puntatore al pezzo ovvero board[riga][colonna] 
+    //vedo se i pezzi dell'avversario riescono a mangiarlo
     return false;
 }
 

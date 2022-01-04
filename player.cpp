@@ -67,5 +67,6 @@ tuple<int, int, int, int> Player::mossa(Board &board)
     else
     {                                  // il giocatore è un computer, la mossa è casuale.
         return make_tuple(2, 3, 4, 5); // gabriel ho fatto return a caso per continuare a lavorare su start
+                                        //va bene bro, fatto bene
     }
 }
