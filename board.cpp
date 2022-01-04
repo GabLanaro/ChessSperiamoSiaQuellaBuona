@@ -6,10 +6,9 @@ using namespace std;
 
 Board::Board()
 {
-    for (int i = 0; i < 8; i++)
-    {
-        for (int j = 0; j < 8; j++)
-        {
+    //inizializzo una scacchiera vuota
+    for (int i = 0; i < 8; i++){
+        for (int j = 0; j < 8; j++){
             board[i][j] = NULL;
         }
     }

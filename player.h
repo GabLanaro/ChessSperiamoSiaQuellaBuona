@@ -1,4 +1,8 @@
+#ifndef PLAYER_H
+#define PLAYER_H
+
 #include <tuple>
+#include "board.h"
 class Player{
     private:
     bool colore;    //true=white,false=black
@@ -10,3 +14,5 @@ class Player{
     void setTipo(bool tipo);
     std::tuple<int,int,int,int> mossa(Board &board);
 };
+
+#endif

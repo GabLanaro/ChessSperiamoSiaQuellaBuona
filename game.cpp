@@ -5,6 +5,7 @@
 #include <fstream>
 #include "game.h"
 #include "board.h"
+#include "player.h"
 
 Game::Game(string mod)
 {
@@ -24,7 +25,7 @@ void Game::start()
 
     bool playerColor = randomColor(); // true=white, false=black
     Player player1(playerColor, false);      
-    Player player2(!playerColor, false);       // player2 è un computer ed è creato in entrambe le modalità.
+    Player player2(!playerColor, false);  // player2 è un computer ed è creato in entrambe le modalità.
     if (tolower(modalita[0]) == 'p')
     {   // la modalità scelta è pc
         player1.setTipo(true); // player1 è umano
@@ -50,7 +51,7 @@ void Game::start()
         bool done=false;
         while(!done){   //ciclo che itera finchè la mossa inserita è valida
             int rigaI,colonnaI,rigaF,colonnaF;
-            std::tie(rigaI,colonnaI,rigaF,colonnaF)=currentPlayer->mossa();  //il giocatore di turno inserisce la mossa
+            std::tie(rigaI,colonnaI,rigaF,colonnaF)=currentPlayer->mossa(board);  //il giocatore di turno inserisce la mossa
             if(board.isMoveValid(rigaI,colonnaI,rigaF,colonnaF)){   //verifica della correttezza della mossa inserita
                 board.spostaPezzo();
                 std::cout<<"mossa effettuata:   "<<rigaI<<colonnaI<<" "<<rigaF<<colonnaF<<"\n";
@@ -64,6 +65,7 @@ void Game::start()
             std::cout<<"numero massimo di mosse raggiunto. La partita è annullata.";
             gameIsOver=true;
         }
+        if(counterMosse==10) gameIsOver=true;
         
     } while (!gameIsOver);
     fileLog.close(); //chiusura file di log al termine della partita

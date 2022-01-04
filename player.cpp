@@ -31,7 +31,7 @@ tuple<int, int, int, int> Player::mossa(Board &board)
     if (this->tipo == true)
     {
         // true=umano
-        cout << "inserisci mossa (Ex. C2 C3): ";
+        cout << "inserisci mossa: ";
         string input;
 
         // CONTROLLI INPUT LESSICO E RANGE
@@ -54,7 +54,7 @@ tuple<int, int, int, int> Player::mossa(Board &board)
             }
             else
             {
-                cout << "L'input che hai inserito non è valido, riprova\n";
+                cout << "L'input che hai inserito non è valido,\ninserisci mossa:\n";
             }
         }
 
