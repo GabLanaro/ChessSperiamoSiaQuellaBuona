@@ -59,14 +59,14 @@ tuple<int, int, int, int> Player::mossa(Board &board)
         }
 
         int colIniz = (int)toupper(input[0]) - 65; // Il codice ASCII di 'A' è 65
-        int rigIniz = input[1] - 1;
+        int rigIniz = input[1] - 49;               // domani vi faccio un audio e vi spiego perchè 49
         int colFin = (int)toupper(input[3]) - 65;
-        int rigFin = input[4] - 1;
+        int rigFin = input[4] - 49;
         return make_tuple(colIniz, rigIniz, colFin, rigFin);
     }
     else
     {                                  // il giocatore è un computer, la mossa è casuale.
         return make_tuple(2, 3, 4, 5); // gabriel ho fatto return a caso per continuare a lavorare su start
-                                        //va bene bro, fatto bene
+                                       // va bene bro, fatto bene
     }
 }
