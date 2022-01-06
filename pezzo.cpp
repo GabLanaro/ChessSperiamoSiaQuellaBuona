@@ -178,7 +178,7 @@ bool isValid(int rIni, int cIni, int rFin, int cFin, bool valido, char nome,int 
             }
         }
         
-        if((rFin==rIni+2) && (cFin==cIni)){ //Se la mossa che sta facendo è la prima , può andare avanti di due celle
+        if((rFin==3) && (cFin==cIni)){ //Se la mossa che sta facendo è la prima , può andare avanti di due celle
             if((a[rFin][cFin]==0) && (a[rFin+1][cFin]==0)){ //Se nella cella in cui si sposta non c'è nulla (e anche nel tragitto non c'è nulla)
                 valido=true; //Allora la mossa è valida
             }
@@ -195,7 +195,7 @@ bool isValid(int rIni, int cIni, int rFin, int cFin, bool valido, char nome,int 
                         valido=true; //Allora la mossa è valida
                   }
              }
-        if((rFin==rIni-2) && (cFin==cIni)){ //Se la mossa che sta facendo è la prima , può andare avanti di due celle
+        if((rFin==4) && (cFin==cIni)){ //Se la mossa che sta facendo è la prima , può andare avanti di due celle
             if((a[rFin][cFin]==0) && (a[rFin+1][cFin]==0)){ //Se nella cella in cui si sposta non c'è nulla
                 valido=true; //Allora la mossa è valida
             }
@@ -319,11 +319,11 @@ bool isValid(int rIni, int cIni, int rFin, int cFin, bool valido, char nome,int 
 //*****ALFIERE*****
 
 bool isValid(int rIni, int cIni, int rFin, int cFin, bool valido, char nome,int a[R][C], int colorGio, int colorPez){
+    int i,j; //indici i->riga, j->colonna
     if(cIni<cFin){ //Se ci si sta spostando verso destra
-        int cTemp=cIni+1; //Colonna temporanea
         if(rIni<rFin){ //Dal basso verso l'alto
-            for(int i=rIni+1;i<=rFin;i++){//Per ogni cella che si attraversa
-                if(i==rFin){  //Se l'indice arriva alla posizione finale
+            for(i=rIni+1,j=cIni+1;((i<=rFin) && (j<=cFin));i++,j++){//Per ogni cella che si attraversa
+                if((i==rFin) && (j==cFin)){  //Se l'indice arriva alla posizione finale
                     if((a[rFin][cFin]!=0) && (colorGio!=colorPez)){ //Se nella posizione finale c'è un pezzo e ha il colore diverso da quello del giocatore
                         return true; //Allora la mossa è valida
                     }
@@ -334,15 +334,14 @@ bool isValid(int rIni, int cIni, int rFin, int cFin, bool valido, char nome,int 
                     }
                 }
                 
-                if(a[i][cTemp]!=0){ //Se le celle che incontra presentano un pezzo
+                if(a[i][j]!=0){ //Se le celle che incontra presentano un pezzo
                     return false; //Allora la mossa non è valida
                 }
-                cTemp++;
             }
             
         }else if(rIni>rFin){ //Dall'alto verso il basso
-            for(int i=rIni-1;i>=rFin;i--){//Per ogni cella che si attraversa
-                if(i==rFin){  //Se l'indice arriva alla posizione finale
+            for(i=rIni-1,j=cIni+1;((i>=rFin) && (j<=cFin));i--,j++){//Per ogni cella che si attraversa
+                if((i==rFin) && (j==cFin)){  //Se l'indice arriva alla posizione finale
                     if((a[rFin][cFin]!=0) && (colorGio!=colorPez)){ //Se nella posizione finale c'è un pezzo e ha il colore diverso da quello del giocatore
                         return true; //Allora la mossa è valida
                     }
@@ -353,10 +352,46 @@ bool isValid(int rIni, int cIni, int rFin, int cFin, bool valido, char nome,int 
                     }
                 }
                 
-                if(a[i][cTemp]!=0){ //Se le celle che incontra presentano un pezzo
+                if(a[i][j]!=0){ //Se le celle che incontra presentano un pezzo
                     return false; //Allora la mossa non è valida
                 }
-                cTemp++;
+            }
+        }
+    }else if(cIni>cFin){ //Se si sta spostando verso sinistra
+        if(rIni<rFin){ //Dal basso verso l'alto
+           for(i=rIni+1,j=cIni-1;((i<=rFin) && (j>=cFin));i++,j--){//Per ogni cella che si attraversa
+                 if((i==rFin) && (j==cFin)){  //Se l'indice arriva alla posizione finale
+                    if((a[rFin][cFin]!=0) && (colorGio!=colorPez)){ //Se nella posizione finale c'è un pezzo e ha il colore diverso da quello del giocatore
+                        return true; //Allora la mossa è valida
+                    }
+                    else if(a[rFin][cFin]==0){ //Se nella posizione finale non c'è nulla
+                        valido=true; //Allora la mossa è valida
+                        //Forse con il return risparmio tempo?
+                        //Posso unirlo all'if di prima?
+                    }
+                }
+                
+                if(a[i][j]!=0){ //Se le celle che incontra presentano un pezzo
+                    return false; //Allora la mossa non è valida
+                }
+            }
+            
+        }else if(rIni>rFin){ //Dall'alto verso il basso
+           for(i=rIni-1,j=cIni-1;((i>=rFin) && (j>=cFin));i--,j--){//Per ogni cella che si attraversa
+                if((i==rFin) && (j==cFin)){  //Se l'indice arriva alla posizione finale
+                    if((a[rFin][cFin]!=0) && (colorGio!=colorPez)){ //Se nella posizione finale c'è un pezzo e ha il colore diverso da quello del giocatore
+                        return true; //Allora la mossa è valida
+                    }
+                    else if(a[rFin][cFin]==0){ //Se nella posizione finale non c'è nulla
+                        valido=true; //Allora la mossa è valida
+                        //Forse con il return risparmio tempo?
+                        //Posso unirlo all'if di prima?
+                    }
+                }
+                
+                if(a[i][j]!=0){ //Se le celle che incontra presentano un pezzo
+                    return false; //Allora la mossa non è valida
+                }
             }
         }
     }
