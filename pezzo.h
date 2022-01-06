@@ -19,37 +19,37 @@ class Pezzo{
 class Pedone : public Pezzo{
     public:
     Pedone(bool color);
-    bool isValid(/*...*/);
+    bool isValid(int ri, int rf, int ci, int cf);
 };
 
 class Torre : public Pezzo{
     public:
     Torre(bool color);
-    bool isValid(/*...*/);
+    bool isValid(int ri, int rf, int ci, int cf);
 };
 
 class Alfiere : public Pezzo{
     public:
     Alfiere(bool color);
-    bool isValid(/*...*/);
+    bool isValid(int ri, int rf, int ci, int cf);
 };
 
 class Cavallo : public Pezzo{
     public:
     Cavallo(bool color);
-    bool isValid(/*...*/);
+    bool isValid(int ri, int rf, int ci, int cf);
 };
 
 class Re : public Pezzo{
     public:
     Re(bool color);
-    bool isValid(/*...*/);
+    bool isValid(int ri, int rf, int ci, int cf);
 };
 
 class Regina : public Pezzo{
     public:
     Regina(bool color);
-    bool isValid(/*...*/);
+    bool isValid(int ri, int rf, int ci, int cf);
 };
 
 #endif
