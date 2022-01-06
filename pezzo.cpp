@@ -8,7 +8,9 @@ bool Pezzo::getColor() const{
     return color;
 }
 
-//*****PEDONE*****
+Pezzo::~Pezzo(){} //da completare
+
+//*****PEDONE****
 
 Pedone::Pedone(bool col){
     color=col;
@@ -219,7 +221,7 @@ bool isValid(int rIni, int cIni, int rFin, int cFin, bool valido, char nome,int 
                     if((a[rFin][cFin]!=0) && (colorGio!=colorPez)){ //Se nella posizione finale c'è un pezzo e ha il colore diverso da quello del giocatore
                         return true; //Allora la mossa è valida
                     }
-                    else if(a[i][cFin]==0){ //Se nella posizione finale non c'è nulla
+                    else if(a[rFin][cFin]==0){ //Se nella posizione finale non c'è nulla
                         valido=true; //Allora la mossa è valida
                         //Forse con il return risparmio tempo?
                         //Posso unirlo all'if di prima?
@@ -236,7 +238,7 @@ bool isValid(int rIni, int cIni, int rFin, int cFin, bool valido, char nome,int 
                     if((a[rFin][cFin]!=0) && (colorGio!=colorPez)){ //Se nella posizione finale c'è un pezzo e ha il colore diverso da quello del giocatore
                         return true; //Allora la mossa è valida
                     }
-                    else if(a[i][cFin]==0){ //Se nella posizione finale non c'è nulla
+                    else if(a[rFin][cFin]==0){ //Se nella posizione finale non c'è nulla
                         valido=true; //Allora la mossa è valida
                         //Forse con il return risparmio tempo?
                         //Posso unirlo all'if di prima?
@@ -255,7 +257,7 @@ bool isValid(int rIni, int cIni, int rFin, int cFin, bool valido, char nome,int 
                     if((a[rFin][cFin]!=0) && (colorGio!=colorPez)){ //Se nella posizione finale c'è un pezzo e ha il colore diverso da quello del giocatore
                         return true; //Allora la mossa è valida
                     }
-                    else if(a[i][cFin]==0){ //Se nella posizione finale non c'è nulla
+                    else if(a[rFin][cFin]==0){ //Se nella posizione finale non c'è nulla
                         valido=true; //Allora la mossa è valida
                         //Forse con il return risparmio tempo?
                         //Posso unirlo all'if di prima?
@@ -272,7 +274,7 @@ bool isValid(int rIni, int cIni, int rFin, int cFin, bool valido, char nome,int 
                     if((a[rFin][cFin]!=0) && (colorGio!=colorPez)){ //Se nella posizione finale c'è un pezzo e ha il colore diverso da quello del giocatore
                         return true; //Allora la mossa è valida
                     }
-                    else if(a[i][cFin]==0){ //Se nella posizione finale non c'è nulla
+                    else if(a[rFin][cFin]==0){ //Se nella posizione finale non c'è nulla
                         valido=true; //Allora la mossa è valida
                         //Forse con il return risparmio tempo?
                         //Posso unirlo all'if di prima?
@@ -313,6 +315,56 @@ bool isValid(int rIni, int cIni, int rFin, int cFin, bool valido, char nome,int 
     
     return valido;
 }
+
+//*****ALFIERE*****
+
+bool isValid(int rIni, int cIni, int rFin, int cFin, bool valido, char nome,int a[R][C], int colorGio, int colorPez){
+    if(cIni<cFin){ //Se ci si sta spostando verso destra
+        int cTemp=cIni+1; //Colonna temporanea
+        if(rIni<rFin){ //Dal basso verso l'alto
+            for(int i=rIni+1;i<=rFin;i++){//Per ogni cella che si attraversa
+                if(i==rFin){  //Se l'indice arriva alla posizione finale
+                    if((a[rFin][cFin]!=0) && (colorGio!=colorPez)){ //Se nella posizione finale c'è un pezzo e ha il colore diverso da quello del giocatore
+                        return true; //Allora la mossa è valida
+                    }
+                    else if(a[rFin][cFin]==0){ //Se nella posizione finale non c'è nulla
+                        valido=true; //Allora la mossa è valida
+                        //Forse con il return risparmio tempo?
+                        //Posso unirlo all'if di prima?
+                    }
+                }
+                
+                if(a[i][cTemp]!=0){ //Se le celle che incontra presentano un pezzo
+                    return false; //Allora la mossa non è valida
+                }
+                cTemp++;
+            }
+            
+        }else if(rIni>rFin){ //Dall'alto verso il basso
+            for(int i=rIni-1;i>=rFin;i--){//Per ogni cella che si attraversa
+                if(i==rFin){  //Se l'indice arriva alla posizione finale
+                    if((a[rFin][cFin]!=0) && (colorGio!=colorPez)){ //Se nella posizione finale c'è un pezzo e ha il colore diverso da quello del giocatore
+                        return true; //Allora la mossa è valida
+                    }
+                    else if(a[rFin][cFin]==0){ //Se nella posizione finale non c'è nulla
+                        valido=true; //Allora la mossa è valida
+                        //Forse con il return risparmio tempo?
+                        //Posso unirlo all'if di prima?
+                    }
+                }
+                
+                if(a[i][cTemp]!=0){ //Se le celle che incontra presentano un pezzo
+                    return false; //Allora la mossa non è valida
+                }
+                cTemp++;
+            }
+        }
+    }
+    
+    return valido;
+}
+
+
 */
 
 

@@ -10,8 +10,8 @@ class Pezzo{
     virtual ~Pezzo();  //distruttore 
     char getName() const;  //nome del Pezzo
     bool getColor() const;  //colore del Pezzo
-    int getPosition();  //posizione del pezzo
-    void setPosition();  //sposta il pezzo 
+    //int getPosition();  //posizione del pezzo
+    //void setPosition();  //sposta il pezzo 
     virtual bool isValid(int ri, int rf, int ci, int cf) = 0;  //check di validità delle mosse(funzione virtuale pura)
 
 };
