@@ -1,6 +1,7 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include <tuple>
 #include "player.h"
 using namespace std;
 class Game
@@ -10,8 +11,9 @@ private:
     bool gameIsOver;
     bool randomColor(); // funzione privata per assegnare un colore casuale al giocatore
 public:
-    Game(string modalita);               // costruttore
-    void start();                        // funzione che contiene il ciclo del gioco
+    Game(string modalita); // costruttore
+    void start();          // funzione che contiene il ciclo del gioco
+    tuple<int, int> trovaRe(Player &, Board &);
     bool sottoScacco(Player &, Board &); // true se il re del giocatore che invoca la funzione è sottoscacco
     bool scaccoMatto(Player &);          // true se il re del giocatore che invoca la funzione è in scaccomatto
 };
