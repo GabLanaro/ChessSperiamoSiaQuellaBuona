@@ -401,6 +401,7 @@ bool isValid(int rIni, int cIni, int rFin, int cFin, bool valido, char nome,int 
 
 
 //*****REGINA*****
+
 bool isValid(int rIni, int cIni, int rFin, int cFin, bool valido, char nome,int a[R][C], int colorGio, int colorPez){
     //Controlli in obliquo
     int i,j; //indici i->riga, j->colonna
@@ -555,6 +556,123 @@ bool isValid(int rIni, int cIni, int rFin, int cFin, bool valido, char nome,int 
         }
     }
     
+    return valido;
+}
+
+//*****RE*****
+
+bool isValid(int rIni, int cIni, int rFin, int cFin, bool valido, char nome,int a[R][C], int colorGio, int colorPez){
+    //Controlli in obliquo
+    int i,j; //indici i->riga, j->colonna
+    if(cIni<cFin){ //Se ci si sta spostando verso destra
+        if(rIni<rFin){ //Dal basso verso l'alto
+            if((rFin==rIni+1) && (cFin==cIni+1)){ //Se si sta spostando di una cella
+                if(a[rFin][cFin]==0){ //Se nella posizione finale non c'è nulla
+                    valido=true; //Allora la mossa è valida
+                    //Forse con il return risparmio tempo
+                }else if((a[rFin][cFin]!=0) && (colorGio!=colorPez)){ //Se nella posizione finale c'è un pezzo e ha il colore diverso da quello del giocatore
+                    valido=true; //Allora la mossa è valida
+                    //Forse con il return risparmio tempo
+                }
+            }
+            
+        }else if(rIni>rFin){ //Dall'alto verso il basso
+            if((rFin==rIni-1) && (cFin==cIni+1)){ //Se si sta spostando di una cella
+                if(a[rFin][cFin]==0){ //Se nella posizione finale non c'è nulla
+                    valido=true; //Allora la mossa è valida
+                    //Forse con il return risparmio tempo
+                }else if((a[rFin][cFin]!=0) && (colorGio!=colorPez)){ //Se nella posizione finale c'è un pezzo e ha il colore diverso da quello del giocatore
+                    valido=true; //Allora la mossa è valida
+                    //Forse con il return risparmio tempo
+                }
+            }
+        }
+    }else if(cIni>cFin){ //Se si sta spostando verso sinistra
+        if(rIni<rFin){ //Dal basso verso l'alto
+           if((rFin==rIni+1) && (cFin==cIni-1)){ //Se si sta spostando di una cella
+                if(a[rFin][cFin]==0){ //Se nella posizione finale non c'è nulla
+                    valido=true; //Allora la mossa è valida
+                    //Forse con il return risparmio tempo
+                }else if((a[rFin][cFin]!=0) && (colorGio!=colorPez)){ //Se nella posizione finale c'è un pezzo e ha il colore diverso da quello del giocatore
+                    valido=true; //Allora la mossa è valida
+                    //Forse con il return risparmio tempo
+                }
+            }
+        }else if(rIni>rFin){ //Dall'alto verso il basso
+           if((rFin==rIni-1) && (cFin==cIni-1)){ //Se si sta spostando di una cella
+                if(a[rFin][cFin]==0){ //Se nella posizione finale non c'è nulla
+                    valido=true; //Allora la mossa è valida
+                    //Forse con il return risparmio tempo
+                }else if((a[rFin][cFin]!=0) && (colorGio!=colorPez)){ //Se nella posizione finale c'è un pezzo e ha il colore diverso da quello del giocatore
+                    valido=true; //Allora la mossa è valida
+                    //Forse con il return risparmio tempo
+                }
+            }
+        }
+    }
+    
+    //Controlli in verticale e orizzontale
+    if(cIni==cFin){ //Se si sta spostando in verticale
+        if(rIni>rFin){ //Se si sta spostando in basso
+            if((rFin==rIni-1) && (cFin==cIni)){ //Se si sta spostando di una cella
+                if(a[rFin][cFin]==0){ //Se nella posizione finale non c'è nulla
+                    valido=true; //Allora la mossa è valida
+                    //Forse con il return risparmio tempo
+                }else if((a[rFin][cFin]!=0) && (colorGio!=colorPez)){ //Se nella posizione finale c'è un pezzo e ha il colore diverso da quello del giocatore
+                    valido=true; //Allora la mossa è valida
+                    //Forse con il return risparmio tempo
+                }
+            }
+        }else if(rIni<rFin){ //Se si sta spostando verso l'alto
+            if((rFin==rIni+1) && (cFin==cIni)){ //Se si sta spostando di una cella
+                if(a[rFin][cFin]==0){ //Se nella posizione finale non c'è nulla
+                    valido=true; //Allora la mossa è valida
+                    //Forse con il return risparmio tempo
+                }else if((a[rFin][cFin]!=0) && (colorGio!=colorPez)){ //Se nella posizione finale c'è un pezzo e ha il colore diverso da quello del giocatore
+                    valido=true; //Allora la mossa è valida
+                    //Forse con il return risparmio tempo
+                }
+            }
+        }
+    }else if(rIni==rFin){ //Se si sta spostando in orizzontale
+         if(cIni>cFin){ //Se si sta spostando verso sinistra
+            if((rFin==rIni) && (cFin==cIni-1)){ //Se si sta spostando di una cella
+                if(a[rFin][cFin]==0){ //Se nella posizione finale non c'è nulla
+                    valido=true; //Allora la mossa è valida
+                    //Forse con il return risparmio tempo
+                }else if((a[rFin][cFin]!=0) && (colorGio!=colorPez)){ //Se nella posizione finale c'è un pezzo e ha il colore diverso da quello del giocatore
+                    valido=true; //Allora la mossa è valida
+                    //Forse con il return risparmio tempo
+                }
+            }
+        }else if(cIni<cFin){ //Se si sta spostando verso destra
+           if((rFin==rIni) && (cFin==cIni+1)){ //Se si sta spostando di una cella
+                if(a[rFin][cFin]==0){ //Se nella posizione finale non c'è nulla
+                    valido=true; //Allora la mossa è valida
+                    //Forse con il return risparmio tempo
+                }else if((a[rFin][cFin]!=0) && (colorGio!=colorPez)){ //Se nella posizione finale c'è un pezzo e ha il colore diverso da quello del giocatore
+                    valido=true; //Allora la mossa è valida
+                    //Forse con il return risparmio tempo
+                }
+            }
+        }
+    }
+    
+    return valido;
+}
+
+//*****RE(ALTERNATIVO)*****
+
+bool isValid(int rIni, int cIni, int rFin, int cFin, bool valido, char nome,int a[R][C], int colorGio, int colorPez){
+    if(((rFin==rIni+1) || (rFin==rIni-1)  || (rFin==rIni)) && ((cFin==cIni+1) || (cFin==cIni-1) || (cFin==cIni))){ //Se si sta spostando di una cella
+        if(a[rFin][cFin]==0){ //Se nella posizione finale non c'è nulla
+                    valido=true; //Allora la mossa è valida
+                    //Forse con il return risparmio tempo
+                }else if((a[rFin][cFin]!=0) && (colorGio!=colorPez)){ //Se nella posizione finale c'è un pezzo e ha il colore diverso da quello del giocatore
+                    valido=true; //Allora la mossa è valida
+                    //Forse con il return risparmio tempo
+                }    
+    }
     return valido;
 }
 
