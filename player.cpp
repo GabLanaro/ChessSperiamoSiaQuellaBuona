@@ -68,9 +68,18 @@ tuple<int, int, int, int> Player::mossa(Board &board)
     {                                  // il giocatore è un computer, la mossa è casuale.
         return make_tuple(2, 3, 4, 5); // gabriel ho fatto return a caso per continuare a lavorare su start
                                        // va bene bro, fatto bene
-        //far scegliere al pc un suo pezzo random
-        //a seconda del pezzo 
-        //mette delle coord finali a caso
-        //in start isMoveValid controllerà e in caso richiede una mossa
+
+        bool trovatoPezzoPC = false;
+        while (!trovatoPezzoPC)
+        {
+            //2 numero random per coord tra 0 e 7
+            //guardo le coord e vedo se il colore è del pc
+            //
+        }
+
+        // far scegliere al pc un suo pezzo random
+        // a seconda del pezzo
+        // mette delle coord finali a caso
+        // in start isMoveValid controllerà e in caso richiede una mossa
     }
 }
