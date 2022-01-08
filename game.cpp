@@ -56,18 +56,18 @@ void Game::start()
             std::tie(colonnaI, rigaI, colonnaF, rigaF) = currentPlayer->mossa(board); // il giocatore di turno inserisce la mossa
             if (board.isMoveValid(rigaI, colonnaI, rigaF, colonnaF))
             { // verifica della correttezza della mossa inserita
-                board.spostaPezzo(rigaI,colonnaI,rigaF,colonnaF);
-                std::cout << "mossa effettuata:   " << colonnaI << rigaI << " " << colonnaF << rigaF << "\n"; //perchè prima colonna e poi riga e non viceversa?
-                fileLog << rigaI << colonnaI << " " << rigaF << colonnaF << "\n";   //scrive la mossa nel file di log
-                currentPlayer = (currentPlayer->getColor() == player1.getColor()) ? &player2 : &player1; // cambio turno giocatore
-                done = true; // esci dal ciclo
+                board.spostaPezzo(rigaI, colonnaI, rigaF, colonnaF);
+                std::cout << "mossa effettuata:   " << colonnaI << rigaI << " " << colonnaF << rigaF << "\n"; // perchè prima colonna e poi riga e non viceversa?
+                fileLog << rigaI << colonnaI << " " << rigaF << colonnaF << "\n";                             // scrive la mossa nel file di log
+                currentPlayer = (currentPlayer->getColor() == player1.getColor()) ? &player2 : &player1;      // cambio turno giocatore
+                done = true;                                                                                  // esci dal ciclo
             }
         }
         counterMosse++;
         board.printScacchiera();
         if (tolower(modalita[0]) == 'c' && counterMosse == 200)
         {
-            std::cout << "numero massimo di mosse raggiunto. La partita è annullata.";
+            std::cout << "numero massimo di mosse raggiunto. La partita \212 annullata.";
             gameIsOver = true;
         }
         if (counterMosse == 10)
@@ -112,13 +112,13 @@ bool Game::sottoScacco(Player &p, Board &b)
                  {
                      if (pez->getName() == 'k' && p.getColor() == true) // se bianco
                      {
-                         // trovato = true;
+                         trovato = true;
                          rigRe = i;
                          colRe = j;
                      }
                      else if (pez->getName() == 'K' && p.getColor() == false) // se nero
                      {
-                         // trovato = true;
+                         trovato = true;
                          rigRe = i;
                          colRe = j;
                      }
