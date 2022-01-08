@@ -13,7 +13,7 @@ private:
 public:
     Board();
     void printScacchiera();
-    void spostaPezzo();
+    void spostaPezzo(int rigaI, int colonnaI, int rigaF, int colonnaF);
     bool isMoveValid(int rigaI, int colonnaI, int rigaF, int colonnaF);
     void setPezzo(Pezzo *P, int riga, int colonna);
     Pezzo *getPezzo(int riga, int colonna);
