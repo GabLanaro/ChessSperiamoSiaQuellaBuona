@@ -1,6 +1,5 @@
 {
     "files.associations": {
-        "chrono": "cpp",
-        "array": "cpp"
+        "chrono": "cpp"
     }
 }
