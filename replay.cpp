@@ -8,10 +8,10 @@
 using namespace std;
 
 //funzione che stampa la configurazione della scacchiera dopo una mossa
-void printFrame(char r1,char c1,char r2,char c2,array<array<char, 8>, 8>& b){
+void printFrame(int r1,int c1,int r2,int c2,array<array<char, 8>, 8>& b){
     //effettuo mossa
-    cout<<r1<<c1<<"***"<<r2<<c2<<endl;
-    cout<<b[r2][c2]<<"***"<<b[r1][c1]<<endl;
+    //cout<<r1<<c1<<"***"<<r2<<c2<<endl;
+    //cout<<b[r2][c2]<<"***"<<b[r1][c1]<<endl;
     b[r2][c2]=b[r1][c1];
     b[r1][c1]=' ';
     //stampo configurazione scacchiera
@@ -26,8 +26,11 @@ void printFrame(char r1,char c1,char r2,char c2,array<array<char, 8>, 8>& b){
         cout << endl;
     }
     printf("%s","\n   A B C D E F G H\n\n");
-    
+    for(int i=0;i<8;i++){
+        cout<<"\33[2K";
+    } 
 }
+
 
 int main(int argc, char* argv[]){
     array<array<char, 8>, 8> charBoard{ //la scacchiera è una matrice di char
@@ -54,8 +57,7 @@ int main(int argc, char* argv[]){
         ifstream chessMoves;
         chessMoves.open(fileLog);
         while(getline(chessMoves,line)){//itera finchè non ci sono più righe da leggere nel file
-        cout<<line[0]<<line[1]<<line[3]<<line[4]<<endl;
-        printFrame(line[0],line[1],line[3],line[4],charBoard);  //stampa frame scacchiera
+        printFrame(line[0]-'0',line[1]-'0',line[3]-'0',line[4]-'0',charBoard);  //stampa frame scacchiera (si noti che i char sono convertiti in int con es. line[1]-'0')
         this_thread::sleep_for(chrono::seconds(2)); //attende 1 secondo tra un frame e il successivo
         }
         

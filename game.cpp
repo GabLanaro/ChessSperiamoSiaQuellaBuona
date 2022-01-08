@@ -64,6 +64,7 @@ void Game::start()
             }
         }
         counterMosse++;
+        board.printScacchiera();
         if (tolower(modalita[0]) == 'c' && counterMosse == 200)
         {
             std::cout << "numero massimo di mosse raggiunto. La partita è annullata.";
