@@ -66,7 +66,7 @@ void Game::start()
         counterMosse++;
         if (tolower(modalita[0]) == 'c' && counterMosse == 200)
         {
-            std::cout << "numero massimo di mosse raggiunto. La partita \212 annullata.";
+            std::cout << "numero massimo di mosse raggiunto. La partita è annullata.";
             gameIsOver = true;
         }
         if (counterMosse == 10)
@@ -111,13 +111,13 @@ bool Game::sottoScacco(Player &p, Board &b)
                  {
                      if (pez->getName() == 'k' && p.getColor() == true) // se bianco
                      {
-                         trovato = true;
+                         // trovato = true;
                          rigRe = i;
                          colRe = j;
                      }
                      else if (pez->getName() == 'K' && p.getColor() == false) // se nero
                      {
-                         trovato = true;
+                         // trovato = true;
                          rigRe = i;
                          colRe = j;
                      }
