@@ -60,7 +60,7 @@ void Game::start()
             { // verifica della correttezza della mossa inserita
                 board.spostaPezzo();
                 std::tie(rigaRe, colonnaRe) = trovaRe(*currentPlayer, board);
-                std::cout << rigaRe << colonnaRe << std::endl;
+                std::cout << rigaRe << " " << colonnaRe << std::endl;
                 std::cout << "mossa effettuata:   " << colonnaI << rigaI << " " << colonnaF << rigaF << "\n";
                 fileLog << rigaI << colonnaI << " " << rigaF << colonnaF << "\n";
                 currentPlayer = (currentPlayer->getColor() == player1.getColor()) ? &player2 : &player1; // cambio turno giocatore
@@ -89,40 +89,35 @@ bool Game::randomColor()
 }
 
 bool Game::sottoScacco(Player &p, Board &b)
-{ /*
+{ 
      // PRIMA PARTE: Cerco il Re del current Player
-     bool trovato = false;
-     int rigRe;
-     int colRe;
-     while (!trovato)
-     { // Scorro tutte le caselle della scacchiera
-         for (int rigCurr = 0; rigCurr < 8; rigCurr++)
-         {
-             for (int colCurr = 0; colCurr < 8; colCurr++)
-             {
-                 // ispeziono il pezzo preso per vedere se è il re cercato
-                 if (b.getPezzo(rigCurr, colCurr) != NULL)
-                 {
-                     Pezzo *pez = b.getPezzo(rigCurr, colCurr);
-                     if (p.getColor() == pez->getColor())
-                     {
-                         if (pez->getName() == 'k' && p.getColor() == true) // se bianco
-                         {
-                             rigRe = rigCurr;
-                             colRe = colCurr;
-                             trovato = true;
-                         }
-                         else if (pez->getName() == 'K' && p.getColor() == false) // se nero
-                         {
-                             rigRe = rigCurr;
-                             colRe = colCurr;
-                             trovato = true;
-                         }
-                     }
-                 }
-             }
-         }
-     }
+    int rigRe = 1;
+    int colRe = 1;
+    // Scorro tutte le caselle della scacchiera
+    for (int rigCurr = 0; rigCurr < 8; rigCurr++)
+    {
+        for (int colCurr = 0; colCurr < 8; colCurr++)
+        {
+            // ispeziono il pezzo preso per vedere se è il re cercato
+            if (b.getPezzo(rigCurr, colCurr) != NULL)
+            {
+                Pezzo *pez = b.getPezzo(rigCurr, colCurr);
+                if (p.getColor() == pez->getColor())
+                {
+                    if (pez->getName() == 'r' && p.getColor() == true) // se bianco
+                    {
+                        rigRe = rigCurr;
+                        colRe = colCurr;
+                    }
+                    else if (pez->getName() == 'R' && p.getColor() == false) // se nero
+                    {
+                        rigRe = rigCurr;
+                        colRe = colCurr;
+                    }
+                }
+            }
+        }
+    }
 
      // SECONDA PARTE: Vedo se i pezzi avversari possono mangiare il re trovato
      for (int rigCurr = 0; rigCurr < 8; rigCurr++)
@@ -142,7 +137,7 @@ bool Game::sottoScacco(Player &p, Board &b)
              }
          }
      }
- */
+
     return false;
 }
 
@@ -150,38 +145,34 @@ tuple<int, int> Game::trovaRe(Player &p, Board &b)
 {
 
     // PRIMA PARTE: Cerco il Re del current Player
-    bool trovato = false;
-    int rigRe;
-    int colRe;
-    while (!trovato)
-    { // Scorro tutte le caselle della scacchiera
-        for (int rigCurr = 0; rigCurr < 8; rigCurr++)
+    int rigRe = 1;
+    int colRe = 1;
+    // Scorro tutte le caselle della scacchiera
+    for (int rigCurr = 0; rigCurr < 8; rigCurr++)
+    {
+        for (int colCurr = 0; colCurr < 8; colCurr++)
         {
-            for (int colCurr = 0; colCurr < 8; colCurr++)
+            // ispeziono il pezzo preso per vedere se è il re cercato
+            if (b.getPezzo(rigCurr, colCurr) != NULL)
             {
-                // ispeziono il pezzo preso per vedere se è il re cercato
-                if (b.getPezzo(rigCurr, colCurr) != NULL)
+                Pezzo *pez = b.getPezzo(rigCurr, colCurr);
+                if (p.getColor() == pez->getColor())
                 {
-                    Pezzo *pez = b.getPezzo(rigCurr, colCurr);
-                    if (p.getColor() == pez->getColor())
+                    if (pez->getName() == 'r' && p.getColor() == true) // se bianco
                     {
-                        if (pez->getName() == 'k' && p.getColor() == true) // se bianco
-                        {
-                            rigRe = rigCurr;
-                            colRe = colCurr;
-                            trovato = true;
-                        }
-                        else if (pez->getName() == 'K' && p.getColor() == false) // se nero
-                        {
-                            rigRe = rigCurr;
-                            colRe = colCurr;
-                            trovato = true;
-                        }
+                        rigRe = rigCurr;
+                        colRe = colCurr;
+                    }
+                    else if (pez->getName() == 'R' && p.getColor() == false) // se nero
+                    {
+                        rigRe = rigCurr;
+                        colRe = colCurr;
                     }
                 }
             }
         }
     }
+
     return make_tuple(rigRe, colRe);
 }
 
