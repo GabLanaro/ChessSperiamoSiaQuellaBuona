@@ -36,7 +36,7 @@ void Board::printScacchiera()
     }
 }
 
-void Board::spostaPezzo()
+void Board::spostaPezzo(int rigaI, int colonnaI, int rigaF, int colonnaF)
 {
     // swap dei pezzi + eliminazione eventuale pezzo
 }
