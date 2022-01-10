@@ -115,30 +115,34 @@ bool Game::sottoScacco(Player &p, Board &b)
             }
         }
     }
-/*
-    // SECONDA PARTE: Vedo se i pezzi avversari possono mangiare il re trovato
-    for (int rigCurr = 0; rigCurr < 8; rigCurr++)
-    {
-        for (int colCurr = 0; colCurr < 8; colCurr++)
+    /*
+        // SECONDA PARTE: Vedo se i pezzi avversari possono mangiare il re trovato
+        for (int rigCurr = 0; rigCurr < 8; rigCurr++)
         {
-            if (b.getPezzo(rigCurr, colCurr) != NULL)
+            for (int colCurr = 0; colCurr < 8; colCurr++)
             {
-                Pezzo *pez = b.getPezzo(rigCurr, colCurr);
-                if (p.getColor() != pez->getColor())
+                if (b.getPezzo(rigCurr, colCurr) != NULL)
                 {
-                    if (pez->isValid(rigCurr, rigRe, colCurr, colRe))
+                    Pezzo *pez = b.getPezzo(rigCurr, colCurr);
+                    if (p.getColor() != pez->getColor())
                     {
-                        return true;
+                        if (pez->isValid(rigCurr, rigRe, colCurr, colRe))
+                        {
+                            return true;
+                        }
                     }
                 }
             }
         }
-    }
- */
+     */
     return false;
 }
 
 bool Game::scaccoMatto(Player &p)
 {
+    // Guardo tutti i pezzi doppio for
+    // prendo solo i pezzi del currPlayer e non nulli nella scacchiera con if colore e !=null
+    // similo delle mosse con il pezzo preso e vedo se riesce a risolvere lo scacco
+    // quando non ho più pezzi da verificare allora return true
     return false;
 }
