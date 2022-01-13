@@ -54,7 +54,7 @@ void Game::start()
         { // ciclo che itera finchè la mossa inserita è valida
             int rigaI, colonnaI, rigaF, colonnaF;
             std::tie(colonnaI, rigaI, colonnaF, rigaF) = currentPlayer->mossa(board); // il giocatore di turno inserisce la mossa
-            if (board.isMoveValid(rigaI, colonnaI, rigaF, colonnaF))
+            if (board.isMoveValid(rigaI, colonnaI, rigaF, colonnaF, currentPlayer))
             { // verifica della correttezza della mossa inserita
                 board.spostaPezzo(rigaI, colonnaI, rigaF, colonnaF);
                 std::cout << "mossa effettuata:   " << colonnaI << rigaI << " " << colonnaF << rigaF << "\n"; // perchè prima colonna e poi riga e non viceversa?

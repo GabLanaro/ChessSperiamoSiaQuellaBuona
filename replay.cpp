@@ -33,14 +33,14 @@ void printFrame(int r1, int c1, int r2, int c2, array<array<char, 8>, 8> &b)
 int main(int argc, char *argv[])
 {
     array<array<char, 8>, 8> charBoard{// la scacchiera è una matrice di char
-                                       't', 'c', 'a', 'd', 'r', 'a', 'c', 't',
-                                       'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p',
-                                       ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
-                                       ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
-                                       ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
-                                       ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
-                                       'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P',
-                                       'T', 'C', 'A', 'D', 'R', 'A', 'C', 'T'};
+    't', 'c', 'a', 'd', 'r', 'a', 'c', 't',
+    'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p',
+    ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+    ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+    ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+    ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+    'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P',
+    'T', 'C', 'A', 'D', 'R', 'A', 'C', 'T'};
 
     string tipoReplay = argv[1];
     string fileLog = argv[2];

@@ -3,10 +3,13 @@
 
 #include <tuple>
 #include "board.h"
+
+class Board;
 class Player{
     private:
     bool colore;    //true=white,false=black
     bool tipo;      //true=umano,false=computer
+
     public:
     Player(bool colore,bool tipo);
     bool getColor() const;

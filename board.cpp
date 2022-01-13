@@ -1,8 +1,9 @@
-#include "board.h"
 #include <cstdio>
 #include <iostream>
 #include <cstdio>
 #include <algorithm>
+#include "board.h"
+#include "player.h"
 using namespace std;
 
 Board::Board()
@@ -69,18 +70,32 @@ void Board::printScacchiera()
 
 void Board::spostaPezzo(int rigaI, int colonnaI, int rigaF, int colonnaF)
 {
-    // swap dei pezzi + eliminazione eventuale pezzo
+    // swap dei pezzi
     board[rigaF][colonnaF] = board[rigaI][colonnaI];
     board[rigaI][colonnaI] = NULL;
 }
 
-bool Board::isMoveValid(int rigaI, int colonnaI, int rigaF, int colonnaF)
+bool Board::isMoveValid(int rigaI, int colonnaI, int rigaF, int colonnaF, Player* currentPlayer)
 {
-    return true;
-    // check generali:
-    //è un pezzo tuo? a[rigaI][colonnaI].getColor()==currentPlayer.getColor()
-    // la casella d'arrivo è occupata da un tuo pezzo?
-    // la mossa mette il tuo re sottoscacco?
+    //3 check di validità che valgono per tutti i pezzi    
+    //1)controllo che il pezzo scelto sia di current player
+    if(currentPlayer->getColor()!=this->getPezzo(rigaI,colonnaI)->getColor()){
+        return false;
+    }
+    //2)controllo che la casella d'arrivo non sia occupata da un pezzo di currentPlayer
+    if(currentPlayer->getColor()==this->getPezzo(rigaI,colonnaI)->getColor()){
+        return false;
+    }
+    //3)controllo che la mossa non metta il re di currentPlayer sottoscacco
+    this->spostaPezzo(rigaI,colonnaI,rigaF,colonnaF); //effettuo temporaneamente la mossa
+    //IF ISSOTTOSCACCO IS TRUE RETURN FALSE
+    this->spostaPezzo(rigaF,colonnaF,rigaI,colonnaI); //ripristino situazione precedente
+
+    //check di validità del pezzo in particolare
+    bool valid=this->getPezzo(rigaI,colonnaI)->isValid(rigaI,colonnaI,rigaF,colonnaF)==false;
+
+    return valid;
+    
 }
 
 void Board::setPezzo(Pezzo *P, int rig, int col) // inserisce il pezzo nella scacchiera
@@ -88,7 +103,7 @@ void Board::setPezzo(Pezzo *P, int rig, int col) // inserisce il pezzo nella sca
     board[rig][col] = P;
 }
 
-Pezzo *Board::getPezzo(int rig, int col) // restituisce il puntatore al pezzo in quella posizione della scacchiera
+Pezzo *Board::getPezzo(int rig, int col) const // restituisce il puntatore al pezzo in quella posizione della scacchiera
 {
     return board[rig][col];
 }
