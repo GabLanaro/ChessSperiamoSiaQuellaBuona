@@ -77,25 +77,34 @@ void Board::spostaPezzo(int rigaI, int colonnaI, int rigaF, int colonnaF)
 
 bool Board::isMoveValid(int rigaI, int colonnaI, int rigaF, int colonnaF, Player* currentPlayer)
 {
-    //3 check di validità che valgono per tutti i pezzi    
+    //4 check di validità che valgono per tutti i pezzi    
+    //1)controllo che la casella scelta non sia vuota
+    if(board[rigaI][colonnaI]==NULL){
+        cout<<"la casella scelta \212 vuota!\n";
+        return false;
+    }
     //1)controllo che il pezzo scelto sia di current player
     if(currentPlayer->getColor()!=this->getPezzo(rigaI,colonnaI)->getColor()){
+        cout<<"il pezzo scelto \212 dell'altro giocatore!\n";
         return false;
     }
     //2)controllo che la casella d'arrivo non sia occupata da un pezzo di currentPlayer
-    if(currentPlayer->getColor()==this->getPezzo(rigaI,colonnaI)->getColor()){
+    if(currentPlayer->getColor()==this->getPezzo(rigaF,colonnaF)->getColor()){
+        cout<<"la casella d'arrivo \212 occupata da un tuo pezzo!\n";
         return false;
     }
     //3)controllo che la mossa non metta il re di currentPlayer sottoscacco
-    this->spostaPezzo(rigaI,colonnaI,rigaF,colonnaF); //effettuo temporaneamente la mossa
-    //IF ISSOTTOSCACCO IS TRUE RETURN FALSE
+    /*this->spostaPezzo(rigaI,colonnaI,rigaF,colonnaF); //effettuo temporaneamente la mossa
+    //IF ISSOTTOSCACCO IS TRUE RETURN FALSE e stampa "la mossa mette il tuo re sottoscacco"
     this->spostaPezzo(rigaF,colonnaF,rigaI,colonnaI); //ripristino situazione precedente
 
     //check di validità del pezzo in particolare
-    bool valid=this->getPezzo(rigaI,colonnaI)->isValid(rigaI,colonnaI,rigaF,colonnaF)==false;
+    if(this->getPezzo(rigaI,colonnaI)->isValid(rigaI,colonnaI,rigaF,colonnaF)==false){
+        cout<<"il pezzo scelto non puo muoversi in quella direzione\n";
+        return false;
+    }*/
 
-    return valid;
-    
+    return true;
 }
 
 void Board::setPezzo(Pezzo *P, int rig, int col) // inserisce il pezzo nella scacchiera

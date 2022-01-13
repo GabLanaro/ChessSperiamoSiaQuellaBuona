@@ -55,7 +55,7 @@ bool Pedone::isValid(int rIni, int cIni, int rFin, int cFin){
         }
     }*/
     
-    return false;
+    return true;
 }
 
 //*****TORRE*****

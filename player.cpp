@@ -54,7 +54,7 @@ tuple<int, int, int, int> Player::mossa(Board &board)
             }
             else
             {
-                cout << "L'input che hai inserito non è valido,\ninserisci mossa:\n";
+                cout << "L'input che hai inserito non è valido,\ninserisci mossa: ";
             }
         }
 
