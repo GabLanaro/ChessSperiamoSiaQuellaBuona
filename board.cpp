@@ -16,30 +16,30 @@ Board::Board()
         }
     }
     // inserisco nella matrice i puntatori ai pezzi bianchi
-    setPezzo(new Torre(true), 0, 0);
-    setPezzo(new Cavallo(true), 0, 1);
-    setPezzo(new Alfiere(true), 0, 2);
-    setPezzo(new Regina(true), 0, 3);
-    setPezzo(new Re(true), 0, 4);
-    setPezzo(new Alfiere(true), 0, 5);
-    setPezzo(new Cavallo(true), 0, 6);
-    setPezzo(new Torre(true), 0, 7);
+    setPezzo(new Torre(true,'t'), 0, 0);
+    setPezzo(new Cavallo(true,'c'), 0, 1);
+    setPezzo(new Alfiere(true,'a'), 0, 2);
+    setPezzo(new Regina(true,'d'), 0, 3);
+    setPezzo(new Re(true,'r'), 0, 4);
+    setPezzo(new Alfiere(true,'a'), 0, 5);
+    setPezzo(new Cavallo(true,'c'), 0, 6);
+    setPezzo(new Torre(true,'t'), 0, 7);
     for (int i = 0; i <= 7; i++)
     {
-        setPezzo(new Pedone(true), 1, i);
+        setPezzo(new Pedone(true,'p'), 1, i);
     }
     // inserisco nella matrice i puntatori ai pezzi neri
-    setPezzo(new Torre(false), 7, 0);
-    setPezzo(new Cavallo(false), 7, 1);
-    setPezzo(new Alfiere(false), 7, 2);
-    setPezzo(new Regina(false), 7, 3);
-    setPezzo(new Re(false), 7, 4);
-    setPezzo(new Alfiere(false), 7, 5);
-    setPezzo(new Cavallo(false), 7, 6);
-    setPezzo(new Torre(false), 7, 7);
+    setPezzo(new Torre(false,'T'), 7, 0);
+    setPezzo(new Cavallo(false,'C'), 7, 1);
+    setPezzo(new Alfiere(false,'A'), 7, 2);
+    setPezzo(new Regina(false,'D'), 7, 3);
+    setPezzo(new Re(false,'R'), 7, 4);
+    setPezzo(new Alfiere(false,'A'), 7, 5);
+    setPezzo(new Cavallo(false,'C'), 7, 6);
+    setPezzo(new Torre(false,'T'), 7, 7);
     for (int i = 0; i <= 7; i++)
     {
-        setPezzo(new Pedone(false), 6, i);
+        setPezzo(new Pedone(false,'P'), 6, i);
     }
 }
 

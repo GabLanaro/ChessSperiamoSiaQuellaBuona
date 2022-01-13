@@ -12,103 +12,104 @@ Pezzo::~Pezzo(){} //da completare
 
 //*****PEDONE****
 
-Pedone::Pedone(bool col){
-    color=col;
-    if(color==true){
-        name='p';
-    }
-    else{
-        name='P';
-    }
-    //funzione chooseName?
+Pedone::Pedone(bool c, char n){
+    color=c;
+    name=n;
 }
 
-bool Pedone::isValid(int ri, int ci, int rf, int cf){
-    return true;
+bool Pedone::isValid(int rIni, int cIni, int rFin, int cFin){
+   /*if(name=='p'){ //Se è bianco
+        if((rFin==rIni+1) && (cFin==cIni)){ //Se la mossa che sta facendo è andare avanti di una cella
+            if(b[rFin][cFin]==0){ //Se nella cella in cui si sposta non c'è nulla
+                return true; //Allora la mossa è valida
+            }
+        }
+        
+        if((rFin==3) && (cFin==cIni)){ //Se la mossa che sta facendo è la prima , può andare avanti di due celle
+            if((b[rFin][cFin]==0) && (b[rFin+1][cFin]==0)){ //Se nella cella in cui si sposta non c'è nulla (e anche nel tragitto non c'è nulla)
+                return true; //Allora la mossa è valida
+            }
+        }
+        
+        if((rFin==rIni+1) && (cFin==cIni+1) || (cFin==cIni-1)){//Se la mossa che sta facendo è mangiare un pezzo(muove in obliquo)
+            if((b[rFin][cFin]!=0) && (!color)){ //Se nella cella in cui si sposta c'è un pezzo e ha un colore diverso dal colore del giocatore
+                return true; //Allora la mossa è valida
+            }
+        }
+    }else if(name=='P'){ //Se è nero
+                if((rFin==rIni-1) && (cFin==cIni)){ //Se la mossa che sta facendo è andare avanti di una cella
+                    if(b[rFin][cFin]==0){ //Se nella cella in cui si sposta non c'è nulla
+                        return true; //Allora la mossa è valida
+                  }
+             }
+        if((rFin==4) && (cFin==cIni)){ //Se la mossa che sta facendo è la prima , può andare avanti di due celle
+            if((b[rFin][cFin]==0) && (b[rFin+1][cFin]==0)){ //Se nella cella in cui si sposta non c'è nulla
+                return true; //Allora la mossa è valida
+            }
+        }
+        
+        if((rFin==rIni-1) && (cFin==cIni-1) || (cFin==cIni+1)){//Se la mossa che sta facendo è mangiare un pezzo(muove in obliquo)
+            if((b[rFin][cFin]!=0) && (!color)){ //Se nella cella in cui si sposta c'è un pezzo e ha un colore diverso dal colore del giocatore
+                return true; //Allora la mossa è valida
+            }
+        }
+    }*/
+    
+    return false;
 }
 
 //*****TORRE*****
 
-Torre::Torre(bool col){
-    color=col;
-    if(color==true){
-        name='t';
-    }
-    else{
-        name='T';
-    }
-    //funzione chooseName?
+Torre::Torre(bool c, char n){
+    color=c;
+    name=n;
 }
 
-bool Torre::isValid(int ri, int ci, int rf, int cf){
+bool Torre::isValid(int rIni, int cIni, int rFin, int cFin){
     return true;
 }
 
 //*****CAVALLO*****
 
-Cavallo::Cavallo(bool col){
-    color=col;
-    if(color==true){
-        name='c';
-    }
-    else{
-        name='C';
-    }
-    //funzione chooseName?
+Cavallo::Cavallo(bool c, char n){
+    color=c;
+    name=n;
 }
 
-bool Cavallo::isValid(int ri, int ci, int rf, int cf){
+bool Cavallo::isValid(int rIni, int cIni, int rFin, int cFin){
     return true;
 }
 
 //*****ALFIERE*****
 
-Alfiere::Alfiere(bool col){
-    color=col;
-    if(color==true){
-        name='a';
-    }
-    else{
-        name='A';
-    }
-    //funzione chooseName?
+Alfiere::Alfiere(bool c, char n){
+    color=c;
+    name=n;
 }
 
-bool Alfiere::isValid(int ri, int ci, int rf, int cf){
+bool Alfiere::isValid(int rIni, int cIni, int rFin, int cFin){
     return true;
 }
 
 //*****RE*****
 
-Re::Re(bool col){
-    color=col;
-    if(color==true){
-        name='r';
-    }
-    else{
-        name='R';
-    }
-    //funzione chooseName?
+Re::Re(bool c, char n){
+    color=c;
+    name=n;
 }
 
-bool Re::isValid(int ri, int ci, int rf, int cf){
+bool Re::isValid(int rIni, int cIni, int rFin, int cFin){
     return true;
 }
 
 //*****REGINA*****
 
-Regina::Regina(bool col){
-    color=col;
-    if(color==true){
-        name='d';
-    }
-    else{
-        name='D';
-    }
-    //funzione chooseName?
+Regina::Regina(bool c, char n){
+    color=c;
+    name=n;
 }
 
-bool Regina::isValid(int ri, int ci, int rf, int cf){
+bool Regina::isValid(int rIni, int cIni, int rFin, int cFin){
     return true;
 }
 
@@ -122,7 +123,7 @@ bool Regina::isValid(int ri, int ci, int rf, int cf){
 
 using namespace std;
 
-bool isValid(int rIni, int cIni, int rFin, int cFin, bool valido, char nome,int a[R][C],int colorGio, int colorPez);
+bool isValid(int rIni, int cIni, int rFin, int cFin, (char nome)->(color),int a[R][C],(int colorGio), (int colorPez);
 
 int main()
 {
