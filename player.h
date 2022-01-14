@@ -4,7 +4,6 @@
 #include <tuple>
 #include "board.h"
 
-class Board;
 class Player{
     private:
     bool colore;    //true=white,false=black
