@@ -73,6 +73,7 @@ void Board::spostaPezzo(int rigaI, int colonnaI, int rigaF, int colonnaF)
     // swap dei pezzi
     board[rigaF][colonnaF] = board[rigaI][colonnaI];
     board[rigaI][colonnaI] = NULL;
+    //DELETE QUA? mettere if per vedere se casella d'arrivo è vuota
 }
 
 bool Board::isMoveValid(int rigaI, int colonnaI, int rigaF, int colonnaF, Player* currentPlayer)

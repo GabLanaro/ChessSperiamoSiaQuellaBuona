@@ -6,7 +6,8 @@
 #include "player.h"
 using namespace std;
 
-class Player; //forward declaration per evitare circular dependencies
+class Pezzo; //forward declaration per evitare circular dependencies
+class Player; 
 class Board
 {
 private:

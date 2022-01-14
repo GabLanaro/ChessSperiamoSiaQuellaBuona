@@ -1,6 +1,8 @@
 #ifndef PEZZO_H
 #define PEZZO_H
+#include "board.h"
 
+class Board; //forward declaration per evitare circular dependencies
 class Pezzo{
     protected:
     char name;  //nome del Pezzo
