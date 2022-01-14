@@ -1,8 +1,12 @@
 #include <string>
 #include <iostream>
 #include <tuple>
+#include <cctype>
+#include <ctime>
 #include "player.h"
 #include "board.h"
+
+
 using namespace std;
 
 Player::Player(bool colore, bool tipo)
@@ -65,18 +69,19 @@ tuple<int, int, int, int> Player::mossa(Board &board)
         return make_tuple(colIniz, rigIniz, colFin, rigFin);
     }
     else
-    {                                  // il giocatore è un computer, la mossa è casuale.
-        return make_tuple(2, 3, 4, 5); // gabriel ho fatto return a caso per continuare a lavorare su start
-                                       // va bene bro, fatto bene
+    {                                  
+        //return make_tuple(2,6,2,5); 
+        srand(time(NULL));   // seed
+        int colIniz, rigIniz, colFin, rigFin;
 
-        bool trovatoPezzoPC = false;
-        while (!trovatoPezzoPC)
-        {
-            //2 numero random per coord tra 0 e 7
-            //guardo le coord e vedo se il colore è del pc
-            //
-        }
-
+        rigIniz = rand() % 8; //numero intero random tra 0 e 8
+        colIniz =rand() % 8;
+        rigFin=rand() % 8;
+        colFin=rand() % 8;
+        
+        cout<<colIniz<<rigIniz<<colFin<<rigFin<<" ";
+        //this_thread::sleep_for(chrono::milliseconds(2));
+        return make_tuple(colIniz, rigIniz, colFin, rigFin);
         // far scegliere al pc un suo pezzo random
         // a seconda del pezzo
         // mette delle coord finali a caso

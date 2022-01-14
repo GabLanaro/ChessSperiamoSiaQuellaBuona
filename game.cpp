@@ -56,13 +56,11 @@ void Game::start()
             std::tie(colonnaI, rigaI, colonnaF, rigaF) = currentPlayer->mossa(board); // il giocatore di turno inserisce la mossa
             if (board.isMoveValid(rigaI, colonnaI, rigaF, colonnaF, currentPlayer))
             { // verifica della correttezza della mossa inserita
-                cout<<"XXXX";
                 board.spostaPezzo(rigaI, colonnaI, rigaF, colonnaF);
-                std::cout << "mossa effettuata:   " << colonnaI << rigaI << " " << colonnaF << rigaF << "\n"; // perchè prima colonna e poi riga e non viceversa?
+                std::cout << "mossa effettuata:   " << rigaI << colonnaI << " " << rigaF << colonnaF << "\n"; 
                 fileLog << rigaI << colonnaI << " " << rigaF << colonnaF << "\n";                             // scrive la mossa nel file di log
                 currentPlayer = (currentPlayer->getColor() == player1.getColor()) ? &player2 : &player1;      // cambio turno giocatore
                 done = true;  // esci dal ciclo
-                board.printScacchiera(); cout<<endl;
             }
         }
         counterMosse++;

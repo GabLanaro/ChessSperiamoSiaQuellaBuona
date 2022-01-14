@@ -89,7 +89,7 @@ bool Board::isMoveValid(int rigaI, int colonnaI, int rigaF, int colonnaF, Player
         return false;
     }
     //2)controllo che la casella d'arrivo non sia occupata da un pezzo di currentPlayer
-    if(currentPlayer->getColor()==this->getPezzo(rigaF,colonnaF)->getColor()){
+    if(this->getPezzo(rigaF,colonnaF)!=NULL && currentPlayer->getColor()==this->getPezzo(rigaF,colonnaF)->getColor()){
         cout<<"la casella d'arrivo \212 occupata da un tuo pezzo!\n";
         return false;
     }
