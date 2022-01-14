@@ -47,6 +47,7 @@ tuple<int, int, int, int> Player::mossa(Board &board)
             {
                 // stampa la scacchiera
                 board.printScacchiera();
+                cout<<"\ninserisci mossa: ";
             }
             else if (toupper(input[0]) >= 'A' && toupper(input[0]) <= 'H' &&
                      toupper(input[3]) >= 'A' && toupper(input[3]) <= 'H' &&
@@ -58,7 +59,7 @@ tuple<int, int, int, int> Player::mossa(Board &board)
             }
             else
             {
-                cout << "L'input che hai inserito non è valido,\ninserisci mossa: ";
+                cout << "L'input che hai inserito non \212 valido,\ninserisci mossa: ";
             }
         }
 
@@ -69,17 +70,14 @@ tuple<int, int, int, int> Player::mossa(Board &board)
         return make_tuple(colIniz, rigIniz, colFin, rigFin);
     }
     else
-    {                                  
-        //return make_tuple(2,6,2,5); 
-        srand(time(NULL));   // seed
+    {                                   
         int colIniz, rigIniz, colFin, rigFin;
-
         rigIniz = rand() % 8; //numero intero random tra 0 e 8
         colIniz =rand() % 8;
         rigFin=rand() % 8;
         colFin=rand() % 8;
         
-        cout<<colIniz<<rigIniz<<colFin<<rigFin<<" ";
+        cout<<rigIniz<<colIniz<<" "<<colFin<<rigFin<<" ";
         //this_thread::sleep_for(chrono::milliseconds(2));
         return make_tuple(colIniz, rigIniz, colFin, rigFin);
         // far scegliere al pc un suo pezzo random

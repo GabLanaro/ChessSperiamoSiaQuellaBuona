@@ -15,6 +15,7 @@ int main(int argc, char *argv[])
     cout << "*******************************************\n";
     cout << "Benvenuto al gioco degli scacchi\n";
     cout << "La modalita' di gioco scelta \212: " << argv[1] << endl;
+    cout << "\n*******************************************\n";
     Game gioco(modalita); // creazione del gioco
     gioco.start();
     return 0;

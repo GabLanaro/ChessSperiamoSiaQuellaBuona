@@ -14,7 +14,7 @@ Game::Game(string mod)
 
 void Game::start()
 {
-    std::cout << "\n*******************************************\n";
+    srand(time(NULL));   // seed per generare mossa casuale del computer
     gameIsOver = false;  // verrà utilizzata nel ciclo do while per verificare che la partita non sia terminata
     int counterMosse{0}; // se la partita è computer vs computer, quando il counterMosse arriva a 200 la parita termina
     Board board;         // inizializzazione scacchiera
@@ -65,13 +65,11 @@ void Game::start()
         }
         counterMosse++;
         board.printScacchiera();
-        if (tolower(modalita[0]) == 'c' && counterMosse == 200)
+        if (tolower(modalita[0]) == 'c' && counterMosse == 100)
         {
-            std::cout << "numero massimo di mosse raggiunto. La partita è annullata.";
+            std::cout << "numero massimo di mosse raggiunto. La partita \212 annullata.";
             gameIsOver = true;
         }
-        if (counterMosse == 10)
-            gameIsOver = true;
 
     } while (!gameIsOver);
     fileLog.close(); // chiusura file di log al termine della partita
@@ -88,34 +86,38 @@ bool Game::randomColor()
 
 bool Game::isMoveValid(int rigaI, int colonnaI, int rigaF, int colonnaF, Player* currentPlayer, Board& board)
 {
-    //4 check di validità che valgono per tutti i pezzi    
+    //4 check di validità che valgono per tutti i pezzi.   
     //0)controllo che la casella scelta non sia vuota
     if(board.getPezzo(rigaI,colonnaI)==NULL){
-        cout<<"la casella scelta \212 vuota!\n";
+        if(currentPlayer->getTipo()==true)
+            cout<<"la casella scelta \212 vuota!\n";
         return false;
     }
     //1)controllo che il pezzo scelto sia di current player
     if(currentPlayer->getColor()!=board.getPezzo(rigaI,colonnaI)->getColor()){
-        cout<<"il pezzo scelto \212 dell'altro giocatore!\n";
+        if(currentPlayer->getTipo()==true)
+            cout<<"il pezzo scelto \212 dell'altro giocatore!\n";
         return false;
     }
     //2)controllo che la casella d'arrivo non sia occupata da un pezzo di currentPlayer
     if(board.getPezzo(rigaF,colonnaF)!=NULL && currentPlayer->getColor()==board.getPezzo(rigaF,colonnaF)->getColor()){
-        cout<<"la casella d'arrivo \212 occupata da un tuo pezzo!\n";
+        if(currentPlayer->getTipo()==true)
+            cout<<"la casella d'arrivo \212 occupata da un tuo pezzo!\n";
         return false;
     }
     //3)controllo che la mossa non metta il re di currentPlayer sottoscacco
-    board.spostaPezzo(rigaI,colonnaI,rigaF,colonnaF); //effettuo temporaneamente la mossa
+    /*board.spostaPezzo(rigaI,colonnaI,rigaF,colonnaF); //effettuo temporaneamente la mossa
     if(sottoScacco(*currentPlayer,board)){
         cout<<"la mossa mette il tuo re sottoscacco!\n";
         board.spostaPezzo(rigaF,colonnaF,rigaI,colonnaI); //ripristino situazione precedente
         return false;
     }
-    board.spostaPezzo(rigaF,colonnaF,rigaI,colonnaI); //ripristino situazione precedente
+    board.spostaPezzo(rigaF,colonnaF,rigaI,colonnaI); //ripristino situazione precedente*/
 
     //check di validità del pezzo in particolare
     if(board.getPezzo(rigaI,colonnaI)->isValid(rigaI,colonnaI,rigaF,colonnaF,board)==false){
-        cout<<"il pezzo scelto non puo muoversi in quella direzione\n";
+        if(currentPlayer->getTipo()==true)
+            cout<<"il pezzo scelto non puo muoversi in quella direzione\n";
         return false;
     }
 
