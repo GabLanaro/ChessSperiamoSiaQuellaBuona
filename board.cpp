@@ -78,7 +78,7 @@ void Board::spostaPezzo(int rigaI, int colonnaI, int rigaF, int colonnaF)
 bool Board::isMoveValid(int rigaI, int colonnaI, int rigaF, int colonnaF, Player* currentPlayer)
 {
     //4 check di validità che valgono per tutti i pezzi    
-    //1)controllo che la casella scelta non sia vuota
+    //0)controllo che la casella scelta non sia vuota
     if(board[rigaI][colonnaI]==NULL){
         cout<<"la casella scelta \212 vuota!\n";
         return false;
