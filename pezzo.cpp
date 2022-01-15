@@ -30,12 +30,12 @@ bool Pedone::isValid(int rIni, int cIni, int rFin, int cFin, Board& b){
                 return true; //Allora la mossa è valida
         }
         
-        if((rFin==rIni+1) && ((cFin==cIni+1) || (cFin==cIni-1))){ //Se si sta spostando in obliquo (mangia un pezzo) 
+        if((rFin==rIni+1) && ((cFin==cIni+1) || (cFin==cIni-1)) && (PezzoFinale!=NULL)){ //Se si sta spostando in obliquo (mangia un pezzo) 
                 return true; //Allora la mossa è valida
         }
 
     }else if(name=='P'){ //Se è nero
-        if((rFin==rIni-1) && (cFin==cIni)){ //Se la mossa che sta facendo è andare avanti di una cella
+        if((rFin==rIni-1) && (cFin==cIni)){ //Se la mossa che sta facendo è andare avanti di una cella 
                 return true; //Allora la mossa è valida
         }
         
@@ -43,7 +43,7 @@ bool Pedone::isValid(int rIni, int cIni, int rFin, int cFin, Board& b){
                 return true; //Allora la mossa è valida
         }
         
-        if((rFin==rIni-1) && ((cFin==cIni-1) || (cFin==cIni+1))){ //Se si sta spostando in obliquo (mangia un pezzo)
+        if((rFin==rIni-1) && ((cFin==cIni-1) || (cFin==cIni+1)) && (PezzoFinale!=NULL)){ //Se si sta spostando in obliquo (mangia un pezzo)
                 return true; //Allora la mossa è valida
         }
     }
