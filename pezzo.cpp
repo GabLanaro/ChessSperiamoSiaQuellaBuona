@@ -22,28 +22,28 @@ Pedone::Pedone(bool c, char n){
 bool Pedone::isValid(int rIni, int cIni, int rFin, int cFin, Board& b){
     Pezzo *PezzoFinale = b.getPezzo(rFin,cFin); //Creo un puntatore alla cella d'arrivo
     if(name=='p'){ //Se è bianco
-        if((rFin==rIni+1) && (cFin==cIni) && (PezzoFinale==NULL)){ //Se la mossa che sta facendo è andare avanti di una cella e non c'è nessun pezzo
+        if((rFin==rIni+1) && (cFin==cIni)){ //Se la mossa che sta facendo è andare avanti di una cella
                 return true; //Allora la mossa è valida
         }
         
-        if((rFin==3) && (cFin==cIni) && (PezzoFinale==NULL) && (b.getPezzo(rFin+1,cFin)==NULL)){ //Se la mossa che sta facendo è la prima , può andare avanti di due celle e se nel tragitto e nella cella d'arrivo non ci sono pezzi
+        if((rFin==3) && (cFin==cIni) && (b.getPezzo(rFin+1,cFin)==NULL)){ //Se la mossa che sta facendo è la prima , può andare avanti di due celle e se nel tragitto non c'è nessun pezzo
                 return true; //Allora la mossa è valida
         }
         
-        if((rFin==rIni+1) && ((cFin==cIni+1) || (cFin==cIni-1)) && (PezzoFinale!=NULL) && (!color)){ //Se nella cella in cui si sposta (muove in obliquo) c'è un pezzo e ha un colore diverso dal colore del giocatore
+        if((rFin==rIni+1) && ((cFin==cIni+1) || (cFin==cIni-1))){ //Se si sta spostando in obliquo (mangia un pezzo) 
                 return true; //Allora la mossa è valida
         }
 
     }else if(name=='P'){ //Se è nero
-        if((rFin==rIni+1) && (cFin==cIni) && (PezzoFinale==NULL)){ //Se la mossa che sta facendo è andare avanti di una cella e non c'è nessun pezzo
+        if((rFin==rIni-1) && (cFin==cIni)){ //Se la mossa che sta facendo è andare avanti di una cella
                 return true; //Allora la mossa è valida
         }
         
-        if((rFin==4) && (cFin==cIni) && (PezzoFinale==NULL) && (b.getPezzo(rFin+1,cFin)==NULL)){ //Se la mossa che sta facendo è la prima , può andare avanti di due celle e se nel tragitto e nella cella d'arrivo non ci sono pezzi
+        if((rFin==4) && (cFin==cIni) && (b.getPezzo(rFin+1,cFin)==NULL)){ //Se la mossa che sta facendo è la prima , può andare avanti di due celle e se nel tragitto non c'è nessun pezzo
                 return true; //Allora la mossa è valida
         }
         
-        if((rFin==rIni+1) && ((cFin==cIni+1) || (cFin==cIni-1)) && (PezzoFinale!=NULL) && (!color)){ //Se nella cella in cui si sposta (muove in obliquo) c'è un pezzo e ha un colore diverso dal colore del giocatore
+        if((rFin==rIni-1) && ((cFin==cIni-1) || (cFin==cIni+1))){ //Se si sta spostando in obliquo (mangia un pezzo)
                 return true; //Allora la mossa è valida
         }
     }
@@ -317,7 +317,6 @@ Re::Re(bool c, char n){
 }
 
 bool Re::isValid(int rIni, int cIni, int rFin, int cFin, Board& b){
-    Pezzo *PezzoFinale = b.getPezzo(rFin,cFin); //Creo un puntatore alla cella d'arrivo
     if(((rFin==rIni+1) || (rFin==rIni-1)  || (rFin==rIni)) && ((cFin==cIni+1) || (cFin==cIni-1) || (cFin==cIni))){ //Se si sta spostando di una cella in qualsiasi direzione
         return true; //Allora la mossa è valida
     }
