@@ -71,9 +71,10 @@ void Board::printScacchiera()
 void Board::spostaPezzo(int rigaI, int colonnaI, int rigaF, int colonnaF)
 {
     // swap dei pezzi
+    cout<<board[rigaF][colonnaF]<<endl;
     board[rigaF][colonnaF] = board[rigaI][colonnaI];
     board[rigaI][colonnaI] = NULL;
-    //DELETE QUA? mettere if per vedere se casella d'arrivo è vuota
+    //DELETE QUA? mettere if per vedere se casella d'arrivo è null. 
 }
 
 

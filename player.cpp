@@ -78,11 +78,6 @@ tuple<int, int, int, int> Player::mossa(Board &board)
         colFin=rand() % 8;
         
         cout<<rigIniz<<colIniz<<" "<<colFin<<rigFin<<" ";
-        //this_thread::sleep_for(chrono::milliseconds(2));
         return make_tuple(colIniz, rigIniz, colFin, rigFin);
-        // far scegliere al pc un suo pezzo random
-        // a seconda del pezzo
-        // mette delle coord finali a caso
-        // in start isMoveValid controllerà e in caso richiede una mossa
     }
 }
