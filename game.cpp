@@ -105,14 +105,16 @@ bool Game::isMoveValid(int rigaI, int colonnaI, int rigaF, int colonnaF, Player*
             cout<<"la casella d'arrivo \212 occupata da un tuo pezzo!\n";
         return false;
     }
-    /*//3)controllo che la mossa non metta il re di currentPlayer sottoscacco
-    board.spostaPezzo(rigaI,colonnaI,rigaF,colonnaF); //effettuo temporaneamente la mossa
-    if(sottoScacco(*currentPlayer,board)){
+    //3)controllo che la mossa non metta il re di currentPlayer sottoscacco
+    /*board.spostaPezzo(rigaI,colonnaI,rigaF,colonnaF); //effettuo temporaneamente la mossa
+     cout<<"HO SPOSTATO IL PEZZO\n";
+        if(sottoScacco(*currentPlayer,board)){
         cout<<"la mossa mette il tuo re sottoscacco!\n";
         board.spostaPezzo(rigaF,colonnaF,rigaI,colonnaI); //ripristino situazione precedente
         return false;
     }
-    board.spostaPezzo(rigaF,colonnaF,rigaI,colonnaI); //ripristino situazione precedente*/
+    board.spostaPezzo(rigaF,colonnaF,rigaI,colonnaI); //ripristino situazione precedente
+    cout<<"HO RIPRISTINATO IL PEZZO\n";*/
 
     //check di validità del pezzo in particolare
     if(board.getPezzo(rigaI,colonnaI)->isValid(rigaI,colonnaI,rigaF,colonnaF,board)==false){
@@ -120,6 +122,11 @@ bool Game::isMoveValid(int rigaI, int colonnaI, int rigaF, int colonnaF, Player*
             cout<<"il pezzo scelto non puo muoversi in quella direzione\n";
         return false;
     }
+    board.spostaPezzo(rigaI,colonnaI,rigaF,colonnaF); //effettuo temporaneamente la mossa
+    cout<<"HO SPOSTATO IL PEZZO\n";
+    board.spostaPezzo(rigaF,colonnaF,rigaI,colonnaI); //ripristino situazione precedente
+    cout<<"HO RIPRISTINATO IL PEZZO\n";
+
 
     return true;
 }

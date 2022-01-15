@@ -77,7 +77,7 @@ tuple<int, int, int, int> Player::mossa(Board &board)
         rigFin=rand() % 8;
         colFin=rand() % 8;
         
-        cout<<rigIniz<<colIniz<<" "<<colFin<<rigFin<<" ";
+        cout<<rigIniz<<colIniz<<" "<<rigFin<<colFin<<" ";
         return make_tuple(colIniz, rigIniz, colFin, rigFin);
     }
 }
