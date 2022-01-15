@@ -1,5 +1,6 @@
 #include "pezzo.h"
 #include "board.h"
+#include "iostream"
 
 char Pezzo::getName() const{
     return name;
@@ -9,7 +10,7 @@ bool Pezzo::getColor() const{
     return color;
 }
 
-Pezzo::~Pezzo(){} //da completare
+Pezzo::~Pezzo(){ std::cout << "Sto invocando il distruttore di Pezzo"; } //devo metterci un delete dentro? Oppure faccio il distruttore in board e faccio il delete del puntatore al pezzo?
 
 //*****PEDONE****
 
@@ -38,7 +39,7 @@ bool Pedone::isValid(int rIni, int cIni, int rFin, int cFin, Board& b){
                 return true; //Allora la mossa è valida
         }
         
-        if((rFin==3) && (cFin==cIni) && (PezzoFinale==NULL) && (b.getPezzo(rFin+1,cFin)==NULL)){ //Se la mossa che sta facendo è la prima , può andare avanti di due celle e se nel tragitto e nella cella d'arrivo non ci sono pezzi
+        if((rFin==4) && (cFin==cIni) && (PezzoFinale==NULL) && (b.getPezzo(rFin+1,cFin)==NULL)){ //Se la mossa che sta facendo è la prima , può andare avanti di due celle e se nel tragitto e nella cella d'arrivo non ci sono pezzi
                 return true; //Allora la mossa è valida
         }
         
@@ -63,9 +64,7 @@ bool Torre::isValid(int rIni, int cIni, int rFin, int cFin, Board& b){
             for(int i = rIni-1; i >= rFin; i--){  //Controllo ogni cella verso il basso
                 Pezzo *PezzoCorrente = b.getPezzo(i,cFin); //Creo un puntatore ad ogni cella verso il basso
                 if(i==rFin){  //Se l'indice arriva alla cella finale
-                    if(((PezzoCorrente!=NULL) && (!color)) || (PezzoCorrente==NULL)){ //Se nella cella finale c'è un pezzo e ha il colore diverso da quello del giocatore oppure se nella cella finale non c'è nessun pezzo
-                        return true; //Allora la mossa è valida
-                    }
+                    return true; //Allora la mossa è valida
                 }
                 
                 if(PezzoCorrente!=NULL){ //Se le celle che incontra presentano un pezzo
@@ -76,9 +75,7 @@ bool Torre::isValid(int rIni, int cIni, int rFin, int cFin, Board& b){
             for(int i = rIni+1; i <= rFin; i++){  //Controllo ogni cella verso l'alto
             Pezzo *PezzoCorrente = b.getPezzo(i,cFin); //Creo un puntatore ad ogni cella verso l'alto
                 if(i==rFin){  //Se l'indice arriva alla posizione finale
-                    if(((PezzoCorrente!=NULL) && (!color)) || (PezzoCorrente==NULL)){ //Se nella cella finale c'è un pezzo e ha il colore diverso da quello del giocatore oppure se nella cella finale non c'è nessun pezzo
-                        return true; //Allora la mossa è valida
-                    }
+                    return true; //Allora la mossa è valida
                 }
                 
                 if(PezzoCorrente!=NULL){ //Se le celle che incontra presentano un pezzo
@@ -91,9 +88,7 @@ bool Torre::isValid(int rIni, int cIni, int rFin, int cFin, Board& b){
             for(int i = cIni-1; i >= cFin; i--){  //Controllo ogni cella verso sinistra
                 Pezzo *PezzoCorrente = b.getPezzo(rFin,i); //Creo un puntatore ad ogni cella verso sinistra
                 if(i==cFin){  //Se l'indice arriva alla posizione finale
-                    if(((PezzoCorrente!=NULL) && (!color)) || (PezzoCorrente==NULL)){ //Se nella cella finale c'è un pezzo e ha il colore diverso da quello del giocatore oppure se nella cella finale non c'è nessun pezzo
-                        return true; //Allora la mossa è valida
-                    }
+                    return true; //Allora la mossa è valida
                 }
                 
                 if(PezzoCorrente!=NULL){ //Se le celle che incontra presentano un pezzo
@@ -104,9 +99,7 @@ bool Torre::isValid(int rIni, int cIni, int rFin, int cFin, Board& b){
             for(int i = cIni+1; i <= cFin; i++){  //Controllo ogni cella verso destra
                  Pezzo *PezzoCorrente = b.getPezzo(rFin,i); //Creo un puntatore ad ogni cella verso destra
                 if(i==cFin){  //Se l'indice arriva alla posizione finale
-                    if(((PezzoCorrente!=NULL) && (!color)) || (PezzoCorrente==NULL)){ //Se nella cella finale c'è un pezzo e ha il colore diverso da quello del giocatore oppure se nella cella finale non c'è nessun pezzo
-                        return true; //Allora la mossa è valida
-                    }
+                    return true; //Allora la mossa è valida
                 }
                 
                 if(PezzoCorrente!=NULL){ //Se le celle che incontra presentano un pezzo
@@ -129,13 +122,9 @@ Cavallo::Cavallo(bool c, char n){
 bool Cavallo::isValid(int rIni, int cIni, int rFin, int cFin, Board& b){
     Pezzo *PezzoFinale = b.getPezzo(rFin,cFin); //Creo un puntatore alla cella d'arrivo
     if(((cFin==cIni+1) || (cFin==cIni-1)) && ((rFin==rIni+2) || (rFin==rIni-2))){ //Se si sposta di una colonna a destra o sinistra e di due righe in alto o in basso
-        if(((PezzoFinale!=NULL) && (!color)) || (PezzoFinale==NULL)){ //Se nella cella finale c'è un pezzo e ha il colore diverso da quello del giocatore oppure se nella cella finale non c'è nessun pezzo
-            return true; //Allora la mossa è valida
-        }    
+        return true; //Allora la mossa è valida
     }else if(((cFin==cIni+2) || (cFin==cIni-2)) && ((rFin==rIni+1) || (rFin==rIni-1))){ //Se si sposta di due colonne a destra o sinistra e di una riga in alto o in basso
-            if(((PezzoFinale!=NULL) && (!color)) || (PezzoFinale==NULL)){ //Se nella cella finale c'è un pezzo e ha il colore diverso da quello del giocatore oppure se nella cella finale non c'è nessun pezzo
-                return true; //Allora la mossa è valida
-            }    
+            return true; //Allora la mossa è valida   
     }
     return false;
 }
@@ -154,9 +143,7 @@ bool Alfiere::isValid(int rIni, int cIni, int rFin, int cFin, Board& b){
             for(i=rIni+1,j=cIni+1;((i<=rFin) && (j<=cFin));i++,j++){//Per ogni cella che si attraversa
                 Pezzo *PezzoCorrente = b.getPezzo(i,j); //Creo un puntatore ad ogni cella verso l'alto in diagonale
                 if((i==rFin) && (j==cFin)){  //Se l'indice arriva alla posizione finale
-                    if(((PezzoCorrente!=NULL) && (!color)) || (PezzoCorrente==NULL)){ //Se nella cella finale c'è un pezzo e ha il colore diverso da quello del giocatore oppure se nella cella finale non c'è nessun pezzo
-                        return true; //Allora la mossa è valida
-                    }
+                    return true; //Allora la mossa è valida
                 }
 
                 if(PezzoCorrente!=NULL){ //Se le celle che incontra presentano un pezzo
@@ -168,9 +155,7 @@ bool Alfiere::isValid(int rIni, int cIni, int rFin, int cFin, Board& b){
             for(i=rIni-1,j=cIni+1;((i>=rFin) && (j<=cFin));i--,j++){//Per ogni cella che si attraversa
                 Pezzo *PezzoCorrente = b.getPezzo(i,j); //Creo un puntatore ad ogni cella verso il basso in diagonale
                 if((i==rFin) && (j==cFin)){  //Se l'indice arriva alla posizione finale
-                    if(((PezzoCorrente!=NULL) && (!color)) || (PezzoCorrente==NULL)){ //Se nella cella finale c'è un pezzo e ha il colore diverso da quello del giocatore oppure se nella cella finale non c'è nessun pezzo
-                        return true; //Allora la mossa è valida
-                    }
+                    return true; //Allora la mossa è valida
                 }
                 
                 if(PezzoCorrente!=NULL){ //Se le celle che incontra presentano un pezzo
@@ -183,9 +168,7 @@ bool Alfiere::isValid(int rIni, int cIni, int rFin, int cFin, Board& b){
            for(i=rIni+1,j=cIni-1;((i<=rFin) && (j>=cFin));i++,j--){//Per ogni cella che si attraversa
                 Pezzo *PezzoCorrente = b.getPezzo(i,j); //Creo un puntatore ad ogni cella verso l'alto in diagonale
                 if((i==rFin) && (j==cFin)){  //Se l'indice arriva alla posizione finale
-                    if(((PezzoCorrente!=NULL) && (!color)) || (PezzoCorrente==NULL)){ //Se nella cella finale c'è un pezzo e ha il colore diverso da quello del giocatore oppure se nella cella finale non c'è nessun pezzo
-                        return true; //Allora la mossa è valida
-                    }
+                    return true; //Allora la mossa è valida
                 }
                 
                 if(PezzoCorrente!=NULL){ //Se le celle che incontra presentano un pezzo
@@ -197,9 +180,7 @@ bool Alfiere::isValid(int rIni, int cIni, int rFin, int cFin, Board& b){
            for(i=rIni-1,j=cIni-1;((i>=rFin) && (j>=cFin));i--,j--){//Per ogni cella che si attraversa
                 Pezzo *PezzoCorrente = b.getPezzo(i,j); //Creo un puntatore ad ogni cella verso il basso in diagonale
                 if((i==rFin) && (j==cFin)){  //Se l'indice arriva alla posizione finale
-                    if(((PezzoCorrente!=NULL) && (!color)) || (PezzoCorrente==NULL)){ //Se nella cella finale c'è un pezzo e ha il colore diverso da quello del giocatore oppure se nella cella finale non c'è nessun pezzo
-                        return true; //Allora la mossa è valida
-                    }
+                    return true; //Allora la mossa è valida
                 }
                 
                 if(PezzoCorrente!=NULL){ //Se le celle che incontra presentano un pezzo
@@ -227,9 +208,7 @@ bool Regina::isValid(int rIni, int cIni, int rFin, int cFin, Board& b){ //Data d
             for(i=rIni+1,j=cIni+1;((i<=rFin) && (j<=cFin));i++,j++){//Per ogni cella che si attraversa
                 Pezzo *PezzoCorrente = b.getPezzo(i,j); //Creo un puntatore ad ogni cella verso l'alto in diagonale
                 if((i==rFin) && (j==cFin)){  //Se l'indice arriva alla posizione finale
-                    if(((PezzoCorrente!=NULL) && (!color)) || (PezzoCorrente==NULL)){ //Se nella cella finale c'è un pezzo e ha il colore diverso da quello del giocatore oppure se nella cella finale non c'è nessun pezzo
-                        return true; //Allora la mossa è valida
-                    }
+                    return true; //Allora la mossa è valida
                 }
 
                 if(PezzoCorrente!=NULL){ //Se le celle che incontra presentano un pezzo
@@ -241,9 +220,7 @@ bool Regina::isValid(int rIni, int cIni, int rFin, int cFin, Board& b){ //Data d
             for(i=rIni-1,j=cIni+1;((i>=rFin) && (j<=cFin));i--,j++){//Per ogni cella che si attraversa
                 Pezzo *PezzoCorrente = b.getPezzo(i,j); //Creo un puntatore ad ogni cella verso il basso in diagonale
                 if((i==rFin) && (j==cFin)){  //Se l'indice arriva alla posizione finale
-                    if(((PezzoCorrente!=NULL) && (!color)) || (PezzoCorrente==NULL)){ //Se nella cella finale c'è un pezzo e ha il colore diverso da quello del giocatore oppure se nella cella finale non c'è nessun pezzo
-                        return true; //Allora la mossa è valida
-                    }
+                    return true; //Allora la mossa è valida
                 }
                 
                 if(PezzoCorrente!=NULL){ //Se le celle che incontra presentano un pezzo
@@ -256,9 +233,7 @@ bool Regina::isValid(int rIni, int cIni, int rFin, int cFin, Board& b){ //Data d
            for(i=rIni+1,j=cIni-1;((i<=rFin) && (j>=cFin));i++,j--){//Per ogni cella che si attraversa
                 Pezzo *PezzoCorrente = b.getPezzo(i,j); //Creo un puntatore ad ogni cella verso l'alto in diagonale
                 if((i==rFin) && (j==cFin)){  //Se l'indice arriva alla posizione finale
-                    if(((PezzoCorrente!=NULL) && (!color)) || (PezzoCorrente==NULL)){ //Se nella cella finale c'è un pezzo e ha il colore diverso da quello del giocatore oppure se nella cella finale non c'è nessun pezzo
-                        return true; //Allora la mossa è valida
-                    }
+                    return true; //Allora la mossa è valida
                 }
                 
                 if(PezzoCorrente!=NULL){ //Se le celle che incontra presentano un pezzo
@@ -270,9 +245,7 @@ bool Regina::isValid(int rIni, int cIni, int rFin, int cFin, Board& b){ //Data d
            for(i=rIni-1,j=cIni-1;((i>=rFin) && (j>=cFin));i--,j--){//Per ogni cella che si attraversa
                 Pezzo *PezzoCorrente = b.getPezzo(i,j); //Creo un puntatore ad ogni cella verso il basso in diagonale
                 if((i==rFin) && (j==cFin)){  //Se l'indice arriva alla posizione finale
-                    if(((PezzoCorrente!=NULL) && (!color)) || (PezzoCorrente==NULL)){ //Se nella cella finale c'è un pezzo e ha il colore diverso da quello del giocatore oppure se nella cella finale non c'è nessun pezzo
-                        return true; //Allora la mossa è valida
-                    }
+                    return true; //Allora la mossa è valida
                 }
                 
                 if(PezzoCorrente!=NULL){ //Se le celle che incontra presentano un pezzo
@@ -288,9 +261,7 @@ bool Regina::isValid(int rIni, int cIni, int rFin, int cFin, Board& b){ //Data d
             for(int i = rIni-1; i >= rFin; i--){  //Controllo ogni cella verso il basso
                 Pezzo *PezzoCorrente = b.getPezzo(i,cFin); //Creo un puntatore ad ogni cella verso il basso
                 if(i==rFin){  //Se l'indice arriva alla cella finale
-                    if(((PezzoCorrente!=NULL) && (!color)) || (PezzoCorrente==NULL)){ //Se nella cella finale c'è un pezzo e ha il colore diverso da quello del giocatore oppure se nella cella finale non c'è nessun pezzo
-                        return true; //Allora la mossa è valida
-                    }
+                    return true; //Allora la mossa è valida
                 }
                 
                 if(PezzoCorrente!=NULL){ //Se le celle che incontra presentano un pezzo
@@ -301,9 +272,7 @@ bool Regina::isValid(int rIni, int cIni, int rFin, int cFin, Board& b){ //Data d
             for(int i = rIni+1; i <= rFin; i++){  //Controllo ogni cella verso l'alto
             Pezzo *PezzoCorrente = b.getPezzo(i,cFin); //Creo un puntatore ad ogni cella verso l'alto
                 if(i==rFin){  //Se l'indice arriva alla posizione finale
-                    if(((PezzoCorrente!=NULL) && (!color)) || (PezzoCorrente==NULL)){ //Se nella cella finale c'è un pezzo e ha il colore diverso da quello del giocatore oppure se nella cella finale non c'è nessun pezzo
-                        return true; //Allora la mossa è valida
-                    }
+                    return true; //Allora la mossa è valida
                 }
                 
                 if(PezzoCorrente!=NULL){ //Se le celle che incontra presentano un pezzo
@@ -316,9 +285,7 @@ bool Regina::isValid(int rIni, int cIni, int rFin, int cFin, Board& b){ //Data d
             for(int i = cIni-1; i >= cFin; i--){  //Controllo ogni cella verso sinistra
                 Pezzo *PezzoCorrente = b.getPezzo(rFin,i); //Creo un puntatore ad ogni cella verso sinistra
                 if(i==cFin){  //Se l'indice arriva alla posizione finale
-                    if(((PezzoCorrente!=NULL) && (!color)) || (PezzoCorrente==NULL)){ //Se nella cella finale c'è un pezzo e ha il colore diverso da quello del giocatore oppure se nella cella finale non c'è nessun pezzo
-                        return true; //Allora la mossa è valida
-                    }
+                    return true; //Allora la mossa è valida
                 }
                 
                 if(PezzoCorrente!=NULL){ //Se le celle che incontra presentano un pezzo
@@ -329,9 +296,7 @@ bool Regina::isValid(int rIni, int cIni, int rFin, int cFin, Board& b){ //Data d
             for(int i = cIni+1; i <= cFin; i++){  //Controllo ogni cella verso destra
                  Pezzo *PezzoCorrente = b.getPezzo(rFin,i); //Creo un puntatore ad ogni cella verso destra
                 if(i==cFin){  //Se l'indice arriva alla posizione finale
-                    if(((PezzoCorrente!=NULL) && (!color)) || (PezzoCorrente==NULL)){ //Se nella cella finale c'è un pezzo e ha il colore diverso da quello del giocatore oppure se nella cella finale non c'è nessun pezzo
-                        return true; //Allora la mossa è valida
-                    }
+                    return true; //Allora la mossa è valida
                 }
                 
                 if(PezzoCorrente!=NULL){ //Se le celle che incontra presentano un pezzo
@@ -354,9 +319,7 @@ Re::Re(bool c, char n){
 bool Re::isValid(int rIni, int cIni, int rFin, int cFin, Board& b){
     Pezzo *PezzoFinale = b.getPezzo(rFin,cFin); //Creo un puntatore alla cella d'arrivo
     if(((rFin==rIni+1) || (rFin==rIni-1)  || (rFin==rIni)) && ((cFin==cIni+1) || (cFin==cIni-1) || (cFin==cIni))){ //Se si sta spostando di una cella in qualsiasi direzione
-        if(((PezzoFinale!=NULL) && (!color)) || (PezzoFinale==NULL)){ //Se nella cella finale c'è un pezzo e ha il colore diverso da quello del giocatore oppure se nella cella finale non c'è nessun pezzo
-            return true; //Allora la mossa è valida
-        }
+        return true; //Allora la mossa è valida
     }
     return false;
 }
