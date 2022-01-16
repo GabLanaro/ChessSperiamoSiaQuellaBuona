@@ -54,13 +54,13 @@ void Game::start()
         { // ciclo che itera finchè la mossa inserita è valida
             int rigaI, colonnaI, rigaF, colonnaF;
             std::tie(colonnaI, rigaI, colonnaF, rigaF) = currentPlayer->mossa(board); // il giocatore di turno inserisce la mossa
-            if (isMoveValid(rigaI, colonnaI, rigaF, colonnaF, currentPlayer,board))
+            if (isMoveValid(rigaI, colonnaI, rigaF, colonnaF, currentPlayer, board))
             { // verifica della correttezza della mossa inserita
                 board.spostaPezzo(rigaI, colonnaI, rigaF, colonnaF);
-                std::cout << "mossa effettuata:   " << rigaI << colonnaI << " " << rigaF << colonnaF << "\n"; 
-                fileLog << rigaI << colonnaI << " " << rigaF << colonnaF << "\n";                             // scrive la mossa nel file di log
-                currentPlayer = (currentPlayer->getColor() == player1.getColor()) ? &player2 : &player1;      // cambio turno giocatore
-                done = true;  // esci dal ciclo
+                std::cout << "mossa effettuata:   " << rigaI << colonnaI << " " << rigaF << colonnaF << "\n";
+                fileLog << rigaI << colonnaI << " " << rigaF << colonnaF << "\n";                        // scrive la mossa nel file di log
+                currentPlayer = (currentPlayer->getColor() == player1.getColor()) ? &player2 : &player1; // cambio turno giocatore
+                done = true;                                                                             // esci dal ciclo
             }
         }
         counterMosse++;
@@ -83,60 +83,62 @@ bool Game::randomColor()
     return x & 1;        // funzione AND tra il numero casuale e 1
 }
 
-
-bool Game::isMoveValid(int rigaI, int colonnaI, int rigaF, int colonnaF, Player* currentPlayer, Board& board)
+bool Game::isMoveValid(int rigaI, int colonnaI, int rigaF, int colonnaF, Player *currentPlayer, Board &board)
 {
-    //4 check di validità che valgono per tutti i pezzi.   
-    //0)controllo che la casella scelta non sia vuota
-    if(board.getPezzo(rigaI,colonnaI)==NULL){
-        //if(currentPlayer->getTipo()==true)
-            cout<<"la casella scelta \212 vuota!\n";
+    // 4 check di validità che valgono per tutti i pezzi.
+    // 0)controllo che la casella scelta non sia vuota
+    if (board.getPezzo(rigaI, colonnaI) == NULL)
+    {
+        // if(currentPlayer->getTipo()==true)
+        cout << "la casella scelta \212 vuota!\n";
         return false;
     }
-    //1)controllo che il pezzo scelto sia di current player
-    if(currentPlayer->getColor()!=board.getPezzo(rigaI,colonnaI)->getColor()){
-        //if(currentPlayer->getTipo()==true)
-            cout<<"il pezzo scelto \212 dell'altro giocatore!\n";
+    // 1)controllo che il pezzo scelto sia di current player
+    if (currentPlayer->getColor() != board.getPezzo(rigaI, colonnaI)->getColor())
+    {
+        // if(currentPlayer->getTipo()==true)
+        cout << "il pezzo scelto \212 dell'altro giocatore!\n";
         return false;
     }
-    //2)controllo che la casella d'arrivo non sia occupata da un pezzo di currentPlayer
-    if(board.getPezzo(rigaF,colonnaF)!=NULL && currentPlayer->getColor()==board.getPezzo(rigaF,colonnaF)->getColor()){
-        //if(currentPlayer->getTipo()==true)
-            cout<<"la casella d'arrivo \212 occupata da un tuo pezzo!\n";
+    // 2)controllo che la casella d'arrivo non sia occupata da un pezzo di currentPlayer
+    if (board.getPezzo(rigaF, colonnaF) != NULL && currentPlayer->getColor() == board.getPezzo(rigaF, colonnaF)->getColor())
+    {
+        // if(currentPlayer->getTipo()==true)
+        cout << "la casella d'arrivo \212 occupata da un tuo pezzo!\n";
+        return false;
+    } /*
+     // 3)controllo che la mossa non metta il re di currentPlayer sottoscacco
+     board.spostaPezzo(rigaI, colonnaI, rigaF, colonnaF); // effettuo temporaneamente la mossa
+     cout << "HO SPOSTATO IL PEZZO\n";
+     if (sottoScacco(*currentPlayer, board))
+     {
+         cout << "la mossa mette il tuo re sottoscacco!\n";
+         board.spostaPezzo(rigaF, colonnaF, rigaI, colonnaI); // ripristino situazione precedente
+         return false;
+     }
+     board.spostaPezzo(rigaF, colonnaF, rigaI, colonnaI); // ripristino situazione precedente
+     cout << "HO RIPRISTINATO IL PEZZO\n";
+     */
+    // check di validità del pezzo in particolare
+    if (board.getPezzo(rigaI, colonnaI)->isValid(rigaI, colonnaI, rigaF, colonnaF, board) == false)
+    {
+        // if(currentPlayer->getTipo()==true)
+        cout << "il pezzo scelto non puo muoversi in quella direzione\n";
         return false;
     }
-    //3)controllo che la mossa non metta il re di currentPlayer sottoscacco
-    /*board.spostaPezzo(rigaI,colonnaI,rigaF,colonnaF); //effettuo temporaneamente la mossa
-     cout<<"HO SPOSTATO IL PEZZO\n";
-        if(sottoScacco(*currentPlayer,board)){
-        cout<<"la mossa mette il tuo re sottoscacco!\n";
-        board.spostaPezzo(rigaF,colonnaF,rigaI,colonnaI); //ripristino situazione precedente
-        return false;
-    }
-    board.spostaPezzo(rigaF,colonnaF,rigaI,colonnaI); //ripristino situazione precedente
-    cout<<"HO RIPRISTINATO IL PEZZO\n";*/
-
-    //check di validità del pezzo in particolare
-    if(board.getPezzo(rigaI,colonnaI)->isValid(rigaI,colonnaI,rigaF,colonnaF,board)==false){
-        //if(currentPlayer->getTipo()==true)
-            cout<<"il pezzo scelto non puo muoversi in quella direzione\n";
-        return false;
-    }
-    board.spostaPezzo(rigaI,colonnaI,rigaF,colonnaF); //effettuo temporaneamente la mossa
-    cout<<"HO SPOSTATO IL PEZZO\n";
-    board.spostaPezzo(rigaF,colonnaF,rigaI,colonnaI); //ripristino situazione precedente
-    cout<<"HO RIPRISTINATO IL PEZZO\n";
-
+    board.spostaPezzo(rigaI, colonnaI, rigaF, colonnaF); // effettuo temporaneamente la mossa
+    cout << "HO SPOSTATO IL PEZZO\n";
+    board.spostaPezzo(rigaF, colonnaF, rigaI, colonnaI); // ripristino situazione precedente
+    cout << "HO RIPRISTINATO IL PEZZO\n";
 
     return true;
 }
 
-
 bool Game::sottoScacco(Player &p, Board &b)
 {
     // PRIMA PARTE: Cerco il Re del current Player
-    int rigRe = 1;
-    int colRe = 1;
+    int rigRe;
+    int colRe;
     // Scorro tutte le caselle della scacchiera
     for (int rigCurr = 0; rigCurr < 8; rigCurr++)
     {
@@ -162,26 +164,26 @@ bool Game::sottoScacco(Player &p, Board &b)
             }
         }
     }
-    /*
-        // SECONDA PARTE: Vedo se i pezzi avversari possono mangiare il re trovato
-        for (int rigCurr = 0; rigCurr < 8; rigCurr++)
+
+    // SECONDA PARTE: Vedo se i pezzi avversari possono mangiare il re trovato
+    for (int rigCurr = 0; rigCurr < 8; rigCurr++)
+    {
+        for (int colCurr = 0; colCurr < 8; colCurr++)
         {
-            for (int colCurr = 0; colCurr < 8; colCurr++)
+            if (b.getPezzo(rigCurr, colCurr) != NULL)
             {
-                if (b.getPezzo(rigCurr, colCurr) != NULL)
+                Pezzo *pez = b.getPezzo(rigCurr, colCurr);
+                if (p.getColor() != pez->getColor())
                 {
-                    Pezzo *pez = b.getPezzo(rigCurr, colCurr);
-                    if (p.getColor() != pez->getColor())
+                    if (pez->isValid(rigCurr, colCurr, rigRe, colRe, b))
                     {
-                        if (pez->isValid(rigCurr, rigRe, colCurr, colRe))
-                        {
-                            return true;
-                        }
+                        return true;
                     }
                 }
             }
         }
-     */
+    }
+
     return false;
 }
 

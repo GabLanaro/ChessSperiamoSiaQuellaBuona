@@ -6,7 +6,6 @@
 #include "player.h"
 #include "board.h"
 
-
 using namespace std;
 
 Player::Player(bool colore, bool tipo)
@@ -47,13 +46,13 @@ tuple<int, int, int, int> Player::mossa(Board &board)
             {
                 // stampa la scacchiera
                 board.printScacchiera();
-                cout<<"\ninserisci mossa: ";
+                cout << "\ninserisci mossa: ";
             }
-            else if (toupper(input[0]) >= 'A' && toupper(input[0]) <= 'H' &&
-                     toupper(input[3]) >= 'A' && toupper(input[3]) <= 'H' &&
-                     input[1] >= '1' && input[1] <= '8' &&
-                     input[4] >= '1' && input[4] <= '8' &&
-                     input[2] == ' ' && input[0] + input[1] != input[3] + input[4]) // check validità lettere/numeri
+            else if (toupper(input[0]) >= 65 && toupper(input[0]) <= 72 &&
+                     toupper(input[3]) >= 65 && toupper(input[3]) <= 72 &&
+                     input[1] >= 49 && input[1] <= 56 &&
+                     input[4] >= 49 && input[4] <= 56 &&
+                     input[2] == 32 && (toupper(input[0]) + toupper(input[1]) != toupper(input[3]) + toupper(input[4]))) // check validità lettere/numeri
             {
                 inputValido = true;
             }
@@ -70,14 +69,14 @@ tuple<int, int, int, int> Player::mossa(Board &board)
         return make_tuple(colIniz, rigIniz, colFin, rigFin);
     }
     else
-    {                                   
+    {
         int colIniz, rigIniz, colFin, rigFin;
-        rigIniz = rand() % 8; //numero intero random tra 0 e 8
-        colIniz =rand() % 8;
-        rigFin=rand() % 8;
-        colFin=rand() % 8;
-        
-        cout<<rigIniz<<colIniz<<" "<<rigFin<<colFin<<" ";
+        rigIniz = rand() % 8; // numero intero random tra 0 e 8
+        colIniz = rand() % 8;
+        rigFin = rand() % 8;
+        colFin = rand() % 8;
+
+        cout << rigIniz << colIniz << " " << rigFin << colFin << " ";
         return make_tuple(colIniz, rigIniz, colFin, rigFin);
     }
 }
