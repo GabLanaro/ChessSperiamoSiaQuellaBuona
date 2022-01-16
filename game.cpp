@@ -43,7 +43,7 @@ void Game::start()
     {
         if (sottoScacco(*currentPlayer, board))
         {
-            if (scaccoMatto(*currentPlayer))
+            if (scaccoMatto(*currentPlayer, board))
                 gameIsOver = true;
             else
                 std::cout << "attenzione! Il tuo re \212 sottoscacco." << std::endl;
@@ -108,22 +108,22 @@ bool Game::isMoveValid(int rigaI, int colonnaI, int rigaF, int colonnaF, Player 
         return false;
     }
     // 3)controllo che la mossa non metta il re di currentPlayer sottoscacco effettuando temporaneamente la mossa
-    Pezzo* temp=board.getPezzo(rigaF,colonnaF);
-    Pezzo* iniziale=board.getPezzo(rigaI,colonnaI);
-    board.setPezzo(iniziale,rigaF,colonnaF); //il pezzo da muovere viene messo temporaneamente nella casella finale
-    board.setPezzo(NULL,rigaI,colonnaI);    //la casella finale viene messa temporaneamente NULL.
-    if(sottoScacco(*currentPlayer,board)){
-        cout<<"la mossa mette il tuo re sottoscacco\n";
-        //ripristino la mosssa
-        board.setPezzo(temp,rigaF,colonnaF);
-        board.setPezzo(iniziale,rigaI,colonnaI);
+    Pezzo *temp = board.getPezzo(rigaF, colonnaF);
+    Pezzo *iniziale = board.getPezzo(rigaI, colonnaI);
+    board.setPezzo(iniziale, rigaF, colonnaF); // il pezzo da muovere viene messo temporaneamente nella casella finale
+    board.setPezzo(NULL, rigaI, colonnaI);     // la casella finale viene messa temporaneamente NULL.
+    if (sottoScacco(*currentPlayer, board))
+    {
+        cout << "la mossa mette il tuo re sottoscacco\n";
+        // ripristino la mosssa
+        board.setPezzo(temp, rigaF, colonnaF);
+        board.setPezzo(iniziale, rigaI, colonnaI);
         return false;
     }
-    //anche se non è sottoscacco ripristino la mossa
-    board.setPezzo(temp,rigaF,colonnaF);
-    board.setPezzo(iniziale,rigaI,colonnaI);
+    // anche se non è sottoscacco ripristino la mossa
+    board.setPezzo(temp, rigaF, colonnaF);
+    board.setPezzo(iniziale, rigaI, colonnaI);
 
-     
     // check di validità del pezzo in particolare
     if (board.getPezzo(rigaI, colonnaI)->isValid(rigaI, colonnaI, rigaF, colonnaF, board) == false)
     {
@@ -188,11 +188,46 @@ bool Game::sottoScacco(Player &p, Board &b)
     return false;
 }
 
-bool Game::scaccoMatto(Player &p)
+bool Game::scaccoMatto(Player &p, Board &b)
 {
-    // Guardo tutti i pezzi doppio for
-    // prendo solo i pezzi del currPlayer e non nulli nella scacchiera con if colore e !=null
-    // similo delle mosse con il pezzo preso e vedo se riesce a risolvere lo scacco
-    // quando non ho più pezzi da verificare allora return true
-    return false;
+    // Ritorna true se il giocatore p è sotto scacco matto
+
+    // <guardo> tutti gli scacchi uno alla volta
+    for (int rigCurr = 0; rigCurr < 8; rigCurr++)
+        for (int colCurr = 0; colCurr < 8; colCurr++)
+        {
+            Pezzo *pez = b.getPezzo(rigCurr, colCurr);
+            // Prendo un pezzo del player
+            if ((pez != NULL) && (pez->getColor() == p.getColor()))
+            {
+                // Guardo se questo per qualche mossa può risolvere lo scacco al Re
+                for (int rigNew = 0; rigNew < 8; rigNew++)
+                    for (int colNew = 0; colNew < 8; colNew++)
+                    {
+                        Pezzo *nuovoPez = b.getPezzo(rigNew, colNew);
+                        // Simula la mossa e guarda se è possibile risolvere lo scacco
+                        if (isMoveValid(rigCurr, colCurr, rigNew, colNew, &p, b))
+                        {
+                            b.setPezzo(nuovoPez, rigNew, colNew);
+                            b.setPezzo(NULL, rigCurr, colCurr);
+                            // Lo scacco non è stato risolto quindi annullo la mossa
+                            if (!sottoScacco(p, b))
+                            {
+                                b.setPezzo(nuovoPez, rigNew, colNew);
+                                b.setPezzo(pez, rigCurr, colCurr);
+                                return false;
+                            }
+                            // Lo scacco non è stato risolto quindi annullo la mossa
+                            // simulo un'altra mossa
+                            else
+                            {
+                                b.setPezzo(nuovoPez, rigNew, colNew);
+                                b.setPezzo(pez, rigCurr, colCurr);
+                            }
+                        }
+                    }
+            }
+        }
+    // Se non trovo nessuna mossa che risolve lo scacco significa che è scacco matto
+    return true;
 }
