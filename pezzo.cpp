@@ -10,7 +10,9 @@ bool Pezzo::getColor() const{
     return color;
 }
 
-Pezzo::~Pezzo(){ std::cout << "Sto invocando il distruttore di Pezzo"; } //devo metterci un delete dentro? Oppure faccio il distruttore in board e faccio il delete del puntatore al pezzo?
+Pezzo::~Pezzo(){
+    std::cout << "Sto invocando il distruttore di Pezzo\n"; 
+} //devo metterci un delete dentro? Oppure faccio il distruttore in board e faccio il delete del puntatore al pezzo?
 
 //*****PEDONE****
 
