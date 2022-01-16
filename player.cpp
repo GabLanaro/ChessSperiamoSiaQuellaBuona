@@ -3,6 +3,7 @@
 #include <tuple>
 #include <cctype>
 #include <ctime>
+#include <algorithm>
 #include "player.h"
 #include "board.h"
 
@@ -42,6 +43,10 @@ tuple<int, int, int, int> Player::mossa(Board &board)
         while (!inputValido)
         {
             getline(cin, input);
+            string iniziale=input.substr(0,2);
+            string finale=input.substr(3,2);
+            transform(iniziale.begin(), iniziale.end(),iniziale.begin(), ::toupper);
+            transform(finale.begin(), finale.end(),finale.begin(), ::toupper);
             if (input == "XX XX" || input == "xx xx")
             {
                 // stampa la scacchiera
@@ -52,12 +57,13 @@ tuple<int, int, int, int> Player::mossa(Board &board)
                      toupper(input[3]) >= 65 && toupper(input[3]) <= 72 &&
                      input[1] >= 49 && input[1] <= 56 &&
                      input[4] >= 49 && input[4] <= 56 &&
-                     input[2] == 32 && (toupper(input[0]) + toupper(input[1]) != toupper(input[3]) + toupper(input[4]))) // check validità lettere/numeri
+                     input[2] == 32 && iniziale!=finale)
             {
                 inputValido = true;
             }
             else
             {
+                cout<<toupper(input[0])<<" "<<input[1]<<"**"<<toupper(input[3])<<" "<<input[4];
                 cout << "L'input che hai inserito non \212 valido,\ninserisci mossa: ";
             }
         }

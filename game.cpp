@@ -126,10 +126,6 @@ bool Game::isMoveValid(int rigaI, int colonnaI, int rigaF, int colonnaF, Player 
         cout << "il pezzo scelto non puo muoversi in quella direzione\n";
         return false;
     }
-    board.spostaPezzo(rigaI, colonnaI, rigaF, colonnaF); // effettuo temporaneamente la mossa
-    cout << "HO SPOSTATO IL PEZZO\n";
-    board.spostaPezzo(rigaF, colonnaF, rigaI, colonnaI); // ripristino situazione precedente
-    cout << "HO RIPRISTINATO IL PEZZO\n";
 
     return true;
 }
