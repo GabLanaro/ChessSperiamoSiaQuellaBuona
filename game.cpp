@@ -106,7 +106,7 @@ bool Game::isMoveValid(int rigaI, int colonnaI, int rigaF, int colonnaF, Player 
         // if(currentPlayer->getTipo()==true)
         cout << "la casella d'arrivo \212 occupata da un tuo pezzo!\n";
         return false;
-    } 
+    }
     // 3)controllo che la mossa non metta il re di currentPlayer sottoscacco effettuando temporaneamente la mossa
     Pezzo* temp=board.getPezzo(rigaF,colonnaF);
     Pezzo* iniziale=board.getPezzo(rigaI,colonnaI);
