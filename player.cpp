@@ -63,7 +63,6 @@ tuple<int, int, int, int> Player::mossa(Board &board)
             }
             else
             {
-                cout<<toupper(input[0])<<" "<<input[1]<<"**"<<toupper(input[3])<<" "<<input[4];
                 cout << "L'input che hai inserito non \212 valido,\ninserisci mossa: ";
             }
         }
