@@ -43,7 +43,8 @@ void Game::start()
     {
         if (sottoScacco(*currentPlayer, board))
         {
-            if (scaccoMatto(*currentPlayer, board)){
+            if (scaccoMatto(*currentPlayer, board))
+            {
                 std::cout << "SCACCO MATTO -- partita terminata";
                 gameIsOver = true;
             }
@@ -51,7 +52,8 @@ void Game::start()
                 std::cout << "attenzione! Il tuo re \212 sottoscacco." << std::endl;
         }
         bool done = false;
-        if(gameIsOver==false){
+        if (gameIsOver == false)
+        {
             // il re non è sottoscacco, currentPlayer inserisce mossa.
             while (!done)
             { // ciclo che itera finchè la mossa inserita è valida
@@ -93,15 +95,15 @@ bool Game::isMoveValid(int rigaI, int colonnaI, int rigaF, int colonnaF, Player 
     // 0)controllo che la casella scelta non sia vuota
     if (board.getPezzo(rigaI, colonnaI) == NULL)
     {
-        if(currentPlayer->getTipo()==true)
-        cout << "la casella scelta \212 vuota!\n";
+        if (currentPlayer->getTipo() == true)
+            cout << "la casella scelta \212 vuota!\n";
         return false;
     }
     // 1)controllo che il pezzo scelto sia di current player
     if (currentPlayer->getColor() != board.getPezzo(rigaI, colonnaI)->getColor())
     {
-        if(currentPlayer->getTipo()==true)
-        cout << "il pezzo scelto \212 dell'altro giocatore!\n";
+        if (currentPlayer->getTipo() == true)
+            cout << "il pezzo scelto \212 dell'altro giocatore!\n";
         return false;
     }
     // 2)controllo che la casella d'arrivo non sia occupata da un pezzo di currentPlayer
@@ -115,8 +117,8 @@ bool Game::isMoveValid(int rigaI, int colonnaI, int rigaF, int colonnaF, Player 
     // check di validità del pezzo in particolare
     if (board.getPezzo(rigaI, colonnaI)->isValid(rigaI, colonnaI, rigaF, colonnaF, board) == false)
     {
-        if(currentPlayer->getTipo()==true)
-        cout << "il pezzo scelto non puo muoversi in quella direzione\n";
+        if (currentPlayer->getTipo() == true)
+            cout << "il pezzo scelto non puo muoversi in quella direzione\n";
         return false;
     }
 
@@ -156,7 +158,7 @@ bool Game::sottoScacco(Player &p, Board &b)
                 Pezzo *pez = b.getPezzo(rigCurr, colCurr);
                 if (p.getColor() == pez->getColor())
                 {
-                    /*if ((pez->getName() == 'r') || (pez->getName() == 'R')) 
+                    /*if ((pez->getName() == 'r') || (pez->getName() == 'R'))
                     {
                         rigRe = rigCurr;
                         colRe = colCurr;
@@ -207,21 +209,24 @@ bool Game::scaccoMatto(Player &p, Board &b)
     {
         for (int colCurr = 0; colCurr < 8; colCurr++)
         {
-            Pezzo *pez = b.getPezzo(rigCurr, colCurr);
-            // Prendo un pezzo del player
-            if ((pez != NULL) && (pez->getColor() == p.getColor()))
+            if (b.getPezzo(rigCurr, colCurr) != NULL)
             {
-                // Guardo se questo per qualche mossa può risolvere lo scacco al Re
-                for (int rigNew = 0; rigNew < 8; rigNew++)
+                Pezzo *pez = b.getPezzo(rigCurr, colCurr);
+                // Prendo un pezzo del player
+                if ((pez != NULL) && (pez->getColor() == p.getColor()))
                 {
-                    for (int colNew = 0; colNew < 8; colNew++)
+                    // Guardo se questo per qualche mossa può risolvere lo scacco al Re
+                    for (int rigNew = 0; rigNew < 8; rigNew++)
                     {
-                        Pezzo *nuovoPez = b.getPezzo(rigNew, colNew);
-                        // Simula la mossa e guarda se è possibile risolvere lo scacco
-                        if (isMoveValid(rigCurr, colCurr, rigNew, colNew, &p, b))
+                        for (int colNew = 0; colNew < 8; colNew++)
                         {
-                            // Dentro isMoveValid c'è già il controllo e la simulazione della mossa
-                            return false;
+                            Pezzo *nuovoPez = b.getPezzo(rigNew, colNew);
+                            // Simula la mossa e guarda se è possibile risolvere lo scacco
+                            if (isMoveValid(rigCurr, colCurr, rigNew, colNew, &p, b))
+                            {
+                                // Dentro isMoveValid c'è già il controllo e la simulazione della mossa
+                                return false;
+                            }
                         }
                     }
                 }
