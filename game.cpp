@@ -3,6 +3,8 @@
 #include <cctype>
 #include <ctime>
 #include <fstream>
+#include <chrono>
+#include <thread>
 #include "game.h"
 #include "board.h"
 #include "player.h"
@@ -68,7 +70,11 @@ void Game::start()
             }
             counterMosse++;
             board.printScacchiera();
-            if (tolower(modalita[0]) == 'c' && counterMosse == 100)
+            if(tolower(modalita[0]) == 'c') //se la partita è tra due computer si attende 1 secondo tra una mossa e l'altra
+            {
+                this_thread::sleep_for(chrono::seconds(1));
+            }
+            if (tolower(modalita[0]) == 'c' && counterMosse == 100) //dopo 100 mosse la partita tra due computer termina
             {
                 std::cout << "numero massimo di mosse raggiunto. La partita \212 annullata.";
                 gameIsOver = true;

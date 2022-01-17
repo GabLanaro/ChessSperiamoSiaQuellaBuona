@@ -81,7 +81,8 @@ tuple<int, int, int, int> Player::mossa(Board &board)
         rigFin = rand() % 8;
         colFin = rand() % 8;
 
-        cout << rigIniz << colIniz << " " << rigFin << colFin << " ";
+        //cout << rigIniz << colIniz << " " << rigFin << colFin << " "; //TEST, DA ELIMINARE
+
         return make_tuple(colIniz, rigIniz, colFin, rigFin);
     }
 }
