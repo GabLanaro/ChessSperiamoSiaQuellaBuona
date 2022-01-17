@@ -209,22 +209,8 @@ bool Game::scaccoMatto(Player &p, Board &b)
                         // Simula la mossa e guarda se è possibile risolvere lo scacco
                         if (isMoveValid(rigCurr, colCurr, rigNew, colNew, &p, b))
                         {
-                            b.setPezzo(nuovoPez, rigNew, colNew);
-                            b.setPezzo(NULL, rigCurr, colCurr);
-                            // Lo scacco non è stato risolto quindi annullo la mossa
-                            if (!sottoScacco(p, b))
-                            {
-                                b.setPezzo(nuovoPez, rigNew, colNew);
-                                b.setPezzo(pez, rigCurr, colCurr);
-                                return false;
-                            }
-                            // Lo scacco non è stato risolto quindi annullo la mossa
-                            // simulo un'altra mossa
-                            else
-                            {
-                                b.setPezzo(nuovoPez, rigNew, colNew);
-                                b.setPezzo(pez, rigCurr, colCurr);
-                            }
+                            // Dentro isMoveValid c'è già il controllo e la simulazione della mossa
+                            return false;
                         }
                     }
             }
