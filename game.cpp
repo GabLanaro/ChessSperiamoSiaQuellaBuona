@@ -43,32 +43,36 @@ void Game::start()
     {
         if (sottoScacco(*currentPlayer, board))
         {
-            if (scaccoMatto(*currentPlayer, board))
+            if (scaccoMatto(*currentPlayer, board)){
+                std::cout << "SCACCO MATTO -- partita terminata";
                 gameIsOver = true;
+            }
             else
                 std::cout << "attenzione! Il tuo re \212 sottoscacco." << std::endl;
         }
-        // il re non è sottoscacco, currentPlayer inserisce mossa.
         bool done = false;
-        while (!done)
-        { // ciclo che itera finchè la mossa inserita è valida
-            int rigaI, colonnaI, rigaF, colonnaF;
-            std::tie(colonnaI, rigaI, colonnaF, rigaF) = currentPlayer->mossa(board); // il giocatore di turno inserisce la mossa
-            if (isMoveValid(rigaI, colonnaI, rigaF, colonnaF, currentPlayer, board))
-            { // verifica della correttezza della mossa inserita
-                board.spostaPezzo(rigaI, colonnaI, rigaF, colonnaF);
-                std::cout << "mossa effettuata:   " << rigaI << colonnaI << " " << rigaF << colonnaF << "\n";
-                fileLog << rigaI << colonnaI << " " << rigaF << colonnaF << "\n";                        // scrive la mossa nel file di log
-                currentPlayer = (currentPlayer->getColor() == player1.getColor()) ? &player2 : &player1; // cambio turno giocatore
-                done = true;                                                                             // esci dal ciclo
+        if(gameIsOver==false){
+            // il re non è sottoscacco, currentPlayer inserisce mossa.
+            while (!done)
+            { // ciclo che itera finchè la mossa inserita è valida
+                int rigaI, colonnaI, rigaF, colonnaF;
+                std::tie(colonnaI, rigaI, colonnaF, rigaF) = currentPlayer->mossa(board); // il giocatore di turno inserisce la mossa
+                if (isMoveValid(rigaI, colonnaI, rigaF, colonnaF, currentPlayer, board))
+                { // verifica della correttezza della mossa inserita
+                    board.spostaPezzo(rigaI, colonnaI, rigaF, colonnaF);
+                    std::cout << "mossa effettuata:   " << rigaI << colonnaI << " " << rigaF << colonnaF << "\n";
+                    fileLog << rigaI << colonnaI << " " << rigaF << colonnaF << "\n";                        // scrive la mossa nel file di log
+                    currentPlayer = (currentPlayer->getColor() == player1.getColor()) ? &player2 : &player1; // cambio turno giocatore
+                    done = true;                                                                             // esci dal ciclo
+                }
             }
-        }
-        counterMosse++;
-        board.printScacchiera();
-        if (tolower(modalita[0]) == 'c' && counterMosse == 100)
-        {
-            std::cout << "numero massimo di mosse raggiunto. La partita \212 annullata.";
-            gameIsOver = true;
+            counterMosse++;
+            board.printScacchiera();
+            if (tolower(modalita[0]) == 'c' && counterMosse == 100)
+            {
+                std::cout << "numero massimo di mosse raggiunto. La partita \212 annullata.";
+                gameIsOver = true;
+            }
         }
 
     } while (!gameIsOver);
@@ -152,6 +156,11 @@ bool Game::sottoScacco(Player &p, Board &b)
                 Pezzo *pez = b.getPezzo(rigCurr, colCurr);
                 if (p.getColor() == pez->getColor())
                 {
+                    /*if ((pez->getName() == 'r') || (pez->getName() == 'R')) 
+                    {
+                        rigRe = rigCurr;
+                        colRe = colCurr;
+                    }*/
                     if (pez->getName() == 'r' && p.getColor() == true) // se bianco
                     {
                         rigRe = rigCurr;

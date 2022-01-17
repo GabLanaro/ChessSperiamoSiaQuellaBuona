@@ -31,7 +31,7 @@ Board::Board()
     }*/
     // inserisco nella matrice i puntatori ai pezzi neri
     //setPezzo(new Torre(false,'T'), 7, 0);
-    //setPezzo(new Cavallo(false,'C'), 7, 1);
+    setPezzo(new Cavallo(false,'C'), 7, 1);
     //setPezzo(new Alfiere(false,'A'), 7, 2);
     //setPezzo(new Regina(false,'D'), 7, 3);
     setPezzo(new Re(false,'R'), 7, 4);
