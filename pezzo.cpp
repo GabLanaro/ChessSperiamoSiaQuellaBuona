@@ -24,28 +24,37 @@ bool Pedone::isValid(int rIni, int cIni, int rFin, int cFin, Board& b){
     Pezzo *PezzoFinale = b.getPezzo(rFin,cFin); //Creo un puntatore al pezzo d'arrivo
     if(name=='p'){ //Se è bianco
         if((rFin==rIni+1) && (cFin==cIni) && (PezzoFinale==NULL)){ //Se la mossa che sta facendo è andare avanti di una cella e non c'è nessun pezzo
-                return true; //Allora la mossa è valida
+            return true; //Allora la mossa è valida
         }
         
         if((rFin==3) && (cFin==cIni) && (PezzoFinale==NULL) && (b.getPezzo(rIni+1,cFin)==NULL)){ //Se la mossa che sta facendo è la prima , può andare avanti di due celle e se nel tragitto e nella cella d'arrivo non ci sono pezzi
-                return true; //Allora la mossa è valida
+            return true; //Allora la mossa è valida
         }
         
         if((rFin==rIni+1) && ((cFin==cIni+1) || (cFin==cIni-1)) && (PezzoFinale!=NULL) && (PezzoFinale->getColor()!=PezzoIniziale->getColor())){ //Se nella cella in cui si sposta (muove in obliquo) c'è un pezzo e ha un colore diverso dal colore del giocatore
-                return true; //Allora la mossa è valida
+            return true; //Allora la mossa è valida
         }
 
     }else if(name=='P'){ //Se è nero
         if((rFin==rIni-1) && (cFin==cIni) && (PezzoFinale==NULL)){ //Se la mossa che sta facendo è andare avanti di una cella e non c'è nessun pezzo
-                return true; //Allora la mossa è valida
+            return true; //Allora la mossa è valida
         }
         
         if((rFin==4) && (cFin==cIni) && (PezzoFinale==NULL) && (b.getPezzo(rIni-1,cFin)==NULL)){ //Se la mossa che sta facendo è la prima , può andare avanti di due celle e se nel tragitto e nella cella d'arrivo non ci sono pezzi
-                return true; //Allora la mossa è valida
+            return true; //Allora la mossa è valida
         }
         
+        /*
+        if(PezzoFinale!=NULL){
+            if((rFin==rIni-1) && ((cFin==cIni-1) || (cFin==cIni+1)) && (PezzoFinale->getColor()!=PezzoIniziale->getColor())){ //Se nella cella in cui si sposta (muove in obliquo) c'è un pezzo e ha un colore diverso dal colore del giocatore
+            return true; //Allora la mossa è valida
+        }else if(PezzoFinale==NULL){
+            //richiamo enPassant, ma come cazzo faccio?
+        }
+        }*/
+        
         if((rFin==rIni-1) && ((cFin==cIni-1) || (cFin==cIni+1)) && (PezzoFinale!=NULL) && (PezzoFinale->getColor()!=PezzoIniziale->getColor())){ //Se nella cella in cui si sposta (muove in obliquo) c'è un pezzo e ha un colore diverso dal colore del giocatore
-                return true; //Allora la mossa è valida
+            return true; //Allora la mossa è valida
         }
     }
     

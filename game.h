@@ -16,6 +16,8 @@ public:
     bool isMoveValid(int rigaI, int colonnaI, int rigaF, int colonnaF, Player *currentPlayer, Board &b); // check di validità generali mossa
     bool sottoScacco(Player &, Board &);                                                                 // true se il re del giocatore che invoca la funzione è sottoscacco
     bool scaccoMatto(Player &, Board &);                                                                 // true se il re del giocatore che invoca la funzione è in scaccomatto
+    void promozione(Board &, int rigaF, int colonnaF);
+    //bool enPassant(Board &, int rigaI, int colonnaI, int rigaF, int colonnaF, int rigaPed, int colonnaPed);
 };
 
 #endif

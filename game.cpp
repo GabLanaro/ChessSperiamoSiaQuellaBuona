@@ -65,7 +65,8 @@ void Game::start()
                 { // verifica della correttezza della mossa inserita
                     board.spostaPezzo(rigaI, colonnaI, rigaF, colonnaF);
                     std::cout << "mossa effettuata:   " << rigaI << colonnaI << " " << rigaF << colonnaF << "\n";
-                    fileLog << rigaI << colonnaI << " " << rigaF << colonnaF << "\n";                        // scrive la mossa nel file di log
+                    fileLog << rigaI << colonnaI << " " << rigaF << colonnaF << "\n";                         // scrive la mossa nel file di log
+                    promozione(board,rigaF,colonnaF);                      
                     currentPlayer = (currentPlayer->getColor() == player1.getColor()) ? &player2 : &player1; // cambio turno giocatore
                     done = true;                                                                             // esci dal ciclo
                 }
@@ -242,3 +243,78 @@ bool Game::scaccoMatto(Player &p, Board &b)
     // Se non trovo nessuna mossa che risolve lo scacco significa che è scacco matto
     return true;
 }
+
+void Game::promozione(Board &b, int rigaF, int colonnaF){
+    char scelta;
+    bool sceltaValida=false;
+    Pezzo *pez = b.getPezzo(rigaF,colonnaF);
+    if(((pez->getName()=='p') && (rigaF==7)) || ((pez->getName()=='P') && (rigaF==0))){
+        //delete pedone
+        std::cout << "Inserisci l'iniziale del pezzo con cui vorresti sostituire il pedone: ";
+        //std::cin >> scelta; //Il problema è questo cin e credo sia collegato al getLine(cin.,input) che c'è dentro a mossa di player
+        //scelta='d';
+        do{
+            switch(scelta){ //mettere anche qua il controllo che non cambia tra maiuscole e minuscole?
+                case 't':
+                if(pez->getColor()==true){ //se è bianco
+                    b.setPezzo(new Torre(true, 't'), 7, colonnaF);
+                }else if(pez->getColor()==false){ //ha senso usare else if o basta mettere else?
+                    b.setPezzo(new Torre(false, 'T'), 0, colonnaF);
+                }
+                sceltaValida=true;
+                break;
+
+                case 'c':
+                if(pez->getColor()==true){ //se è bianco
+                    b.setPezzo(new Cavallo(true, 'c'), 7, colonnaF);
+                }else if(pez->getColor()==false){ //ha senso usare else if o basta mettere else?
+                    b.setPezzo(new Cavallo(false, 'C'), 0, colonnaF);
+                }
+                sceltaValida=true;
+                break;
+
+                case 'a':
+                if(pez->getColor()==true){ //se è bianco
+                    b.setPezzo(new Alfiere(true, 'a'), 7, colonnaF);
+                }else if(pez->getColor()==false){ //ha senso usare else if o basta mettere else?
+                    b.setPezzo(new Alfiere(false, 'A'), 0, colonnaF);
+                }
+                sceltaValida=true;
+                break;
+
+                case 'd':
+                if(pez->getColor()==true){ //se è bianco
+                    b.setPezzo(new Regina(true, 'd'), 7, colonnaF);
+                }else if(pez->getColor()==false){ //ha senso usare else if o basta mettere else?
+                    b.setPezzo(new Regina(false, 'D'), 0, colonnaF);
+                }
+                sceltaValida=true;
+                break;
+
+                case 'p':
+                if(pez->getColor()==true){ //se è bianco
+                    b.setPezzo(new Pedone(true, 'p'), 7, colonnaF);
+                }else if(pez->getColor()==false){ //ha senso usare else if o basta mettere else?
+                    b.setPezzo(new Pedone(false, 'P'), 0, colonnaF);
+                }
+                sceltaValida=true;
+                break;
+            }
+            if(sceltaValida==false){
+                std::cout << "Scelta non valida, riprova" << endl;
+            }
+        }while(sceltaValida==false);
+    }
+}
+
+/*
+//if(p.getTipo()==true){//Se il giocatore ora è bianco, vuol dire che la mossa fatta prima è stata fatta dal giocatore nero
+       // if((rigaFinalePed==6) && (rigaInizialePed==4) && (PezzoIniziale->getName()=='P')){
+
+ bool Game::enPassant(Board &b, int rigaI, int colonnaI, int rigaF, int colonnaF, int rigaPed, int colonnaPed){
+    Pezzo *PezzoIniziale = b.getPezzo(rigaI,colonnaI); // Creo un puntatore al pezzo iniziale
+    Pezzo *PezzoFinale = b.getPezzo(rigaF,colonnaF); //Creo un puntatore al pezzo d'arrivo
+        if((rigaI==4) && (PezzoFinale==NULL) && (PezzoIniziale->getName()=='p') && (colonnaF==colonnaPed) && (rigaF==rigaPed+1)){
+            return true;
+        }
+}*/
