@@ -20,36 +20,45 @@ class Pezzo{
 
 class Pedone : public Pezzo{
     public:
+    //virtual ~Pedone();  //distruttore
     Pedone(bool c, char n);
     bool isValid(int rIni, int cIni, int rFin, int cFin, Board& b);
 };
 
 class Torre : public Pezzo{
+    //private:
+    //Pezzo *p = new Torre()
+
     public:
+    //virtual ~Torre();  //distruttore
     Torre(bool c, char n);
     bool isValid(int rIni, int cIni, int rFin, int cFin, Board& b);
 };
 
 class Alfiere : public Pezzo{
     public:
+    //virtual ~Alfiere();  //distruttore
     Alfiere(bool c, char n);
     bool isValid(int rIni, int cIni, int rFin, int cFin, Board& b);
 };
 
 class Cavallo : public Pezzo{
     public:
+    //virtual ~Cavallo();  //distruttore
     Cavallo(bool c, char n);
     bool isValid(int rIni, int cIni, int rFin, int cFin, Board& b);
 };
 
 class Regina : public Pezzo{
     public:
+    //virtual ~Regina();  //distruttore
     Regina(bool c, char n);
     bool isValid(int rIni, int cIni, int rFin, int cFin, Board& b);
 };
 
 class Re : public Pezzo{
     public:
+    //virtual ~Re();  //distruttore
     Re(bool c, char n);
     bool isValid(int rIni, int cIni, int rFin, int cFin, Board& b);
 };

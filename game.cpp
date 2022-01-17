@@ -101,12 +101,21 @@ bool Game::isMoveValid(int rigaI, int colonnaI, int rigaF, int colonnaF, Player 
         return false;
     }
     // 2)controllo che la casella d'arrivo non sia occupata da un pezzo di currentPlayer
-    if (board.getPezzo(rigaF, colonnaF) != NULL && currentPlayer->getColor() == board.getPezzo(rigaF, colonnaF)->getColor())
+    /*if (board.getPezzo(rigaF, colonnaF) != NULL && currentPlayer->getColor() == board.getPezzo(rigaF, colonnaF)->getColor())
     {
         // if(currentPlayer->getTipo()==true)
         cout << "la casella d'arrivo \212 occupata da un tuo pezzo!\n";
         return false;
+    }*/
+
+    // check di validità del pezzo in particolare
+    if (board.getPezzo(rigaI, colonnaI)->isValid(rigaI, colonnaI, rigaF, colonnaF, board) == false)
+    {
+        // if(currentPlayer->getTipo()==true)
+        cout << "il pezzo scelto non puo muoversi in quella direzione\n";
+        return false;
     }
+
     // 3)controllo che la mossa non metta il re di currentPlayer sottoscacco effettuando temporaneamente la mossa
     Pezzo *temp = board.getPezzo(rigaF, colonnaF);
     Pezzo *iniziale = board.getPezzo(rigaI, colonnaI);
@@ -123,14 +132,6 @@ bool Game::isMoveValid(int rigaI, int colonnaI, int rigaF, int colonnaF, Player 
     // anche se non è sottoscacco ripristino la mossa
     board.setPezzo(temp, rigaF, colonnaF);
     board.setPezzo(iniziale, rigaI, colonnaI);
-
-    // check di validità del pezzo in particolare
-    if (board.getPezzo(rigaI, colonnaI)->isValid(rigaI, colonnaI, rigaF, colonnaF, board) == false)
-    {
-        // if(currentPlayer->getTipo()==true)
-        cout << "il pezzo scelto non puo muoversi in quella direzione\n";
-        return false;
-    }
 
     return true;
 }

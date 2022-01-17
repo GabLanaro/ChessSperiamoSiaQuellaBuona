@@ -40,7 +40,7 @@ bool Pedone::isValid(int rIni, int cIni, int rFin, int cFin, Board& b){
                 return true; //Allora la mossa è valida
         }
         
-        if((rFin==4) && (cFin==cIni) && (PezzoFinale==NULL) && (b.getPezzo(rIni+1,cFin)==NULL)){ //Se la mossa che sta facendo è la prima , può andare avanti di due celle e se nel tragitto e nella cella d'arrivo non ci sono pezzi
+        if((rFin==4) && (cFin==cIni) && (PezzoFinale==NULL) && (b.getPezzo(rIni-1,cFin)==NULL)){ //Se la mossa che sta facendo è la prima , può andare avanti di due celle e se nel tragitto e nella cella d'arrivo non ci sono pezzi
                 return true; //Allora la mossa è valida
         }
         
