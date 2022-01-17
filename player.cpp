@@ -32,8 +32,8 @@ void Player::setTipo(bool tipo)
 
 tuple<int, int, int, int> Player::mossa(Board &board)
 {
-    /*if (this->tipo == true)
-    {*/
+    if (this->tipo == true)
+    {
     // true=umano
     cout << "inserisci mossa: ";
     string input;
@@ -72,7 +72,7 @@ tuple<int, int, int, int> Player::mossa(Board &board)
     int colFin = (int)toupper(input[3]) - 65;
     int rigFin = input[4] - 49;
     return make_tuple(colIniz, rigIniz, colFin, rigFin);
-    /*}
+    }
     else
     {
         int colIniz, rigIniz, colFin, rigFin;
@@ -83,5 +83,5 @@ tuple<int, int, int, int> Player::mossa(Board &board)
 
         cout << rigIniz << colIniz << " " << rigFin << colFin << " ";
         return make_tuple(colIniz, rigIniz, colFin, rigFin);
-    }*/
+    }
 }

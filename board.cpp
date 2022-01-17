@@ -76,12 +76,11 @@ void Board::spostaPezzo(int rigaI, int colonnaI, int rigaF, int colonnaF)
     board[rigaI][colonnaI] = NULL;
 
     //DELETE QUA? mettere if per vedere se casella d'arrivo è null.
-    /*if(temp!=NULL){
+    if(temp!=NULL){
             cout<<temp->getName()<<"\n";
             delete temp;
-            Pezzo* p=new Torre(true,'T');
             cout<<temp->getName()<<endl;
-    }*/
+    }
 }
 
 

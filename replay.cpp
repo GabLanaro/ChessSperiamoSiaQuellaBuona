@@ -10,8 +10,8 @@ using namespace std;
 // funzione che stampa la configurazione della scacchiera dopo una mossa
 void printFrame(int r1, int c1, int r2, int c2, array<array<char, 8>, 8> &b)
 { // effettuo mossa
-    // cout<<r1<<c1<<"***"<<r2<<c2<<endl;
-    // cout<<b[r2][c2]<<"***"<<b[r1][c1]<<endl;
+    //cout<<r1<<c1<<"***"<<r2<<c2<<endl;
+    //cout<<b[r2][c2]<<"***"<<b[r1][c1]<<endl;
     b[r2][c2] = b[r1][c1];
     b[r1][c1] = ' ';
     // stampo configurazione scacchiera

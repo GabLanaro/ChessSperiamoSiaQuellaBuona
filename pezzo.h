@@ -1,6 +1,7 @@
 #ifndef PEZZO_H
 #define PEZZO_H
 #include "board.h"
+#include "iostream"
 
 class Board; //forward declaration per evitare circular dependencies
 class Pezzo{
@@ -26,11 +27,11 @@ class Pedone : public Pezzo{
 };
 
 class Torre : public Pezzo{
-    //private:
-    //Pezzo *p = new Torre()
+   /* private:
+    Pezzo *p;*/
 
     public:
-    //virtual ~Torre();  //distruttore
+    virtual ~Torre();  //distruttore
     Torre(bool c, char n);
     bool isValid(int rIni, int cIni, int rFin, int cFin, Board& b);
 };
