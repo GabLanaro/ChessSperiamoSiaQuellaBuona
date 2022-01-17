@@ -219,7 +219,7 @@ bool Game::scaccoMatto(Player &p, Board &b)
             {
                 Pezzo *pez = b.getPezzo(rigCurr, colCurr);
                 // Prendo un pezzo del player
-                if ((pez != NULL) && (pez->getColor() == p.getColor()))
+                if ((pez->getColor() == p.getColor()))
                 {
                     // Guardo se questo per qualche mossa può risolvere lo scacco al Re
                     for (int rigNew = 0; rigNew < 8; rigNew++)
