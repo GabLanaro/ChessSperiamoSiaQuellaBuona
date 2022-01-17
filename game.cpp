@@ -89,21 +89,21 @@ bool Game::isMoveValid(int rigaI, int colonnaI, int rigaF, int colonnaF, Player 
     // 0)controllo che la casella scelta non sia vuota
     if (board.getPezzo(rigaI, colonnaI) == NULL)
     {
-        // if(currentPlayer->getTipo()==true)
+        if(currentPlayer->getTipo()==true)
         cout << "la casella scelta \212 vuota!\n";
         return false;
     }
     // 1)controllo che il pezzo scelto sia di current player
     if (currentPlayer->getColor() != board.getPezzo(rigaI, colonnaI)->getColor())
     {
-        // if(currentPlayer->getTipo()==true)
+        if(currentPlayer->getTipo()==true)
         cout << "il pezzo scelto \212 dell'altro giocatore!\n";
         return false;
     }
     // 2)controllo che la casella d'arrivo non sia occupata da un pezzo di currentPlayer
     /*if (board.getPezzo(rigaF, colonnaF) != NULL && currentPlayer->getColor() == board.getPezzo(rigaF, colonnaF)->getColor())
     {
-        // if(currentPlayer->getTipo()==true)
+        if(currentPlayer->getTipo()==true)
         cout << "la casella d'arrivo \212 occupata da un tuo pezzo!\n";
         return false;
     }*/
@@ -111,7 +111,7 @@ bool Game::isMoveValid(int rigaI, int colonnaI, int rigaF, int colonnaF, Player 
     // check di validità del pezzo in particolare
     if (board.getPezzo(rigaI, colonnaI)->isValid(rigaI, colonnaI, rigaF, colonnaF, board) == false)
     {
-        // if(currentPlayer->getTipo()==true)
+        if(currentPlayer->getTipo()==true)
         cout << "il pezzo scelto non puo muoversi in quella direzione\n";
         return false;
     }
@@ -123,7 +123,7 @@ bool Game::isMoveValid(int rigaI, int colonnaI, int rigaF, int colonnaF, Player 
     board.setPezzo(NULL, rigaI, colonnaI);     // la casella finale viene messa temporaneamente NULL.
     if (sottoScacco(*currentPlayer, board))
     {
-        cout << "la mossa mette il tuo re sottoscacco\n";
+        cout << "la mossa mette il tuo re sottoscacco*********************************************\n";
         // ripristino la mosssa
         board.setPezzo(temp, rigaF, colonnaF);
         board.setPezzo(iniziale, rigaI, colonnaI);
@@ -195,6 +195,7 @@ bool Game::scaccoMatto(Player &p, Board &b)
 
     // <guardo> tutti gli scacchi uno alla volta
     for (int rigCurr = 0; rigCurr < 8; rigCurr++)
+    {
         for (int colCurr = 0; colCurr < 8; colCurr++)
         {
             Pezzo *pez = b.getPezzo(rigCurr, colCurr);
@@ -203,6 +204,7 @@ bool Game::scaccoMatto(Player &p, Board &b)
             {
                 // Guardo se questo per qualche mossa può risolvere lo scacco al Re
                 for (int rigNew = 0; rigNew < 8; rigNew++)
+                {
                     for (int colNew = 0; colNew < 8; colNew++)
                     {
                         Pezzo *nuovoPez = b.getPezzo(rigNew, colNew);
@@ -213,8 +215,10 @@ bool Game::scaccoMatto(Player &p, Board &b)
                             return false;
                         }
                     }
+                }
             }
         }
+    }
     // Se non trovo nessuna mossa che risolve lo scacco significa che è scacco matto
     return true;
 }
