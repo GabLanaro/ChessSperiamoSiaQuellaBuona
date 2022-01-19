@@ -61,12 +61,15 @@ void Game::start()
             { // ciclo che itera finchè la mossa inserita è valida
                 int rigaI, colonnaI, rigaF, colonnaF;
                 std::tie(colonnaI, rigaI, colonnaF, rigaF) = currentPlayer->mossa(board); // il giocatore di turno inserisce la mossa
+                /*if(enPassant(board,rigaI,colonnaI,rigaF,colonnaF)){
+                    done = true; 
+                }*/
                 if (isMoveValid(rigaI, colonnaI, rigaF, colonnaF, currentPlayer, board))
                 { // verifica della correttezza della mossa inserita
                     board.spostaPezzo(rigaI, colonnaI, rigaF, colonnaF);
                     std::cout << "mossa effettuata:   " << rigaI << colonnaI << " " << rigaF << colonnaF << "\n";
-                    fileLog << rigaI << colonnaI << " " << rigaF << colonnaF << "\n";                         // scrive la mossa nel file di log
-                    promozione(board,rigaF,colonnaF);                      
+                    fileLog << rigaI << colonnaI << " " << rigaF << colonnaF << "\n";                         // scrive la mossa nel file di log          
+                    promozione(board,rigaF,colonnaF);
                     currentPlayer = (currentPlayer->getColor() == player1.getColor()) ? &player2 : &player1; // cambio turno giocatore
                     done = true;                                                                             // esci dal ciclo
                 }
@@ -113,6 +116,7 @@ bool Game::isMoveValid(int rigaI, int colonnaI, int rigaF, int colonnaF, Player 
             cout << "il pezzo scelto \212 dell'altro giocatore!\n";
         return false;
     }
+
     // 2)controllo che la casella d'arrivo non sia occupata da un pezzo di currentPlayer
     /*if (board.getPezzo(rigaF, colonnaF) != NULL && currentPlayer->getColor() == board.getPezzo(rigaF, colonnaF)->getColor())
     {
@@ -245,16 +249,15 @@ bool Game::scaccoMatto(Player &p, Board &b)
 }
 
 void Game::promozione(Board &b, int rigaF, int colonnaF){
-    char scelta;
+    string scelta;
     bool sceltaValida=false;
     Pezzo *pez = b.getPezzo(rigaF,colonnaF);
     if(((pez->getName()=='p') && (rigaF==7)) || ((pez->getName()=='P') && (rigaF==0))){
         //delete pedone
         std::cout << "Inserisci l'iniziale del pezzo con cui vorresti sostituire il pedone: ";
-        //std::cin >> scelta; //Il problema è questo cin e credo sia collegato al getLine(cin.,input) che c'è dentro a mossa di player
-        //scelta='d';
         do{
-            switch(scelta){ //mettere anche qua il controllo che non cambia tra maiuscole e minuscole?
+            getline(cin,scelta);
+            switch(scelta[0]){ //mettere anche qua il controllo che non cambia tra maiuscole e minuscole?
                 case 't':
                 if(pez->getColor()==true){ //se è bianco
                     b.setPezzo(new Torre(true, 't'), 7, colonnaF);
@@ -307,14 +310,19 @@ void Game::promozione(Board &b, int rigaF, int colonnaF){
     }
 }
 
-/*
-//if(p.getTipo()==true){//Se il giocatore ora è bianco, vuol dire che la mossa fatta prima è stata fatta dal giocatore nero
-       // if((rigaFinalePed==6) && (rigaInizialePed==4) && (PezzoIniziale->getName()=='P')){
-
- bool Game::enPassant(Board &b, int rigaI, int colonnaI, int rigaF, int colonnaF, int rigaPed, int colonnaPed){
+ bool Game::enPassant(Board &b, int rigaI, int colonnaI, int rigaF, int colonnaF){
     Pezzo *PezzoIniziale = b.getPezzo(rigaI,colonnaI); // Creo un puntatore al pezzo iniziale
     Pezzo *PezzoFinale = b.getPezzo(rigaF,colonnaF); //Creo un puntatore al pezzo d'arrivo
-        if((rigaI==4) && (PezzoFinale==NULL) && (PezzoIniziale->getName()=='p') && (colonnaF==colonnaPed) && (rigaF==rigaPed+1)){
+    if((rigaI==4) && (PezzoFinale==NULL) && (PezzoIniziale->getName()=='p')){
+        if((colonnaF==PezzoIniziale->getColonnaPed()) && (rigaF==PezzoIniziale->getRigaPed()+1)){
             return true;
         }
-}*/
+    }else if((rigaI==3) && (PezzoFinale==NULL) && (PezzoIniziale->getName()=='P')){
+        if((colonnaF==PezzoIniziale->getColonnaPed()) && (rigaF==PezzoIniziale->getRigaPed()-1)){
+            return true;
+        }
+    }
+    
+    return false;
+}
+

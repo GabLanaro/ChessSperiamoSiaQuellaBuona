@@ -10,6 +10,15 @@ bool Pezzo::getColor() const{
     return color;
 }
 
+int Pezzo::getRigaPed(){
+    return rigaPed;
+}
+
+int Pezzo::getColonnaPed(){
+    return colonnaPed;
+}
+
+
 Pezzo::~Pezzo(){ std::cout << "Ho invocato il distruttore di Pezzo\n";} //devo metterci un delete dentro? Oppure faccio il distruttore in board e faccio il delete del puntatore al pezzo?
 
 //*****PEDONE****
@@ -27,7 +36,9 @@ bool Pedone::isValid(int rIni, int cIni, int rFin, int cFin, Board& b){
             return true; //Allora la mossa è valida
         }
         
-        if((rFin==3) && (cFin==cIni) && (PezzoFinale==NULL) && (b.getPezzo(rIni+1,cFin)==NULL)){ //Se la mossa che sta facendo è la prima , può andare avanti di due celle e se nel tragitto e nella cella d'arrivo non ci sono pezzi
+        if((rIni==1) && (rFin==3) && (cFin==cIni) && (PezzoFinale==NULL) && (b.getPezzo(rIni+1,cFin)==NULL)){ //Se la mossa che sta facendo è la prima , può andare avanti di due celle e se nel tragitto e nella cella d'arrivo non ci sono pezzi
+            rigaPed=rFin;
+            colonnaPed=cFin;
             return true; //Allora la mossa è valida
         }
         
@@ -40,7 +51,9 @@ bool Pedone::isValid(int rIni, int cIni, int rFin, int cFin, Board& b){
             return true; //Allora la mossa è valida
         }
         
-        if((rFin==4) && (cFin==cIni) && (PezzoFinale==NULL) && (b.getPezzo(rIni-1,cFin)==NULL)){ //Se la mossa che sta facendo è la prima , può andare avanti di due celle e se nel tragitto e nella cella d'arrivo non ci sono pezzi
+        if((rIni==6) && (rFin==4) && (cFin==cIni) && (PezzoFinale==NULL) && (b.getPezzo(rIni-1,cFin)==NULL)){ //Se la mossa che sta facendo è la prima , può andare avanti di due celle e se nel tragitto e nella cella d'arrivo non ci sono pezzi
+            rigaPed=rFin;
+            colonnaPed=cFin;
             return true; //Allora la mossa è valida
         }
         
