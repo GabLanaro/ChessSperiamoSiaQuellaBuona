@@ -409,13 +409,26 @@ string Game::isPatta(vector<string> vectBoard, string strBoard, Board &b)
     // PRIMA CONDIZIONE VERIFICATA IN MAIN
     //  SECONDA CONDIZIONE: Posizione ripetuta per tre volte
     int count = 0;
-    for (int i = 0; i < vectBoard.size(); i++)
-    {
-        count = std::count(vectBoard.begin(), vectBoard.end(), strBoard);
-    }
+    count = std::count(vectBoard.begin(), vectBoard.end(), strBoard);
     if (count >= 3)
     {
-        //return true;
+        // return true;
+    }
+
+    // TERZA CONDIZIONE: 50 mosse consecutive senza che vengano mangiati pezzi o mossi pedoni
+    int numVuoti;
+    int posPedoni;
+    int pos = 0;
+    for (int i; i < vectBoard.size(); i++)
+    {
+        numVuoti = std::count(strBoard.begin(), strBoard.end(), "0");
+    }
+    // posPedoni contiene un numero uguale alla somma degli indici dei pedoni presenti nella scacchiera
+    // se uno dei pedoni presenti viene spostato allora cambierà anche posPedoni
+    while (pos != string::npos)
+    {
+        posPedoni += pos;
+        pos = strBoard.find("p", pos + 1);
     }
 
     return std::to_string(count);
