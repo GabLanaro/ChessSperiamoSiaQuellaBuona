@@ -3,6 +3,7 @@
 
 #include "player.h"
 #include "board.h"
+#include <vector>
 using namespace std;
 class Game
 {
@@ -18,6 +19,7 @@ public:
     bool scaccoMatto(Player &, Board &);                                                                 // true se il re del giocatore che invoca la funzione è in scaccomatto
     void promozione(Board &, int rigaF, int colonnaF);
     bool enPassant(Board &, int rigaI, int colonnaI, int rigaF, int colonnaF);
+    string isPatta(vector<string>, string, Board &);
 };
 
 #endif
