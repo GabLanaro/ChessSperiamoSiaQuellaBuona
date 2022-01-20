@@ -405,8 +405,8 @@ string Game::isPatta(vector<string> vectBoard, string strBoard, Board &b)
         }
     }
     vectBoard.push_back(strBoard);
-
-    // SECONDA CONDIZIONE: Posizione ripetuta per tre volte
+    // PRIMA CONDIZIONE VERIFICATA IN MAIN
+    //  SECONDA CONDIZIONE: Posizione ripetuta per tre volte
     int count = 0;
     for (int i = 0; i < vectBoard.size(); i++)
     {
