@@ -1,4 +1,5 @@
 #include <iostream>
+#include <algorithm>
 #include <string>
 #include <cctype>
 #include <ctime>
@@ -410,16 +411,11 @@ string Game::isPatta(vector<string> vectBoard, string strBoard, Board &b)
     int count = 0;
     for (int i = 0; i < vectBoard.size(); i++)
     {
-        for (int j = 0; j < vectBoard.size(); j++)
-        {
-            if (i != j)
-            {
-                if (vectBoard[i] == vectBoard[j])
-                {
-                    count++;
-                }
-            }
-        }
+        count = std::count(vectBoard.begin(), vectBoard.end(), strBoard);
+    }
+    if (count >= 3)
+    {
+        //return true;
     }
 
     return std::to_string(count);
