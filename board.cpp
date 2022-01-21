@@ -34,6 +34,7 @@ Board::Board()
     setPezzo(new Cavallo(false, 'C'), 7, 1);
     setPezzo(new Alfiere(false, 'A'), 7, 2);
     setPezzo(new Regina(false, 'D'), 7, 3);
+
     setPezzo(new Re(false, 'R'), 7, 4);
     setPezzo(new Alfiere(false, 'A'), 7, 5);
     setPezzo(new Cavallo(false, 'C'), 7, 6);
