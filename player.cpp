@@ -45,8 +45,11 @@ tuple<int, int, int, int> Player::mossa(Board &board)
             getline(cin, input);
             string iniziale = input.substr(0, 2);
             string finale = input.substr(3, 2);
+            //trasformazione in maiuscolo per favorire il controllo lessicale
             transform(iniziale.begin(), iniziale.end(), iniziale.begin(), ::toupper);
             transform(finale.begin(), finale.end(), finale.begin(), ::toupper);
+
+            // PATTA
             if (input == "PATTA" || input == "patta")
             {
                 cout << "Hai richiesto la patta\n";
@@ -60,16 +63,18 @@ tuple<int, int, int, int> Player::mossa(Board &board)
                     cout << "Il Computer ha rifiutato la patta\nInserisci mossa: ";
                 }
             }
+            // STAMPA BOARD
             else if (input == "XX XX" || input == "xx xx")
             {
                 // stampa la scacchiera
                 board.printScacchiera();
                 cout << "\nInserisci mossa: ";
             }
-            else if (toupper(input[0]) >= 65 && toupper(input[0]) <= 72 &&
-                     toupper(input[3]) >= 65 && toupper(input[3]) <= 72 &&
-                     input[1] >= 49 && input[1] <= 56 &&
-                     input[4] >= 49 && input[4] <= 56 &&
+            // INSERIMENTO MOSSA
+            else if (toupper(input[0]) >= 65 && toupper(input[0]) <= 72 && // I numeri 65 e 72 corrispondono ai
+                     toupper(input[3]) >= 65 && toupper(input[3]) <= 72 && // codici ASCII delle lettere A e H
+                     input[1] >= 49 && input[1] <= 56 &&                   // I numeri 49, 56 e 32 corrispondono ai
+                     input[4] >= 49 && input[4] <= 56 &&                   // codici ASCII dei numeri 1, 8 e allo spazio
                      input[2] == 32 && iniziale != finale)
             {
                 inputValido = true;
@@ -86,7 +91,7 @@ tuple<int, int, int, int> Player::mossa(Board &board)
         int rigFin = input[4] - 49;
         return make_tuple(colIniz, rigIniz, colFin, rigFin);
     }
-    else
+    else //false=computer
     {
         int colIniz, rigIniz, colFin, rigFin;
         rigIniz = rand() % 8; // numero intero random tra 0 e 8
@@ -97,6 +102,7 @@ tuple<int, int, int, int> Player::mossa(Board &board)
         return make_tuple(colIniz, rigIniz, colFin, rigFin);
     }
 }
+//Metodo che risponde alla patta richiesta dall'utente col 10% di possibilità di accettare
 bool Player::rispPatta()
 {
     srand(time(NULL));
