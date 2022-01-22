@@ -29,8 +29,9 @@ void Game::start()
     std::vector<string> vectBoard; // vector che contiene delle stringhe raffiguranti la board
     std::vector<int> vectVuoti_P;  // vector che contiene la somma delle posizioni vuote e degli indici dei pedoni
     string strBoard;               // stringhe raffiguranti la board
-    std::ofstream fileLog;         // creazione file di log
-    fileLog.open("log.txt");       // il file di log rimarrà aperto durante tutta la partita.
+    int numVuoti_P;
+    std::ofstream fileLog;   // creazione file di log
+    fileLog.open("log.txt"); // il file di log rimarrà aperto durante tutta la partita.
 
     bool playerColor = randomColor(); // true=white, false=black
     Player player1(playerColor, false);
@@ -48,8 +49,10 @@ void Game::start()
         }
     }
     Player *currentPlayer = (player1.getColor() == true) ? &player1 : &player2; // currentPlayer è un puntatore al player bianco
-    // CICLO CHE VERIFICA SCACCO E SCACCOMATTO, CHIEDE MOSSA, LA EFFETTUA E CAMBIA TURNO.
+    strBoard = creaStrBoard(board);
+    vectBoard.push_back(strBoard);
 
+    // CICLO CHE VERIFICA SCACCO E SCACCOMATTO, CHIEDE MOSSA, LA EFFETTUA E CAMBIA TURNO.
     do
     {
         if (sottoScacco(*currentPlayer, board))
@@ -70,7 +73,6 @@ void Game::start()
             tempoLim = std::chrono::seconds(5);
             while (!done)
             { // ciclo che itera finchè la mossa inserita è valida
-
                 int rigaI, colonnaI, rigaF, colonnaF;
                 std::tie(colonnaI, rigaI, colonnaF, rigaF) = currentPlayer->mossa(board); // il giocatore di turno inserisce la mossa
                 if (colonnaI == -1)
@@ -83,8 +85,7 @@ void Game::start()
                 done = true;
                 }*/
                 tempoMossa = end - start;
-                // Statisticamente il PC non ha trovato mosse valide, quindi non ce ne sono
-                if (currentPlayer->getTipo() == false)
+                if (currentPlayer->getTipo() == false) // Statisticamente il PC non ha trovato mosse valide, quindi non ce ne sono
                 {
                     end = std::chrono::system_clock::now();
                     done = (tempoMossa > tempoLim) ? true : false;
@@ -99,8 +100,17 @@ void Game::start()
                     done = true;                                                                             // esci dal ciclo
                 }
             }
+
             counterMosse++;
-            std::cout << isPatta(vectBoard, vectVuoti_P, strBoard, counterMosse, board); // funzione che controlla la patta
+            strBoard = creaStrBoard(board);
+            vectBoard.push_back(strBoard);
+            numVuoti_P = contaVuoti_P(strBoard);
+            vectVuoti_P.push_back(numVuoti_P);
+            if (isPatta(vectBoard, vectVuoti_P, strBoard, counterMosse))
+            {
+                std::cout << "La partita si \212 conclusa con una PATTA";
+                gameIsOver = true;
+            }
             board.printScacchiera();
             if (currentPlayer->getTipo() == false)
             {
@@ -387,12 +397,12 @@ bool Game::enPassant(Board &b, int rigaI, int colonnaI, int rigaF, int colonnaF)
     return false;
 }
 
-string Game::isPatta(vector<string> vectBoard, vector<int> vectVuoti_P, string strBoard, int countmosse, Board &b)
+string Game::creaStrBoard(Board &b)
 {
-    // CREAZIONE STRINGHE E INSERIMENTO NEL VECTOR
-    int rigCurr;
-    int colCurr;
+    // CREAZIONE STRINGHE
     string nomePezzo;
+    string strBoard;
+
     for (int rigCurr = 0; rigCurr < 8; rigCurr++)
     {
         for (int colCurr = 0; colCurr < 8; colCurr++)
@@ -409,45 +419,47 @@ string Game::isPatta(vector<string> vectBoard, vector<int> vectVuoti_P, string s
             }
         }
     }
-    vectBoard.push_back(strBoard);
+    return strBoard;
+}
 
-    // PRIMA CONDIZIONE VERIFICATA IN MAIN
+int Game::contaVuoti_P(string strBoard)
+{
+    int numVuoti{0};
+    int indiciP{0};
+    // conto il numero di vuoti e l'indice dei pedoni nella stringa che rappresenta la scacchiera
+    for (int i = 0; i < strBoard.size(); i++)
+    {
+        if (strBoard[i] == '0')
+        {
+            numVuoti++;
+        }
+        else if (strBoard[i] == 'p' || strBoard[i] == 'P')
+        {
+            // indiciP contiene un numero uguale alla somma degli
+            // indici dei pedoni presenti nella scacchiera
+            // se uno dei pedoni presenti viene spostato allora cambierà anche indiciP
+            indiciP += i;
+        }
+    }
+    return numVuoti + indiciP;
+}
+
+bool Game::isPatta(vector<string> vectBoard, vector<int> vectVuoti_P, string strBoard, int countmosse)
+{
+    // Le variabili pattai sono le variabili di check per ogni condizione
+    //  PRIMA CONDIZIONE VERIFICATA IN MAIN
 
     //  SECONDA CONDIZIONE: Posizione ripetuta per tre volte
     int patta2{0};
-    patta2 = std::count(vectBoard.begin(), vectBoard.end(), strBoard);
-    if (patta2 >= 3)
+    patta2 = std::count(vectBoard.begin(), vectBoard.end(), vectBoard[countmosse - 1]); // controllo occorrenza di strBoard nel vectBoard
+    if (patta2 == 3)
     {
-        // return true;
+        return true;
     }
 
     // TERZA CONDIZIONE: 50 mosse consecutive senza che vengano mangiati pezzi o mossi pedoni
-    int numVuoti{0};
-    int indiciP{0};
-    int temp{0};
-    int patta3{0}; // counter per le 50 mosse
-    // conto il numero di vuoti e l'indice dei pedoni nella stringa che rappresenta la scacchiera
-    for (int j = 0; j < vectBoard.size(); j++)
-    {
-        for (int i = 0; i < strBoard.size(); i++)
-        {
-            if (strBoard[i] == '0')
-            {
-                numVuoti++;
-            }
-            else if (strBoard[i] == 'p' || strBoard[i] == 'P')
-            {
-                // indiciP contiene un numero uguale alla somma degli
-                // indici dei pedoni presenti nella scacchiera
-                // se uno dei pedoni presenti viene spostato allora cambierà anche indiciP
-                indiciP += i;
-            }
-        }
-    }
-    temp = numVuoti + indiciP;
-    vectVuoti_P.push_back(temp);
-
-    // controllo se ci sono 50 elementi uguali in vectVuoti_P
+    // controllo se ci sono 50 elementi uguali consecutivi in vectVuoti_P
+    int patta3{0};
     for (int i = 1; i < vectVuoti_P.size(); i++)
     {
         if (vectVuoti_P[i - 1] == vectVuoti_P[i])
@@ -460,7 +472,7 @@ string Game::isPatta(vector<string> vectBoard, vector<int> vectVuoti_P, string s
         }
         if (patta3 == 50)
         {
-            // return true;
+            return true;
         }
     }
 
@@ -470,11 +482,10 @@ string Game::isPatta(vector<string> vectBoard, vector<int> vectVuoti_P, string s
          (std::count(strBoard.begin(), strBoard.end(), 'C') == 1) ||
          (std::count(strBoard.begin(), strBoard.end(), 'a') == 1) ||
          std::count(strBoard.begin(), strBoard.end(), 'A')) &&
-        numVuoti == 61)
+        vectVuoti_P[countmosse - 1] == 61)
     {
-        // return true;
+        return true;
     }
 
-    // return std::to_string(patta4);
-    return strBoard;
+    return false;
 }

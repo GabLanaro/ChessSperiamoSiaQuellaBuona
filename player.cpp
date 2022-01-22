@@ -35,7 +35,7 @@ tuple<int, int, int, int> Player::mossa(Board &board)
     if (this->tipo == true)
     {
         // true=umano
-        cout << "inserisci mossa: ";
+        cout << "Inserisci mossa: ";
         string input;
 
         // CONTROLLI INPUT LESSICO E RANGE
@@ -64,7 +64,7 @@ tuple<int, int, int, int> Player::mossa(Board &board)
             {
                 // stampa la scacchiera
                 board.printScacchiera();
-                cout << "\ninserisci mossa: ";
+                cout << "\nInserisci mossa: ";
             }
             else if (toupper(input[0]) >= 65 && toupper(input[0]) <= 72 &&
                      toupper(input[3]) >= 65 && toupper(input[3]) <= 72 &&
@@ -94,14 +94,12 @@ tuple<int, int, int, int> Player::mossa(Board &board)
         rigFin = rand() % 8;
         colFin = rand() % 8;
 
-        // cout << rigIniz << colIniz << " " << rigFin << colFin << " "; //TEST, DA ELIMINARE
-
         return make_tuple(colIniz, rigIniz, colFin, rigFin);
     }
 }
 bool Player::rispPatta()
 {
     srand(time(NULL));
-    bool x = rand() % 8;
+    bool x = rand() % 10;
     return !x;
 }

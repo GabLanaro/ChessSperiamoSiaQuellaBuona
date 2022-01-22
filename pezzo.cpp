@@ -19,7 +19,8 @@ int Pezzo::getColonnaPed(){
 }
 
 
-Pezzo::~Pezzo(){ std::cout << "Ho invocato il distruttore di Pezzo\n";} //devo metterci un delete dentro? Oppure faccio il distruttore in board e faccio il delete del puntatore al pezzo?
+Pezzo::~Pezzo(){ 
+    std::cout << "Ho invocato il distruttore di Pezzo\n";} //devo metterci un delete dentro? Oppure faccio il distruttore in board e faccio il delete del puntatore al pezzo?
 
 //*****PEDONE****
 
