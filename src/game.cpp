@@ -151,7 +151,7 @@ void Game::start()
             }
 
             // dopo 100 mosse la partita tra due computer termina
-            if (tolower(modalita[0]) == 'c' && counterMosse == 300000)
+            if (tolower(modalita[0]) == 'c' && counterMosse == 100)
             {
                 std::cout << "numero massimo di mosse raggiunto. La partita \212 annullata.";
                 gameIsOver = true;

@@ -87,7 +87,10 @@ int main(int argc, char *argv[])
 
     string tipoReplay = argv[1];
     string nomeFileLog = argv[2];
-    string nomeFileOutput = argv[3];
+    string nomeFileOutput;
+    if(argv[3]!=NULL){
+        nomeFileOutput = argv[3];
+    }
     // controllo che il primo argomento inserito da linea di comando sia valido
     if (tipoReplay != "v" && tipoReplay != "f")
     {

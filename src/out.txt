@@ -1,0 +1,636 @@
+
+8  T C A D R A C T 
+7  P P P P P P P P 
+6                  
+5                  
+4                  
+3            c     
+2  p p p p p p p p 
+1  t c a d r a   t 
+
+   A B C D E F G H
+
+
+8  T C A D R A C T 
+7  P P   P P P P P 
+6      P           
+5                  
+4                  
+3            c     
+2  p p p p p p p p 
+1  t c a d r a   t 
+
+   A B C D E F G H
+
+
+8  T C A D R A C T 
+7  P P   P P P P P 
+6      P           
+5                  
+4                  
+3      c     c     
+2  p p p p p p p p 
+1  t   a d r a   t 
+
+   A B C D E F G H
+
+
+8  T C A   R A C T 
+7  P P   P P P P P 
+6    D P           
+5                  
+4                  
+3      c     c     
+2  p p p p p p p p 
+1  t   a d r a   t 
+
+   A B C D E F G H
+
+
+8  T C A   R A C T 
+7  P P   P P P P P 
+6    D P           
+5                  
+4  p               
+3      c     c     
+2    p p p p p p p 
+1  t   a d r a   t 
+
+   A B C D E F G H
+
+
+8  T C A   R A C T 
+7  P P   P P P P   
+6    D P         P 
+5                  
+4  p               
+3      c     c     
+2    p p p p p p p 
+1  t   a d r a   t 
+
+   A B C D E F G H
+
+
+8  T C A   R A C T 
+7  P P   P P P P   
+6    D P         P 
+5                  
+4  p               
+3  t   c     c     
+2    p p p p p p p 
+1      a d r a   t 
+
+   A B C D E F G H
+
+
+8  T C A   R A C T 
+7  P P   P P P P   
+6    D           P 
+5      P           
+4  p               
+3  t   c     c     
+2    p p p p p p p 
+1      a d r a   t 
+
+   A B C D E F G H
+
+
+8  T C A   R A C T 
+7  P P   P P P P   
+6    D           P 
+5      P           
+4  p               
+3    t c     c     
+2    p p p p p p p 
+1      a d r a   t 
+
+   A B C D E F G H
+
+
+8  T C A   R A C T 
+7  P P     P P P   
+6    D           P 
+5      P P         
+4  p               
+3    t c     c     
+2    p p p p p p p 
+1      a d r a   t 
+
+   A B C D E F G H
+
+
+8  T C A   R A C T 
+7  P P     P P P   
+6    t           P 
+5      P P         
+4  p               
+3      c     c     
+2    p p p p p p p 
+1      a d r a   t 
+
+   A B C D E F G H
+
+
+8  T C     R A C T 
+7  P P     P P P   
+6    t     A     P 
+5      P P         
+4  p               
+3      c     c     
+2    p p p p p p p 
+1      a d r a   t 
+
+   A B C D E F G H
+
+
+8  T C     R A C T 
+7  P P     P P P   
+6    t     A     P 
+5      P P         
+4  p       p       
+3      c     c     
+2    p p p   p p p 
+1      a d r a   t 
+
+   A B C D E F G H
+
+
+8  T C A   R A C T 
+7  P P     P P P   
+6    t           P 
+5      P P         
+4  p       p       
+3      c     c     
+2    p p p   p p p 
+1      a d r a   t 
+
+   A B C D E F G H
+
+
+8  T C A   R A C T 
+7  P P     P P P   
+6    t           P 
+5      P p         
+4  p               
+3      c     c     
+2    p p p   p p p 
+1      a d r a   t 
+
+   A B C D E F G H
+
+
+8  T C A     A C T 
+7  P P   R P P P   
+6    t           P 
+5      P p         
+4  p               
+3      c     c     
+2    p p p   p p p 
+1      a d r a   t 
+
+   A B C D E F G H
+
+
+8  T C A     A C T 
+7  P P   R P P P   
+6    t           P 
+5      P p         
+4  p               
+3            c     
+2    p p p c p p p 
+1      a d r a   t 
+
+   A B C D E F G H
+
+
+8  T C A     A C T 
+7  P P R   P P P   
+6    t           P 
+5      P p         
+4  p               
+3            c     
+2    p p p c p p p 
+1      a d r a   t 
+
+   A B C D E F G H
+
+
+8  T C A     A C T 
+7  P P R   P P P   
+6    t           P 
+5      P p         
+4  p               
+3        p   c     
+2    p p   c p p p 
+1      a d r a   t 
+
+   A B C D E F G H
+
+
+8  T C A     A C T 
+7  P P R     P P   
+6    t           P 
+5      P p P       
+4  p               
+3        p   c     
+2    p p   c p p p 
+1      a d r a   t 
+
+   A B C D E F G H
+
+
+8  T C A     A C T 
+7  P P R     P P   
+6    t           P 
+5      P p P       
+4  p               
+3        p   c     
+2    p p d c p p p 
+1      a   r a   t 
+
+   A B C D E F G H
+
+
+8  T   A     A C T 
+7  P P R C   P P   
+6    t           P 
+5      P p P       
+4  p               
+3        p   c     
+2    p p d c p p p 
+1      a   r a   t 
+
+   A B C D E F G H
+
+
+8  T   A     A C T 
+7  P P R C   P P   
+6    t           d 
+5      P p P       
+4  p               
+3        p   c     
+2    p p   c p p p 
+1      a   r a   t 
+
+   A B C D E F G H
+
+
+8  T   A     A C T 
+7  P P R C     P   
+6    t       P   d 
+5      P p P       
+4  p               
+3        p   c     
+2    p p   c p p p 
+1      a   r a   t 
+
+   A B C D E F G H
+
+
+8  T   A     A C d 
+7  P P R C     P   
+6    t       P     
+5      P p P       
+4  p               
+3        p   c     
+2    p p   c p p p 
+1      a   r a   t 
+
+   A B C D E F G H
+
+
+8  T   A     A C d 
+7  P P R C         
+6    t       P     
+5      P p P   P   
+4  p               
+3        p   c     
+2    p p   c p p p 
+1      a   r a   t 
+
+   A B C D E F G H
+
+
+8  T   A     A d   
+7  P P R C         
+6    t       P     
+5      P p P   P   
+4  p               
+3        p   c     
+2    p p   c p p p 
+1      a   r a   t 
+
+   A B C D E F G H
+
+
+8  T R A     A d   
+7  P P   C         
+6    t       P     
+5      P p P   P   
+4  p               
+3        p   c     
+2    p p   c p p p 
+1      a   r a   t 
+
+   A B C D E F G H
+
+
+8  T R A     d     
+7  P P   C         
+6    t       P     
+5      P p P   P   
+4  p               
+3        p   c     
+2    p p   c p p p 
+1      a   r a   t 
+
+   A B C D E F G H
+
+
+8  T R A     C     
+7  P P             
+6    t       P     
+5      P p P   P   
+4  p               
+3        p   c     
+2    p p   c p p p 
+1      a   r a   t 
+
+   A B C D E F G H
+
+
+8  T R A     C     
+7  P P             
+6    t       P     
+5      P p P   P   
+4  p             p 
+3        p   c     
+2    p p   c p p   
+1      a   r a   t 
+
+   A B C D E F G H
+
+
+8  T R A           
+7  P P             
+6    t       P C   
+5      P p P   P   
+4  p             p 
+3        p   c     
+2    p p   c p p   
+1      a   r a   t 
+
+   A B C D E F G H
+
+
+8  T R A           
+7  P P             
+6    t       P C   
+5      P p P   P p 
+4  p               
+3        p   c     
+2    p p   c p p   
+1      a   r a   t 
+
+   A B C D E F G H
+
+
+8  T R             
+7  P P             
+6    t     A P C   
+5      P p P   P p 
+4  p               
+3        p   c     
+2    p p   c p p   
+1      a   r a   t 
+
+   A B C D E F G H
+
+
+8  T R             
+7  P P             
+6    t     A P C p 
+5      P p P   P   
+4  p               
+3        p   c     
+2    p p   c p p   
+1      a   r a   t 
+
+   A B C D E F G H
+
+
+8  T R             
+7  P P             
+6    t       P C p 
+5      P A P   P   
+4  p               
+3        p   c     
+2    p p   c p p   
+1      a   r a   t 
+
+   A B C D E F G H
+
+
+8  T R             
+7  P P           p 
+6    t       P C   
+5      P A P   P   
+4  p               
+3        p   c     
+2    p p   c p p   
+1      a   r a   t 
+
+   A B C D E F G H
+
+
+8  T R             
+7  P P       A   p 
+6    t       P C   
+5      P   P   P   
+4  p               
+3        p   c     
+2    p p   c p p   
+1      a   r a   t 
+
+   A B C D E F G H
+
+
+8  T R           d 
+7  P P       A     
+6    t       P C   
+5      P   P   P   
+4  p               
+3        p   c     
+2    p p   c p p   
+1      a   r a   t 
+
+   A B C D E F G H
+
+
+8  T R         A d 
+7  P P             
+6    t       P C   
+5      P   P   P   
+4  p               
+3        p   c     
+2    p p   c p p   
+1      a   r a   t 
+
+   A B C D E F G H
+
+
+8  T R         d   
+7  P P             
+6    t       P C   
+5      P   P   P   
+4  p               
+3        p   c     
+2    p p   c p p   
+1      a   r a   t 
+
+   A B C D E F G H
+
+
+8  T R       C d   
+7  P P             
+6    t       P     
+5      P   P   P   
+4  p               
+3        p   c     
+2    p p   c p p   
+1      a   r a   t 
+
+   A B C D E F G H
+
+
+8  T R       d     
+7  P P             
+6    t       P     
+5      P   P   P   
+4  p               
+3        p   c     
+2    p p   c p p   
+1      a   r a   t 
+
+   A B C D E F G H
+
+
+8  T         d     
+7  P P R           
+6    t       P     
+5      P   P   P   
+4  p               
+3        p   c     
+2    p p   c p p   
+1      a   r a   t 
+
+   A B C D E F G H
+
+
+8  d               
+7  P P R           
+6    t       P     
+5      P   P   P   
+4  p               
+3        p   c     
+2    p p   c p p   
+1      a   r a   t 
+
+   A B C D E F G H
+
+
+8  d               
+7    P R           
+6  P t       P     
+5      P   P   P   
+4  p               
+3        p   c     
+2    p p   c p p   
+1      a   r a   t 
+
+   A B C D E F G H
+
+
+8  d             t 
+7    P R           
+6  P t       P     
+5      P   P   P   
+4  p               
+3        p   c     
+2    p p   c p p   
+1      a   r a     
+
+   A B C D E F G H
+
+
+8  d             t 
+7    P R           
+6    t       P     
+5  P   P   P   P   
+4  p               
+3        p   c     
+2    p p   c p p   
+1      a   r a     
+
+   A B C D E F G H
+
+
+8  d             t 
+7    t R           
+6            P     
+5  P   P   P   P   
+4  p               
+3        p   c     
+2    p p   c p p   
+1      a   r a     
+
+   A B C D E F G H
+
+
+8  d             t 
+7    t             
+6        R   P     
+5  P   P   P   P   
+4  p               
+3        p   c     
+2    p p   c p p   
+1      a   r a     
+
+   A B C D E F G H
+
+
+8                t 
+7    t             
+6  d     R   P     
+5  P   P   P   P   
+4  p               
+3        p   c     
+2    p p   c p p   
+1      a   r a     
+
+   A B C D E F G H
+
+
+8                t 
+7    t             
+6  d         P     
+5  P   P R P   P   
+4  p               
+3        p   c     
+2    p p   c p p   
+1      a   r a     
+
+   A B C D E F G H
+
+
+8                t 
+7        t         
+6  d         P     
+5  P   P R P   P   
+4  p               
+3        p   c     
+2    p p   c p p   
+1      a   r a     
+
+   A B C D E F G H
+
