@@ -1,0 +1,3 @@
+C:/Users/Admin/Documents/GitHub/ChessSperiamoSiaQuellaBuona/build/CMakeFiles/Scacchiera.dir
+C:/Users/Admin/Documents/GitHub/ChessSperiamoSiaQuellaBuona/build/CMakeFiles/edit_cache.dir
+C:/Users/Admin/Documents/GitHub/ChessSperiamoSiaQuellaBuona/build/CMakeFiles/rebuild_cache.dir
