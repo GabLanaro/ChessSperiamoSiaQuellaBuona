@@ -1,3 +1,5 @@
+//FILIPPO MORBIATO
+
 #ifndef PEZZO_H
 #define PEZZO_H
 #include "board.h"
