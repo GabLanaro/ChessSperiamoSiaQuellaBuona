@@ -22,8 +22,8 @@ Board::Board()
     setPezzo(new Alfiere(true, 'a'), 0, 2);
     setPezzo(new Regina(true, 'd'), 0, 3);
     setPezzo(new Re(true, 'r'), 0, 4);
-    //setPezzo(new Alfiere(true, 'a'), 0, 5);
-    //setPezzo(new Cavallo(true, 'c'), 0, 6);
+    setPezzo(new Alfiere(true, 'a'), 0, 5);
+    setPezzo(new Cavallo(true, 'c'), 0, 6);
     setPezzo(new Torre(true, 't'), 0, 7);
     for (int i = 0; i <= 7; i++)
     {
