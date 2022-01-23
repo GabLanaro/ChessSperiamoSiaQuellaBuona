@@ -6,7 +6,7 @@
 #include "player.h"
 using namespace std;
 
-Board::Board() // COSTRUTTORE
+Board::Board() // COSTRUTTORE: la scacchiera è una matrice 8x8 di puntatori ai pezzi
 {
     // inizializzo una scacchiera vuota
     for (int i = 0; i < 8; i++)
@@ -46,12 +46,13 @@ Board::Board() // COSTRUTTORE
 
 Board::~Board() // DISTRUTTORE
 {
+    //il distruttore di board viene invocato quando board esce dal suo scope
     for (int i = 0; i < 8; i++)
         for (int j = 0; j < 8; j++)
             delete board[i][j];
 }
 
-void Board::printScacchiera()
+void Board::printScacchiera() //stampa la configurazione attuale della scacchiera
 {
     cout << endl;
     int indexRiga = 8;
@@ -60,11 +61,11 @@ void Board::printScacchiera()
         printf("%d  ", indexRiga);
         for (int j = 0; j < 8; j++)
         {
-            if (board[i][j] == NULL)
+            if (board[i][j] == NULL) //se la casella è vuota
             {
                 printf("%c ", ' ');
             }
-            else
+            else //se la casella è occupata da un pezzo
             {
                 printf("%c ", board[i][j]->getName());
             }
@@ -82,12 +83,9 @@ void Board::spostaPezzo(int rigaI, int colonnaI, int rigaF, int colonnaF)
     board[rigaF][colonnaF] = board[rigaI][colonnaI];
     board[rigaI][colonnaI] = NULL;
 
-    // DELETE QUA? mettere if per vedere se casella d'arrivo è null.
     if (temp != NULL)
     {
-        cout << temp->getName() << "\n";
         delete temp;
-        cout << temp->getName() << endl;
     }
 }
 
