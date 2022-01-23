@@ -45,7 +45,7 @@ tuple<int, int, int, int> Player::mossa(Board &board)
             getline(cin, input);
             string iniziale = input.substr(0, 2);
             string finale = input.substr(3, 2);
-            //trasformazione in maiuscolo per favorire il controllo lessicale
+            // trasformazione in maiuscolo per favorire il controllo lessicale
             transform(iniziale.begin(), iniziale.end(), iniziale.begin(), ::toupper);
             transform(finale.begin(), finale.end(), finale.begin(), ::toupper);
 
@@ -62,6 +62,15 @@ tuple<int, int, int, int> Player::mossa(Board &board)
                 {
                     cout << "Il Computer ha rifiutato la patta\nInserisci mossa: ";
                 }
+            }
+            // ARROCCO
+            else if (input == "ARROCCO DX" || input == "arrocco dx")
+            {
+                return make_tuple(-2, -2, -2, -2);
+            }
+            else if (input == "ARROCCO SX" || input == "arrocco sx")
+            {
+                return make_tuple(-3, -3, -3, -3);
             }
             // STAMPA BOARD
             else if (input == "XX XX" || input == "xx xx")
@@ -91,7 +100,7 @@ tuple<int, int, int, int> Player::mossa(Board &board)
         int rigFin = input[4] - 49;
         return make_tuple(colIniz, rigIniz, colFin, rigFin);
     }
-    else //false=computer
+    else // false=computer
     {
         int colIniz, rigIniz, colFin, rigFin;
         rigIniz = rand() % 8; // numero intero random tra 0 e 8
@@ -102,7 +111,7 @@ tuple<int, int, int, int> Player::mossa(Board &board)
         return make_tuple(colIniz, rigIniz, colFin, rigFin);
     }
 }
-//Metodo che risponde alla patta richiesta dall'utente col 10% di possibilità di accettare
+// Metodo che risponde alla patta richiesta dall'utente col 10% di possibilità di accettare
 bool Player::rispPatta()
 {
     srand(time(NULL));

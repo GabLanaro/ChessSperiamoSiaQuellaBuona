@@ -82,10 +82,19 @@ void Game::start()
                     gameIsOver = true;
                     break;
                 }
-                /*if(enPassant(board,rigaI,colonnaI,rigaF,colonnaF)){
-                done = true;
+                if ((arrocco(board, vectBoard, currentPlayer->getColor(), colonnaI)))
+                {
+                    std::cout << "Arrocco effettuato";
+                    // cambia turno
+                    break;
+                }
+
+                /*if (enPassant(board, rigaI, colonnaI, rigaF, colonnaF))
+                {
+                    done = true;
                 }*/
                 tempoMossa = end - start;
+
                 if (currentPlayer->getTipo() == false) // Statisticamente il PC non ha trovato mosse valide, quindi non ce ne sono
                 {
                     end = std::chrono::system_clock::now();
@@ -394,6 +403,64 @@ bool Game::enPassant(Board &b, int rigaI, int colonnaI, int rigaF, int colonnaF)
         }
     }
 
+    return false;
+}
+
+bool Game::arrocco(Board &b, vector<string> vectBoard, bool color, int lato)
+{
+    string strBoard;
+    if ((color == true) && (lato == -2)) // Arrocco bianco a destra
+    {
+        for (int i = 0; i < vectBoard.size(); i++)
+        {
+            strBoard = vectBoard[i];
+            if ((strBoard[7] != 't') && strBoard[4] == 'r')
+            {
+                b.spostaPezzo(0, 4, 0, 6); // Sposta Re in G1
+                b.spostaPezzo(0, 7, 0, 5); // Sposta torre in F1
+                return true;
+            }
+        }
+    }
+    else if ((color == true) && (lato == -3)) // Arrocco bianco a sinistra
+    {
+        for (int i = 0; i < vectBoard.size(); i++)
+        {
+            strBoard = vectBoard[i];
+            if (strBoard[0] != 't' && strBoard[4] == 'r')
+            {
+                b.spostaPezzo(0, 4, 0, 2); // Sposta Re da E1 a C1
+                b.spostaPezzo(0, 0, 0, 3); // Sposta torre da A1 a D1
+                return true;
+            }
+        }
+    }
+    else if ((color == false) && (lato == -2)) // Arrocco nero a destra
+    {
+        for (int i = 0; i < vectBoard.size(); i++)
+        {
+            strBoard = vectBoard[i];
+            if (strBoard[63] != 'T' && strBoard[60] == 'R')
+            {
+                b.spostaPezzo(7, 4, 7, 6); // Sposta Re da E8 a G8
+                b.spostaPezzo(7, 7, 7, 5); // Sposta torre da H8 a F8
+                return true;
+            }
+        }
+    }
+    else if ((color == false) && (lato == -3)) // Arrocco nero a sinistra
+    {
+        for (int i = 0; i < vectBoard.size(); i++)
+        {
+            strBoard = vectBoard[i];
+            if (strBoard[56] == 'T' && strBoard[60] == 'R')
+            {
+                b.spostaPezzo(7, 4, 7, 2); // Sposta Re da E8 a C8
+                b.spostaPezzo(7, 7, 7, 3); // Sposta torre da H8 a D8
+                return true;
+            }
+        }
+    }
     return false;
 }
 

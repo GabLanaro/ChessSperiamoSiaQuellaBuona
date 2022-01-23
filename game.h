@@ -19,6 +19,7 @@ public:
     bool scaccoMatto(Player &, Board &);                                                                 // true se il re del giocatore che invoca la funzione è in scaccomatto
     void promozione(Board &, int rigaF, int colonnaF);
     bool enPassant(Board &, int rigaI, int colonnaI, int rigaF, int colonnaF);
+    bool arrocco(Board &, vector<string>, bool, int);
     string creaStrBoard(Board &);
     int contaVuoti_P(string);
     bool isPatta(vector<string>, vector<int>, string, int);

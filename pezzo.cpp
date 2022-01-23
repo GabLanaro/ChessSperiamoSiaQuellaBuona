@@ -394,6 +394,7 @@ bool Re::isValid(int rIni, int cIni, int rFin, int cFin, Board& b){
             return true; //Allora la mossa è valida
         }
     }
+    
     return false;
 }
 
