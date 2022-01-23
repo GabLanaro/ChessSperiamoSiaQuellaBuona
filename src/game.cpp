@@ -11,7 +11,7 @@
 #include "board.h"
 #include "player.h"
 
-Game::Game(string mod)
+Game::Game(string mod) //COSTRUTTORE
 {
     modalita = mod;
 }
@@ -24,9 +24,9 @@ void Game::start()
 
     srand(time(NULL));             // seed per generare mossa casuale del computer
     gameIsOver = false;            // verrà utilizzata nel ciclo do while per verificare che la partita non sia terminata
-    int counterMosse{0};           // se la partita è computer vs computer, quando il counterMosse arriva a 200 la parita termina
+    int counterMosse{0};           // se la partita è computer vs computer, quando il counterMosse arriva a 100 la parita termina
     Board board;                   // inizializzazione scacchiera
-    std::vector<string> vectBoard; // vector che contiene delle stringhe raffiguranti la board
+    std::vector<string> vectBoard; // vector che contiene delle stringhe strBoard raffiguranti la board
     std::vector<int> vectVuoti_P;  // vector che contiene la somma delle posizioni vuote e degli indici dei pedoni
     string strBoard;               // stringhe raffiguranti la board
     int numVuoti_P;                // int corrispondente alla somma di caselle vuote nella board più la somma degli indici dei pedoni
@@ -57,7 +57,7 @@ void Game::start()
     { // Verifica che il re del currentPlayer non sia sotto scacco o scacco matto
         if (sottoScacco(*currentPlayer, board))
         {
-            if (scaccoMatto(*currentPlayer, board))
+            if (scaccoMatto(*currentPlayer, board)) //la partita termina
             {
                 std::cout << "SCACCO MATTO -- partita terminata";
                 gameIsOver = true;
