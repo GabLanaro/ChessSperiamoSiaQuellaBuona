@@ -24,6 +24,11 @@ Pezzo::~Pezzo(){
 
 //*****PEDONE****
 
+Pedone::~Pedone(){ 
+    std::cout << "Ho invocato il distruttore di Pedone\n";
+    //delete p;
+}
+
 Pedone::Pedone(bool c, char n){
     color=c;
     name=n;
@@ -153,6 +158,11 @@ bool Torre::isValid(int rIni, int cIni, int rFin, int cFin, Board& b){
 
 //*****CAVALLO*****
 
+Cavallo::~Cavallo(){ 
+    std::cout << "Ho invocato il distruttore di Cavallo\n";
+    //delete p;
+}
+
 Cavallo::Cavallo(bool c, char n){
     color=c;
     name=n;
@@ -174,6 +184,11 @@ bool Cavallo::isValid(int rIni, int cIni, int rFin, int cFin, Board& b){
 }
 
 //*****ALFIERE*****
+
+Alfiere::~Alfiere(){ 
+    std::cout << "Ho invocato il distruttore di Alfiere\n";
+    //delete p;
+}
 
 Alfiere::Alfiere(bool c, char n){
     color=c;
@@ -247,6 +262,11 @@ bool Alfiere::isValid(int rIni, int cIni, int rFin, int cFin, Board& b){
 }
 
 //*****REGINA*****
+
+Regina::~Regina(){ 
+    std::cout << "Ho invocato il distruttore di Regina\n";
+    //delete p;
+}
 
 Regina::Regina(bool c, char n){
     color=c;
@@ -380,6 +400,11 @@ bool Regina::isValid(int rIni, int cIni, int rFin, int cFin, Board& b){ //Data d
 }
 
 //*****RE*****
+
+Re::~Re(){ 
+    std::cout << "Ho invocato il distruttore di Re\n";
+    //delete p;
+}
 
 Re::Re(bool c, char n){
     color=c;
