@@ -9,32 +9,31 @@
 
 using namespace std;
 
-Player::Player(bool colore, bool tipo)
+Player::Player(bool colore, bool tipo) // costruttore
 {
     this->colore = colore;
     this->tipo = tipo;
 }
 
-bool Player::getColor() const
+bool Player::getColor() const // restituisce il colore
 {
     return colore;
 }
 
-bool Player::getTipo() const
+bool Player::getTipo() const // restituisce il tipo
 {
     return tipo;
 }
 
-void Player::setTipo(bool tipo)
+void Player::setTipo(bool tipo) // imposta il tipo
 {
     this->tipo = tipo;
 }
 
-tuple<int, int, int, int> Player::mossa(Board &board)
+tuple<int, int, int, int> Player::mossa(Board &board) // riceve e legge l'input dell'utente e del computer e ne restituisce le coordinate
 {
-    if (this->tipo == true)
+    if (this->tipo == true) // true=umano
     {
-        // true=umano
         cout << "Inserisci mossa: ";
         string input;
 
@@ -43,7 +42,6 @@ tuple<int, int, int, int> Player::mossa(Board &board)
         while (!inputValido)
         {
             getline(cin, input);
-
             // PATTA
             if (input == "PATTA" || input == "patta")
             {
@@ -51,7 +49,7 @@ tuple<int, int, int, int> Player::mossa(Board &board)
                 bool risposta = rispPatta();
                 if (risposta)
                 {
-                    return make_tuple(-1, -1, -1, -1);
+                    return make_tuple(-1, -1, -1, -1); // se la patta è stata accettata restituisce una tupla speciale
                 }
                 else
                 {
@@ -61,16 +59,16 @@ tuple<int, int, int, int> Player::mossa(Board &board)
             // ARROCCO
             else if (input == "ARROCCO DX" || input == "arrocco dx")
             {
-                return make_tuple(-2, -2, -2, -2);
+                return make_tuple(-2, -2, -2, -2); //-2 valore speciale per la chiamata alla funzione arrocco in Game
             }
             else if (input == "ARROCCO SX" || input == "arrocco sx")
             {
-                return make_tuple(-3, -3, -3, -3);
+                return make_tuple(-3, -3, -3, -3); //-3 valore speciale per la chiamata alla funzione arrocco in Game
             }
 
             if (input.size() != 5)
             {
-                cout << "L'input che hai inserito non \212 valido,\ninserisci mossa: ";
+                cout << "L'input che hai inserito non ha il numero corretto di caratteri.\nInserisci mossa: ";
             }
             else
             {
@@ -98,12 +96,12 @@ tuple<int, int, int, int> Player::mossa(Board &board)
                 }
                 else
                 {
-                    cout << "L'input che hai inserito non \212 valido,\ninserisci mossa: ";
+                    cout << "L'input che hai inserito non \212 valido,\nInserisci mossa: ";
                 }
             }
         }
         int colIniz = (int)toupper(input[0]) - 65; // Il codice ASCII di 'A' è 65
-        int rigIniz = input[1] - 49;               // domani vi faccio un audio e vi spiego perchè 49
+        int rigIniz = input[1] - 49;
         int colFin = (int)toupper(input[3]) - 65;
         int rigFin = input[4] - 49;
         return make_tuple(colIniz, rigIniz, colFin, rigFin);
@@ -119,10 +117,11 @@ tuple<int, int, int, int> Player::mossa(Board &board)
         return make_tuple(colIniz, rigIniz, colFin, rigFin);
     }
 }
+
 // Metodo che risponde alla patta richiesta dall'utente col 10% di possibilità di accettare
 bool Player::rispPatta()
 {
     srand(time(NULL));
-    bool x = rand() % 10;
+    bool x = rand() % 10; // numero intero random tra 0 e 10
     return !x;
 }

@@ -46,13 +46,13 @@ Board::Board() // COSTRUTTORE: la scacchiera è una matrice 8x8 di puntatori ai 
 
 Board::~Board() // DISTRUTTORE
 {
-    //il distruttore di board viene invocato quando board esce dal suo scope
+    // il distruttore di board viene invocato quando board esce dal suo scope
     for (int i = 0; i < 8; i++)
         for (int j = 0; j < 8; j++)
             delete board[i][j];
 }
 
-void Board::printScacchiera() //stampa la configurazione attuale della scacchiera
+void Board::printScacchiera() // stampa la configurazione attuale della scacchiera
 {
     cout << endl;
     int indexRiga = 8;
@@ -61,11 +61,11 @@ void Board::printScacchiera() //stampa la configurazione attuale della scacchier
         printf("%d  ", indexRiga);
         for (int j = 0; j < 8; j++)
         {
-            if (board[i][j] == NULL) //se la casella è vuota
+            if (board[i][j] == NULL) // se la casella è vuota
             {
                 printf("%c ", ' ');
             }
-            else //se la casella è occupata da un pezzo
+            else // se la casella è occupata da un pezzo
             {
                 printf("%c ", board[i][j]->getName());
             }
@@ -76,7 +76,7 @@ void Board::printScacchiera() //stampa la configurazione attuale della scacchier
     printf("%s", "\n   A B C D E F G H\n\n");
 }
 
-void Board::spostaPezzo(int rigaI, int colonnaI, int rigaF, int colonnaF)
+void Board::spostaPezzo(int rigaI, int colonnaI, int rigaF, int colonnaF) // Sposta il pezzo e disalloca il pezzo mangiato
 {
 
     Pezzo *temp = board[rigaF][colonnaF];

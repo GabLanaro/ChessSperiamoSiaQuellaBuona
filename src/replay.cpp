@@ -88,7 +88,8 @@ int main(int argc, char *argv[])
     string tipoReplay = argv[1];
     string nomeFileLog = argv[2];
     string nomeFileOutput;
-    if(argv[3]!=NULL){
+    if (argv[3] != NULL)
+    {
         nomeFileOutput = argv[3];
     }
     // controllo che il primo argomento inserito da linea di comando sia valido
@@ -115,7 +116,7 @@ int main(int argc, char *argv[])
         if (tipoReplay == "v")
         {
             printFrameOnScreen(line[0] - '0', line[1] - '0', line[3] - '0', line[4] - '0', line[5], charBoard); // stampa frame scacchiera (si noti che i char sono convertiti in int con es. line[1]-'0')
-            this_thread::sleep_for(chrono::seconds(2));                                                         // attende 1 secondo tra un frame e il successivo
+            this_thread::sleep_for(chrono::seconds(2));                                                         // attende 2 secondi tra un frame e il successivo
         }
         else
         {

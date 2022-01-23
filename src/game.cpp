@@ -11,7 +11,7 @@
 #include "board.h"
 #include "player.h"
 
-Game::Game(string mod) //COSTRUTTORE
+Game::Game(string mod) // COSTRUTTORE
 {
     modalita = mod;
 }
@@ -57,7 +57,7 @@ void Game::start()
     { // Verifica che il re del currentPlayer non sia sotto scacco o scacco matto
         if (sottoScacco(*currentPlayer, board))
         {
-            if (scaccoMatto(*currentPlayer, board)) //la partita termina
+            if (scaccoMatto(*currentPlayer, board)) // la partita termina
             {
                 std::cout << "SCACCO MATTO -- partita terminata";
                 gameIsOver = true;
@@ -69,6 +69,7 @@ void Game::start()
         if (gameIsOver == false)
         {
             // il re non è sottoscacco, currentPlayer inserisce mossa.
+            // parte il cronometro per la condizione 1 di patta
             start = std::chrono::system_clock::now();
             tempoLim = std::chrono::seconds(5);
             while (!done)
@@ -95,29 +96,31 @@ void Game::start()
 
                 /*if (enPassant(board, rigaI, colonnaI, rigaF, colonnaF))
                 {
+                    //en passant interrompe l'esecuzione del programma quindi è stato commentato
+                    currentPlayer = (currentPlayer->getColor() == player1.getColor()) ? &player2 : &player1; // cambio turno giocatore
                     break;
                 }*/
-                tempoMossa = end - start;
 
+                tempoMossa = end - start;
                 if (currentPlayer->getTipo() == false) // Statisticamente il PC non ha trovato mosse valide, quindi non ce ne sono
                 {
                     end = std::chrono::system_clock::now();
                     done = (tempoMossa > tempoLim) ? true : false;
                 }
+
                 if (isMoveValid(rigaI, colonnaI, rigaF, colonnaF, currentPlayer, board))
                 {
                     // verifica della correttezza della mossa inserita
                     board.spostaPezzo(rigaI, colonnaI, rigaF, colonnaF);
                     std::cout << "mossa effettuata:   " << rigaI << colonnaI << " " << rigaF << colonnaF << "\n";
-
-                    fileLog << rigaI << colonnaI << " " << rigaF << colonnaF; // scrive la mossa nel file di log
-                    if (promozione(board, rigaF, colonnaF, currentPlayer->getTipo()))
+                    fileLog << rigaI << colonnaI << " " << rigaF << colonnaF;         // scrive la mossa nel file di log
+                    if (promozione(board, rigaF, colonnaF, currentPlayer->getTipo())) // check della promozione dei pedoni
                     {
-                        fileLog << "D\n";
+                        fileLog << "D\n"; // stampa sul file log per replay
                     }
                     else
                     {
-                        fileLog << "O\n";
+                        fileLog << "O\n"; // stampa sul file log per replay
                     }
                     // cambio turno giocatore
                     currentPlayer = (currentPlayer->getColor() == player1.getColor()) ? &player2 : &player1;
@@ -147,7 +150,7 @@ void Game::start()
             // se la partita è tra due computer si attende 1 secondo tra una mossa e l'altra
             if (tolower(modalita[0]) == 'c')
             {
-                // this_thread::sleep_for(chrono::seconds(1));
+                this_thread::sleep_for(chrono::seconds(1));
             }
 
             // dopo 100 mosse la partita tra due computer termina
@@ -167,34 +170,26 @@ bool Game::randomColor()
     // true=white, false=black
     srand(time(NULL));   // seed
     bool x = rand() % 2; // numero intero casuale tra 0 e 1
-    return x;            // Ho tolto l'AND tra x & 1
+    return x;
 }
 
 bool Game::isMoveValid(int rigaI, int colonnaI, int rigaF, int colonnaF, Player *currentPlayer, Board &board)
 {
-    // 4 check di validità che valgono per tutti i pezzi.
-    // 0)controllo che la casella scelta non sia vuota
+    // 4 check di validità per i pezzi.
+    // controllo che la casella scelta non sia vuota
     if (board.getPezzo(rigaI, colonnaI) == NULL)
     {
         if (currentPlayer->getTipo() == true)
             cout << "la casella scelta \212 vuota!\n";
         return false;
     }
-    // 1)controllo che il pezzo scelto sia di current player
+    // controllo che il pezzo scelto sia di current player
     if (currentPlayer->getColor() != board.getPezzo(rigaI, colonnaI)->getColor())
     {
         if (currentPlayer->getTipo() == true)
             cout << "il pezzo scelto \212 dell'altro giocatore!\n";
         return false;
     }
-
-    // 2)controllo che la casella d'arrivo non sia occupata da un pezzo di currentPlayer
-    /*if (board.getPezzo(rigaF, colonnaF) != NULL && currentPlayer->getColor() == board.getPezzo(rigaF, colonnaF)->getColor())
-    {
-        if(currentPlayer->getTipo()==true)
-        cout << "la casella d'arrivo \212 occupata da un tuo pezzo!\n";
-        return false;
-    }*/
 
     // check di validità del pezzo in particolare
     if (board.getPezzo(rigaI, colonnaI)->isValid(rigaI, colonnaI, rigaF, colonnaF, board) == false)
@@ -204,14 +199,17 @@ bool Game::isMoveValid(int rigaI, int colonnaI, int rigaF, int colonnaF, Player 
         return false;
     }
 
-    // 3)controllo che la mossa non metta il re di currentPlayer sottoscacco effettuando temporaneamente la mossa
+    // controllo che la mossa non metta il re di currentPlayer sottoscacco effettuando temporaneamente la mossa
     Pezzo *temp = board.getPezzo(rigaF, colonnaF);
     Pezzo *iniziale = board.getPezzo(rigaI, colonnaI);
     board.setPezzo(iniziale, rigaF, colonnaF); // il pezzo da muovere viene messo temporaneamente nella casella finale
     board.setPezzo(NULL, rigaI, colonnaI);     // la casella finale viene messa temporaneamente NULL.
     if (sottoScacco(*currentPlayer, board))
     {
-        cout << "la mossa mette il tuo re sottoscacco*********************************************\n";
+        if (currentPlayer->getTipo() == true)
+        {
+            cout << "la mossa mette il tuo re sottoscacco\n";
+        }
         // ripristino la mosssa
         board.setPezzo(temp, rigaF, colonnaF);
         board.setPezzo(iniziale, rigaI, colonnaI);
@@ -240,11 +238,6 @@ bool Game::sottoScacco(Player &p, Board &b)
                 Pezzo *pez = b.getPezzo(rigCurr, colCurr);
                 if (p.getColor() == pez->getColor())
                 {
-                    /*if ((pez->getName() == 'r') || (pez->getName() == 'R'))
-                    {
-                        rigRe = rigCurr;
-                        colRe = colCurr;
-                    }*/
                     if (pez->getName() == 'r' && p.getColor() == true) // se bianco
                     {
                         rigRe = rigCurr;
@@ -282,11 +275,9 @@ bool Game::sottoScacco(Player &p, Board &b)
     return false;
 }
 
-bool Game::scaccoMatto(Player &p, Board &b)
+bool Game::scaccoMatto(Player &p, Board &b) // Ritorna true se il giocatore p è sotto scacco matto
 {
-    // Ritorna true se il giocatore p è sotto scacco matto
-
-    // <guardo> tutti gli scacchi uno alla volta
+    // guardo tutti gli scacchi uno alla volta
     for (int rigCurr = 0; rigCurr < 8; rigCurr++)
     {
         for (int colCurr = 0; colCurr < 8; colCurr++)
@@ -333,15 +324,15 @@ bool Game::promozione(Board &b, int rigaF, int colonnaF, bool tipo)
             do
             {
                 getline(cin, scelta);
-                switch (scelta[0])
-                { // mettere anche qua il controllo che non cambia tra maiuscole e minuscole?
+                switch (tolower(scelta[0]))
+                {
                 case 't':
                     if (pez->getColor() == true)
                     { // se è bianco
                         b.setPezzo(new Torre(true, 't'), 7, colonnaF);
                     }
                     else if (pez->getColor() == false)
-                    { // ha senso usare else if o basta mettere else?
+                    {//se è nero
                         b.setPezzo(new Torre(false, 'T'), 0, colonnaF);
                     }
                     sceltaValida = true;
@@ -353,7 +344,7 @@ bool Game::promozione(Board &b, int rigaF, int colonnaF, bool tipo)
                         b.setPezzo(new Cavallo(true, 'c'), 7, colonnaF);
                     }
                     else if (pez->getColor() == false)
-                    { // ha senso usare else if o basta mettere else?
+                    {//se è nero
                         b.setPezzo(new Cavallo(false, 'C'), 0, colonnaF);
                     }
                     sceltaValida = true;
@@ -365,7 +356,7 @@ bool Game::promozione(Board &b, int rigaF, int colonnaF, bool tipo)
                         b.setPezzo(new Alfiere(true, 'a'), 7, colonnaF);
                     }
                     else if (pez->getColor() == false)
-                    { // ha senso usare else if o basta mettere else?
+                    {//se è nero
                         b.setPezzo(new Alfiere(false, 'A'), 0, colonnaF);
                     }
                     sceltaValida = true;
@@ -377,7 +368,7 @@ bool Game::promozione(Board &b, int rigaF, int colonnaF, bool tipo)
                         b.setPezzo(new Regina(true, 'd'), 7, colonnaF);
                     }
                     else if (pez->getColor() == false)
-                    { // ha senso usare else if o basta mettere else?
+                    { // se è nero
                         b.setPezzo(new Regina(false, 'D'), 0, colonnaF);
                     }
                     sceltaValida = true;
@@ -389,7 +380,7 @@ bool Game::promozione(Board &b, int rigaF, int colonnaF, bool tipo)
                         b.setPezzo(new Pedone(true, 'p'), 7, colonnaF);
                     }
                     else if (pez->getColor() == false)
-                    { // ha senso usare else if o basta mettere else?
+                    { // se è nero
                         b.setPezzo(new Pedone(false, 'P'), 0, colonnaF);
                     }
                     sceltaValida = true;
@@ -409,7 +400,7 @@ bool Game::promozione(Board &b, int rigaF, int colonnaF, bool tipo)
                 b.setPezzo(new Regina(true, 'd'), 7, colonnaF);
             }
             else if (pez->getColor() == false)
-            { // ha senso usare else if o basta mettere else?
+            {//se è nero
                 b.setPezzo(new Regina(false, 'D'), 0, colonnaF);
             }
             sceltaValida = true;
@@ -418,21 +409,21 @@ bool Game::promozione(Board &b, int rigaF, int colonnaF, bool tipo)
     }
     return false;
 }
-
+/*
 bool Game::enPassant(Board &b, int rigaI, int colonnaI, int rigaF, int colonnaF)
 {
     Pezzo *PezzoIniziale = b.getPezzo(rigaI, colonnaI); // Creo un puntatore al pezzo iniziale
     Pezzo *PezzoFinale = b.getPezzo(rigaF, colonnaF);   // Creo un puntatore al pezzo d'arrivo
     if ((rigaI == 4) && (PezzoFinale == NULL) && (PezzoIniziale->getName() == 'p'))
     {
-        if ((colonnaF == PezzoIniziale->getColonnaPed()) && (rigaF == PezzoIniziale->getRigaPed() + 1))
+        if ((colonnaF == PezzoIniziale->getColonnaPed()) && (rigaF == 5))
         {
             return true;
         }
     }
     else if ((rigaI == 3) && (PezzoFinale == NULL) && (PezzoIniziale->getName() == 'P'))
     {
-        if ((colonnaF == PezzoIniziale->getColonnaPed()) && (rigaF == PezzoIniziale->getRigaPed() - 1))
+        if ((colonnaF == PezzoIniziale->getColonnaPed()) && (rigaF == 2))
         {
             return true;
         }
@@ -440,7 +431,7 @@ bool Game::enPassant(Board &b, int rigaI, int colonnaI, int rigaF, int colonnaF)
 
     return false;
 }
-
+*/
 bool Game::arrocco(Board &b, vector<string> vectBoard, bool color, int lato)
 {
     bool done = false;
