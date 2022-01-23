@@ -13,6 +13,7 @@ private:
 
 public:
     Board();
+    ~Board();  //distruttore 
     void printScacchiera();
     void spostaPezzo(int rigaI, int colonnaI, int rigaF, int colonnaF);
     void setPezzo(Pezzo *P, int riga, int colonna);

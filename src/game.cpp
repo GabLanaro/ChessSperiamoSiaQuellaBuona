@@ -89,13 +89,13 @@ void Game::start()
                 if (colonnaI == -2 || colonnaI == -3)
                 {
                     arrocco(board, vectBoard, currentPlayer->getColor(), colonnaI);
+                    currentPlayer = (currentPlayer->getColor() == player1.getColor()) ? &player2 : &player1; // cambio turno giocatore
                     break;
                 }
 
                 /*if (enPassant(board, rigaI, colonnaI, rigaF, colonnaF))
                 {
-                    //Cambio turno
-                    done = true;
+                    break;
                 }*/
                 tempoMossa = end - start;
 
@@ -105,13 +105,23 @@ void Game::start()
                     done = (tempoMossa > tempoLim) ? true : false;
                 }
                 if (isMoveValid(rigaI, colonnaI, rigaF, colonnaF, currentPlayer, board))
-                { // verifica della correttezza della mossa inserita
+                {
+                    // verifica della correttezza della mossa inserita
                     board.spostaPezzo(rigaI, colonnaI, rigaF, colonnaF);
                     std::cout << "mossa effettuata:   " << rigaI << colonnaI << " " << rigaF << colonnaF << "\n";
-                    fileLog << rigaI << colonnaI << " " << rigaF << colonnaF << "\n"; // scrive la mossa nel file di log
-                    promozione(board, rigaF, colonnaF);
-                    currentPlayer = (currentPlayer->getColor() == player1.getColor()) ? &player2 : &player1; // cambio turno giocatore
-                    done = true;                                                                             // esci dal ciclo
+
+                    fileLog << rigaI << colonnaI << " " << rigaF << colonnaF; // scrive la mossa nel file di log
+                    if (promozione(board, rigaF, colonnaF, currentPlayer->getTipo()))
+                    {
+                        fileLog << "D\n";
+                    }
+                    else
+                    {
+                        fileLog << "O\n";
+                    }
+                    // cambio turno giocatore
+                    currentPlayer = (currentPlayer->getColor() == player1.getColor()) ? &player2 : &player1;
+                    done = true; // esci dal ciclo
                 }
             }
 
@@ -134,11 +144,14 @@ void Game::start()
 
             board.printScacchiera();
 
-            if (tolower(modalita[0]) == 'c') // se la partita è tra due computer si attende 1 secondo tra una mossa e l'altra
+            // se la partita è tra due computer si attende 1 secondo tra una mossa e l'altra
+            if (tolower(modalita[0]) == 'c')
             {
-                this_thread::sleep_for(chrono::seconds(1));
+                // this_thread::sleep_for(chrono::seconds(1));
             }
-            if (tolower(modalita[0]) == 'c' && counterMosse == 100) // dopo 100 mosse la partita tra due computer termina
+
+            // dopo 100 mosse la partita tra due computer termina
+            if (tolower(modalita[0]) == 'c' && counterMosse == 300000)
             {
                 std::cout << "numero massimo di mosse raggiunto. La partita \212 annullata.";
                 gameIsOver = true;
@@ -306,86 +319,104 @@ bool Game::scaccoMatto(Player &p, Board &b)
     return true;
 }
 
-void Game::promozione(Board &b, int rigaF, int colonnaF)
+bool Game::promozione(Board &b, int rigaF, int colonnaF, bool tipo)
 {
     string scelta;
     bool sceltaValida = false;
     Pezzo *pez = b.getPezzo(rigaF, colonnaF);
+
     if (((pez->getName() == 'p') && (rigaF == 7)) || ((pez->getName() == 'P') && (rigaF == 0)))
     {
-        // delete pedone
-        std::cout << "Inserisci l'iniziale del pezzo con cui vorresti sostituire il pedone: ";
-        do
+        if (tipo == true)
         {
-            getline(cin, scelta);
-            switch (scelta[0])
-            { // mettere anche qua il controllo che non cambia tra maiuscole e minuscole?
-            case 't':
-                if (pez->getColor() == true)
-                { // se è bianco
-                    b.setPezzo(new Torre(true, 't'), 7, colonnaF);
-                }
-                else if (pez->getColor() == false)
-                { // ha senso usare else if o basta mettere else?
-                    b.setPezzo(new Torre(false, 'T'), 0, colonnaF);
-                }
-                sceltaValida = true;
-                break;
-
-            case 'c':
-                if (pez->getColor() == true)
-                { // se è bianco
-                    b.setPezzo(new Cavallo(true, 'c'), 7, colonnaF);
-                }
-                else if (pez->getColor() == false)
-                { // ha senso usare else if o basta mettere else?
-                    b.setPezzo(new Cavallo(false, 'C'), 0, colonnaF);
-                }
-                sceltaValida = true;
-                break;
-
-            case 'a':
-                if (pez->getColor() == true)
-                { // se è bianco
-                    b.setPezzo(new Alfiere(true, 'a'), 7, colonnaF);
-                }
-                else if (pez->getColor() == false)
-                { // ha senso usare else if o basta mettere else?
-                    b.setPezzo(new Alfiere(false, 'A'), 0, colonnaF);
-                }
-                sceltaValida = true;
-                break;
-
-            case 'd':
-                if (pez->getColor() == true)
-                { // se è bianco
-                    b.setPezzo(new Regina(true, 'd'), 7, colonnaF);
-                }
-                else if (pez->getColor() == false)
-                { // ha senso usare else if o basta mettere else?
-                    b.setPezzo(new Regina(false, 'D'), 0, colonnaF);
-                }
-                sceltaValida = true;
-                break;
-
-            case 'p':
-                if (pez->getColor() == true)
-                { // se è bianco
-                    b.setPezzo(new Pedone(true, 'p'), 7, colonnaF);
-                }
-                else if (pez->getColor() == false)
-                { // ha senso usare else if o basta mettere else?
-                    b.setPezzo(new Pedone(false, 'P'), 0, colonnaF);
-                }
-                sceltaValida = true;
-                break;
-            }
-            if (sceltaValida == false)
+            std::cout << "Inserisci l'iniziale del pezzo con cui vorresti sostituire il pedone: ";
+            do
             {
-                std::cout << "Scelta non valida, riprova" << endl;
+                getline(cin, scelta);
+                switch (scelta[0])
+                { // mettere anche qua il controllo che non cambia tra maiuscole e minuscole?
+                case 't':
+                    if (pez->getColor() == true)
+                    { // se è bianco
+                        b.setPezzo(new Torre(true, 't'), 7, colonnaF);
+                    }
+                    else if (pez->getColor() == false)
+                    { // ha senso usare else if o basta mettere else?
+                        b.setPezzo(new Torre(false, 'T'), 0, colonnaF);
+                    }
+                    sceltaValida = true;
+                    return true;
+
+                case 'c':
+                    if (pez->getColor() == true)
+                    { // se è bianco
+                        b.setPezzo(new Cavallo(true, 'c'), 7, colonnaF);
+                    }
+                    else if (pez->getColor() == false)
+                    { // ha senso usare else if o basta mettere else?
+                        b.setPezzo(new Cavallo(false, 'C'), 0, colonnaF);
+                    }
+                    sceltaValida = true;
+                    return true;
+
+                case 'a':
+                    if (pez->getColor() == true)
+                    { // se è bianco
+                        b.setPezzo(new Alfiere(true, 'a'), 7, colonnaF);
+                    }
+                    else if (pez->getColor() == false)
+                    { // ha senso usare else if o basta mettere else?
+                        b.setPezzo(new Alfiere(false, 'A'), 0, colonnaF);
+                    }
+                    sceltaValida = true;
+                    return true;
+
+                case 'd':
+                    if (pez->getColor() == true)
+                    { // se è bianco
+                        b.setPezzo(new Regina(true, 'd'), 7, colonnaF);
+                    }
+                    else if (pez->getColor() == false)
+                    { // ha senso usare else if o basta mettere else?
+                        b.setPezzo(new Regina(false, 'D'), 0, colonnaF);
+                    }
+                    sceltaValida = true;
+                    return true;
+
+                case 'p':
+                    if (pez->getColor() == true)
+                    { // se è bianco
+                        b.setPezzo(new Pedone(true, 'p'), 7, colonnaF);
+                    }
+                    else if (pez->getColor() == false)
+                    { // ha senso usare else if o basta mettere else?
+                        b.setPezzo(new Pedone(false, 'P'), 0, colonnaF);
+                    }
+                    sceltaValida = true;
+                    return true;
+                }
+                if (sceltaValida == false)
+                {
+                    std::cout << "Scelta non valida, riprova" << endl;
+                }
+            } while (sceltaValida == false);
+        }
+        else
+        {
+            std::cout << "Promozione avvenuta con donna";
+            if (pez->getColor() == true)
+            { // se è bianco
+                b.setPezzo(new Regina(true, 'd'), 7, colonnaF);
             }
-        } while (sceltaValida == false);
+            else if (pez->getColor() == false)
+            { // ha senso usare else if o basta mettere else?
+                b.setPezzo(new Regina(false, 'D'), 0, colonnaF);
+            }
+            sceltaValida = true;
+            return true;
+        }
     }
+    return false;
 }
 
 bool Game::enPassant(Board &b, int rigaI, int colonnaI, int rigaF, int colonnaF)
@@ -482,7 +513,7 @@ bool Game::arrocco(Board &b, vector<string> vectBoard, bool color, int lato)
             }
         }
         b.spostaPezzo(7, 4, 7, 2); // Sposta Re da E8 a C8
-        b.spostaPezzo(7, 7, 7, 3); // Sposta torre da H8 a D8
+        b.spostaPezzo(7, 0, 7, 3); // Sposta torre da A8 a D8
     }
     std::cout << "ARROCCO EFFETTUATO";
     return done;
@@ -543,6 +574,7 @@ bool Game::isPatta(vector<string> vectBoard, vector<int> vectVuoti_P, string str
     // controllo occorrenza di strBoard nel vectBoard
     if (std::count(vectBoard.begin(), vectBoard.end(), vectBoard[countmosse - 1]) == 3)
     {
+        std::cout << "\nDisposizione dei pezzi nella scacchiera ripetuta 3 volte\n";
         return true;
     }
 
@@ -561,6 +593,7 @@ bool Game::isPatta(vector<string> vectBoard, vector<int> vectVuoti_P, string str
         }
         if (mossaPat == 50)
         {
+            std::cout << "\n50 mosse consecutive senza mangiare pezzi o muovere pedoni\n";
             return true;
         }
     }
@@ -572,6 +605,7 @@ bool Game::isPatta(vector<string> vectBoard, vector<int> vectVuoti_P, string str
          std::count(strBoard.begin(), strBoard.end(), 'A')) &&
         vectVuoti_P[countmosse - 1] == 61)
     {
+        std::cout << "\nPosizione morta, non ci sono abbastanza pezzi per forzare uno scacco matto\n";
         return true;
     }
 

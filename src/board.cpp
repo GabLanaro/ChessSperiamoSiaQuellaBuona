@@ -6,7 +6,7 @@
 #include "player.h"
 using namespace std;
 
-Board::Board()
+Board::Board() // COSTRUTTORE
 {
     // inizializzo una scacchiera vuota
     for (int i = 0; i < 8; i++)
@@ -44,6 +44,13 @@ Board::Board()
     }
 }
 
+Board::~Board() // DISTRUTTORE
+{
+    for (int i = 0; i < 8; i++)
+        for (int j = 0; j < 8; j++)
+            delete board[i][j];
+}
+
 void Board::printScacchiera()
 {
     cout << endl;
@@ -70,7 +77,7 @@ void Board::printScacchiera()
 
 void Board::spostaPezzo(int rigaI, int colonnaI, int rigaF, int colonnaF)
 {
-    // swap dei pezzi
+
     Pezzo *temp = board[rigaF][colonnaF];
     board[rigaF][colonnaF] = board[rigaI][colonnaI];
     board[rigaI][colonnaI] = NULL;
