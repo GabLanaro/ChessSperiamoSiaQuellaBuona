@@ -23,7 +23,7 @@ class Pezzo{
 
 class Pedone : public Pezzo{
     public:
-    //virtual ~Pedone();  //distruttore
+    virtual ~Pedone();  //distruttore
     Pedone(bool c, char n);
     bool isValid(int rIni, int cIni, int rFin, int cFin, Board& b);
 };
@@ -40,28 +40,28 @@ class Torre : public Pezzo{
 
 class Alfiere : public Pezzo{
     public:
-    //virtual ~Alfiere();  //distruttore
+    virtual ~Alfiere();  //distruttore
     Alfiere(bool c, char n);
     bool isValid(int rIni, int cIni, int rFin, int cFin, Board& b);
 };
 
 class Cavallo : public Pezzo{
     public:
-    //virtual ~Cavallo();  //distruttore
+    virtual ~Cavallo();  //distruttore
     Cavallo(bool c, char n);
     bool isValid(int rIni, int cIni, int rFin, int cFin, Board& b);
 };
 
 class Regina : public Pezzo{
     public:
-    //virtual ~Regina();  //distruttore
+    virtual ~Regina();  //distruttore
     Regina(bool c, char n);
     bool isValid(int rIni, int cIni, int rFin, int cFin, Board& b);
 };
 
 class Re : public Pezzo{
     public:
-    //virtual ~Re();  //distruttore
+    virtual ~Re();  //distruttore
     Re(bool c, char n);
     bool isValid(int rIni, int cIni, int rFin, int cFin, Board& b);
 };

@@ -20,7 +20,8 @@ int Pezzo::getColonnaPed(){
 
 
 Pezzo::~Pezzo(){ 
-    std::cout << "Ho invocato il distruttore di Pezzo\n";} //devo metterci un delete dentro? Oppure faccio il distruttore in board e faccio il delete del puntatore al pezzo?
+    std::cout << "Ho invocato il distruttore di Pezzo\n";
+} //devo metterci un delete dentro? Oppure faccio il distruttore in board e faccio il delete del puntatore al pezzo?
 
 //*****PEDONE****
 
@@ -81,7 +82,6 @@ bool Pedone::isValid(int rIni, int cIni, int rFin, int cFin, Board& b){
 }
 
 //*****TORRE*****
-
 
 Torre::~Torre(){ 
     std::cout << "Ho invocato il distruttore di Torre\n";
@@ -161,7 +161,7 @@ bool Torre::isValid(int rIni, int cIni, int rFin, int cFin, Board& b){
 Cavallo::~Cavallo(){ 
     std::cout << "Ho invocato il distruttore di Cavallo\n";
     //delete p;
-}
+} 
 
 Cavallo::Cavallo(bool c, char n){
     color=c;
@@ -188,7 +188,7 @@ bool Cavallo::isValid(int rIni, int cIni, int rFin, int cFin, Board& b){
 Alfiere::~Alfiere(){ 
     std::cout << "Ho invocato il distruttore di Alfiere\n";
     //delete p;
-}
+} 
 
 Alfiere::Alfiere(bool c, char n){
     color=c;
